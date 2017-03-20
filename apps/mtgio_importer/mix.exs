@@ -1,8 +1,8 @@
-defmodule MtgioImporter.Mixfile do
+defmodule Mtgio.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :mtgio_importer,
+    [app: :mtgio,
      version: "0.1.0",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -37,7 +37,10 @@ defmodule MtgioImporter.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
+      {:dataset, in_umbrella: true},
+
       {:mtg_api, "~> 0.1.0"}
+
     ]
   end
 end

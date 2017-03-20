@@ -3,7 +3,7 @@ defmodule Dataset.Repo.Migrations.CreateSets do
 
   def change do
     create table(:sets) do
-      add :mtgio_id, :integer
+      add :mtgio_id, :string
       add :mtgio_data, :jsonb
 
       timestamps()
