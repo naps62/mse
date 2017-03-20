@@ -2,11 +2,6 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-import_config "#{Mix.env}.exs"
-
-config :dataset,
-  ecto_repos: [Dataset.Repo]
-
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
@@ -15,11 +10,11 @@ config :dataset,
 
 # You can configure for your application as:
 #
-#     config :dataset, key: :value
+#     config :mtgio_importer, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:dataset, :key)
+#     Application.get_env(:mtgio_importer, :key)
 #
 # Or configure a 3rd-party app:
 #
