@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :dataset, Dataset.Repo,
+config :db, DB.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",

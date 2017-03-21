@@ -37,7 +37,7 @@ defmodule Mtgio.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:dataset, in_umbrella: true},
+      {:db, in_umbrella: true},
 
       {:mtg_api, "~> 0.1.0"}
 

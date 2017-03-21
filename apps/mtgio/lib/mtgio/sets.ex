@@ -3,7 +3,7 @@ defmodule Mtgio.Sets do
   import Ecto.Query
   import Ecto.Changeset
 
-  alias Dataset.{Repo, Models.Set}
+  alias DB.{Repo, Models.Set}
 
   def import do
     {:ok, sets} = MTG.sets

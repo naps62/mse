@@ -33,7 +33,7 @@ defmodule MseWeb.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:dataset, in_umbrella: true},
+      {:db, in_umbrella: true},
 
       {:phoenix, "~> 1.3.0-rc"},
       {:phoenix_pubsub, "~> 1.0"},

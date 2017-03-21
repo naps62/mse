@@ -1,4 +1,4 @@
-defmodule Dataset.Models.Set do
+defmodule DB.Models.Set do
   use Ecto.Schema
 
   schema "sets" do

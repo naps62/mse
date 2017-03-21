@@ -1,6 +1,6 @@
-defmodule Dataset do
+defmodule DB do
   @moduledoc """
-  Documentation for Dataset.
+  Documentation for DB.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Dataset do
 
   ## Examples
 
-      iex> Dataset.hello
+      iex> DB.hello
       :world
 
   """

@@ -1,4 +1,4 @@
-defmodule Dataset.Application do
+defmodule DB.Application do
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -10,12 +10,12 @@ defmodule Dataset.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      worker(Dataset.Repo, [])
+      worker(DB.Repo, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Dataset.Supervisor]
+    opts = [strategy: :one_for_one, name: DB.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

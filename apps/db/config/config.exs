@@ -4,8 +4,8 @@ use Mix.Config
 
 import_config "#{Mix.env}.exs"
 
-config :dataset,
-  ecto_repos: [Dataset.Repo]
+config :db,
+  ecto_repos: [DB.Repo]
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
@@ -15,11 +15,11 @@ config :dataset,
 
 # You can configure for your application as:
 #
-#     config :dataset, key: :value
+#     config :db, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:dataset, :key)
+#     Application.get_env(:db, :key)
 #
 # Or configure a 3rd-party app:
 #

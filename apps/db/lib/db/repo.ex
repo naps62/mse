@@ -1,5 +1,5 @@
-defmodule Dataset.Repo do
-  use Ecto.Repo, otp_app: :dataset
+defmodule DB.Repo do
+  use Ecto.Repo, otp_app: :db
 
   def init(_, opts) do
     {:ok, Keyword.put(opts, :url, System.get_env("DATABASE_URL"))}

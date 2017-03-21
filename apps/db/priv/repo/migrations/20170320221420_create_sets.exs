@@ -1,4 +1,4 @@
-defmodule Dataset.Repo.Migrations.CreateSets do
+defmodule DB.Repo.Migrations.CreateSets do
   use Ecto.Migration
 
   def change do
