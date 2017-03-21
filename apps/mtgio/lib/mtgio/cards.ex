@@ -5,10 +5,20 @@ defmodule Mtgio.Cards do
 
   alias DB.{Repo, Models.Card}
 
-  def import do
-    {:ok, sets} = MTG.cards
+  def import(page \\ 1) do
+    case MTG.cards(params: %{page: page}) do
+      {:ok, []} -> nil
 
-    sets
+      {:ok, cards} ->
+        import_page(cards)
+        __MODULE__.import(page + 1)
+
+      _ -> IO.inpect "Something went wrong on Mtgio.Cards.import/0"
+    end
+  end
+
+  def import_page(cards) do
+    cards
     |> Enum.reduce(Multi.new, &add_card/2)
     |> Repo.transaction
   end

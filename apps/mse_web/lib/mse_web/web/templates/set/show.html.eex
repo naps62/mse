@@ -2,6 +2,9 @@
 
 <ul>
   <%= for card <- @set.cards do %>
-    <li><%= card.name %></li>
+    <li>
+      <%= card.name %>
+      <%= img_tag card.mtgio_data["imageUrl"] %>
+    </li>
   <% end %>
 </ul>
