@@ -1,7 +1,7 @@
-defmodule DB.Models.Set do
+defmodule DB.Models.Card do
   use Ecto.Schema
 
-  schema "sets" do
+  schema "cards" do
     field :name, :string
 
     field :mtgio_id, :string

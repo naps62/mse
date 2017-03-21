@@ -1,8 +1,8 @@
-defmodule DB.Repo.Migrations.CreateSets do
+defmodule DB.Repo.Migrations.CreateCards do
   use Ecto.Migration
 
   def change do
-    create table(:sets) do
+    create table(:cards) do
       add :name, :string
 
       add :mtgio_id, :string
@@ -11,6 +11,6 @@ defmodule DB.Repo.Migrations.CreateSets do
       timestamps()
     end
 
-    create index(:sets, [:mtgio_id])
+    create index(:cards, [:mtgio_id])
   end
 end

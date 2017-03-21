@@ -1,5 +1,5 @@
 <ul>
   <%= for set <- @sets do %>
-    <li><%= Map.get(set.mtgio_data, "name") %></li>
+    <li><%= set.name %></li>
   <% end %>
 </ul>

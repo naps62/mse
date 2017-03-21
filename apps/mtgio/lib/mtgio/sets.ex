@@ -28,5 +28,6 @@ defmodule Mtgio.Sets do
     change(set)
     |> put_change(:mtgio_data, data)
     |> put_change(:mtgio_id, data.code)
+    |> put_change(:name, Map.get(data, :name))
   end
 end
