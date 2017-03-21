@@ -1,0 +1,5 @@
+<ul>
+  <%= for set <- @sets do %>
+    <li><%= link "[#{set.mtgio_id}] #{set.name}", to: set_path(@conn, :show, set) %></li>
+  <% end %>
+</ul>

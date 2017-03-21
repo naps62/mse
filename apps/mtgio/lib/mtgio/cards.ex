@@ -28,6 +28,7 @@ defmodule Mtgio.Cards do
     change(card)
     |> put_change(:mtgio_data, data)
     |> put_change(:mtgio_id, data.id)
+    |> put_change(:set_mtgio_id, Map.get(data, :set))
     |> put_change(:name, Map.get(data, :name))
   end
 end

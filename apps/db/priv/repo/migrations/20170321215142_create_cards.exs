@@ -5,6 +5,7 @@ defmodule DB.Repo.Migrations.CreateCards do
     create table(:cards) do
       add :name, :string
 
+      add :set_mtgio_id, :string
       add :mtgio_id, :string
       add :mtgio_data, :jsonb
 

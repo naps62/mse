@@ -1,5 +1,0 @@
-<ul>
-  <%= for set <- @sets do %>
-    <li><%= set.name %></li>
-  <% end %>
-</ul>

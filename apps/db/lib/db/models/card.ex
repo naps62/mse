@@ -7,6 +7,11 @@ defmodule DB.Models.Card do
     field :mtgio_id, :string
     field :mtgio_data, :map
 
+    belongs_to :set, DB.Models.Set,
+      foreign_key: :set_mtgio_id,
+      references: :mtgio_id,
+      type: :string
+
     timestamps
   end
 end

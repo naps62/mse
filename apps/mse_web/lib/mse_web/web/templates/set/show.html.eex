@@ -1,0 +1,7 @@
+<h1><%= @set.name %></h1>
+
+<ul>
+  <%= for card <- @set.cards do %>
+    <li><%= card.name %></li>
+  <% end %>
+</ul>
