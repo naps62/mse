@@ -1,3 +1,5 @@
+<div class="react-root"></div>
+
 <ul>
   <%= for set <- @sets do %>
     <li>
