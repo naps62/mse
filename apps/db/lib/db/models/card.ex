@@ -1,6 +1,8 @@
 defmodule DB.Models.Card do
   use Ecto.Schema
 
+  @derive [Poison.Encoder]
+
   schema "cards" do
     field :name, :string
 

@@ -16,11 +16,14 @@ defmodule MseWeb.Web.Router do
   scope "/", MseWeb.Web do
     pipe_through :browser # Use the default browser stack
 
-    resources "/sets", SetController
+    resources "/sets", SetController, only: [:index, :show]
+    get "/", SetController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", MseWeb.Web do
-  #   pipe_through :api
-  # end
+  scope "/api", MseWeb.Web do
+    pipe_through :api
+
+    resources "/sets", API.SetController, only: [:index, :show]
+  end
 end

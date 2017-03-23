@@ -1,0 +1,8 @@
+@import "node_modules/keyrune/sass/keyrune";
+
+.ss-absolute-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}

@@ -1,6 +1,8 @@
 defmodule DB.Models.Set do
   use Ecto.Schema
 
+  @derive {Poison.Encoder, only: [:name, :mtgio_id]}
+
   schema "sets" do
     field :name, :string
 

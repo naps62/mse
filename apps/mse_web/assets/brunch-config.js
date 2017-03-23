@@ -48,11 +48,20 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/],
-      presets: [ "es2015", "react" ]
+      presets: [ "es2015", "react", "stage-0"]
     },
     sass: {
       mode: "native",
-    }
+    },
+    brunchTypescript: {
+      module: "commonjs",
+      target: "es5",
+      jsx: "react",
+      allowSyntheticDefaultImports: true,
+      experimentalDecorators: true,
+      noImplicitThis: true,
+      strictNullChecks: false,
+    },
   },
 
   modules: {

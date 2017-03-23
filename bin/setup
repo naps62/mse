@@ -1,5 +1,8 @@
 #!/bin/sh
 
+DB_MIX="cd apps/db; mix"
+
 mix deps.get
-mix ecto.create
-mix ecto.migrate
+
+$DB_MIX ecto.create
+$DB_MIX ecto.migrate

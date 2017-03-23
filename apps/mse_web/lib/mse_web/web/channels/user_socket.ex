@@ -2,7 +2,7 @@ defmodule MseWeb.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", MseWeb.Web.RoomChannel
+  # channel "sets", MseWeb.Web.SetChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
