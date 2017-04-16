@@ -13,6 +13,8 @@ defmodule MseWeb.Web.Router do
     plug :accepts, ["json"]
   end
 
+  forward "/graphql", Absinthe.Plug, schema: MseWeb.Web.Schema
+
   scope "/", MseWeb.Web do
     pipe_through :browser # Use the default browser stack
 
