@@ -12,7 +12,7 @@ config :mse_web, MseWeb.Web.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-                    cd: Path.expand("../assets", __DIR__)]]
+                    cd: Path.expand("../../frontend", __DIR__)]]
 
 # ## SSL Support
 #
