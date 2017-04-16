@@ -17,7 +17,9 @@ const WithQuery = (Child, options) => class extends React.Component<undefined, W
   }
 
   componentDidMount() {
-    client.query(options.query).then(this.onResult)
+    const vars = options.vars ? options.vars(this.props) : {};
+
+    client.query(options.query, vars).then(this.onResult)
   }
 
   onResult = (result) => {
