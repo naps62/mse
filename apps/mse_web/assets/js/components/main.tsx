@@ -1,22 +1,24 @@
-import * as React from "react";
+// import * as React from "react";
 
-import WithTheme from '../decorators/with_theme'
-import SetList from './set_list';
+// import WithTheme from '../decorators/with_theme'
+// import SetList from './set_list';
 
-const mainComponents = {
-  SetList,
-};
+// import App from './app';
 
-interface MainProps {
-  component: string,
-  props: object,
-}
+// const mainComponents = {
+//   SetList,
+// };
 
-const Main = (props: MainProps) => (
-  React.createElement(
-    mainComponents[props.component],
-    props.props,
-  )
-)
+// interface MainProps {
+//   component: string,
+//   props: object,
+// }
 
-export default WithTheme(Main);
+// const Main = (props: MainProps) => (
+//   React.createElement(
+//     mainComponents[props.component],
+//     props.props,
+//   )
+// )
+
+// export default WithTheme(Main);

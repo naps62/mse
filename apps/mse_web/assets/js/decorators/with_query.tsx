@@ -21,7 +21,6 @@ const WithQuery = (Child, options) => class extends React.Component<undefined, W
   }
 
   onResult = (result) => {
-    console.log(result);
     this.setState({ data: result });
   }
 

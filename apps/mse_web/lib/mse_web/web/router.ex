@@ -13,13 +13,12 @@ defmodule MseWeb.Web.Router do
     plug :accepts, ["json"]
   end
 
-  forward "/graphql", Absinthe.Plug, schema: MseWeb.Web.Schema
+  forward "/graphql", Absinthe.Plug, schema: Graph.Schema
 
   scope "/", MseWeb.Web do
     pipe_through :browser # Use the default browser stack
 
-    resources "/sets", SetController, only: [:index, :show]
-    get "/", SetController, :index
+    get "/*path", PageController, :index
   end
 
   # Other scopes may use custom stacks.

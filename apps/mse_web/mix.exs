@@ -21,7 +21,7 @@ defmodule MseWeb.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {MseWeb.Application, []},
-     extra_applications: [:logger, :runtime_tools, :absinthe]]
+     extra_applications: [:logger, :runtime_tools, :absinthe_plug]]
   end
 
   # Specifies which paths to compile per environment.
@@ -34,6 +34,7 @@ defmodule MseWeb.Mixfile do
   defp deps do
     [
       {:db, in_umbrella: true},
+      {:graph, in_umbrella: true},
 
       {:phoenix, "~> 1.3.0-rc"},
       {:phoenix_pubsub, "~> 1.0"},
@@ -44,7 +45,6 @@ defmodule MseWeb.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:poison, "~> 3.0"},
-      {:absinthe, "~> 1.2"},
       {:absinthe_plug, "~> 1.2"}
     ]
   end

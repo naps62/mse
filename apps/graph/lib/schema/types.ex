@@ -1,4 +1,4 @@
-defmodule MseWeb.Web.Schema.Types do
+defmodule Graph.Schema.Types do
   use Absinthe.Schema.Notation
 
   object :set do
