@@ -1,25 +1,58 @@
-import * as React from "react";
+import * as React from 'react';
 import * as _ from 'lodash';
-import { List, ListItem } from "material-ui/List";
+import { List, ListItem } from 'material-ui/List';
+import TextField from 'material-ui/TextField/TextField';
+import {Card, CardActions} from 'material-ui/Card';
 
-import WithQuery from '../decorators/with_query';
 import Item from './set_list/item';
 
-interface SetListProps {
-  data: {
-    sets: ReadonlyArray<{ id: string, name: string, mtgio_id: string}>,
-  },
+import debouncedEventHandler from '../helpers/debounced_event_handler';
+import Querier from '../helpers/querier';
+
+interface SetListState {
+  autocompletion: ReadonlyArray<string>,
+  query: string,
+  sets: Array<{ id: string, name: string, mtgio_id: string}>,
 }
 
-const SetList = (props: SetListProps) => (
-  <List>
-    {_.map(props.data.sets, (set) => <Item key={set.id} set={set} />)}
-  </List>
-);
+class SetList extends React.Component<undefined, SetListState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      autocompletion: [],
+      query: '',
+      sets: [],
+    };
+    this.updateSearchResults('');
+  }
 
-export default WithQuery(SetList, {
-  query: `
-    { sets { id, name, mtgio_id } }
-  `,
-  initialData: [],
-});
+  onSearchUpdate = debouncedEventHandler(event => {
+    this.updateSearchResults(event.target.value);
+  }, 300)
+
+  updateSearchResults = (search) => {
+    const query = `query($search: String!) {
+      sets(search: $search) { id, name, mtgio_id }
+    }`;
+    const vars = { search };
+
+    Querier.query(query, vars).then(data => this.setState({ sets: data.sets }));
+  }
+
+  render() {
+    return <Card>
+      <CardActions>
+        <TextField
+          hintText="Filter sets"
+          onChange={this.onSearchUpdate}
+        />
+      </CardActions>
+
+      <List style={{ paddingTop: 0 }}>
+        {_.map(this.state.sets, (set) => <Item key={set.id} set={set} />)}
+      </List>
+    </Card>
+  }
+}
+
+export default SetList;

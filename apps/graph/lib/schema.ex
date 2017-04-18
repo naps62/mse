@@ -7,6 +7,7 @@ defmodule Graph.Schema do
   query do
     @desc "Get all sets"
     field :sets, list_of(:set) do
+      arg :search, :string
       resolve &Resolvers.Set.all/2
     end
 
