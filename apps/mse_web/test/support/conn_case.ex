@@ -28,9 +28,9 @@ defmodule MseWeb.Web.ConnCase do
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(MseWeb.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(DB.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(MseWeb.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(DB.Repo, {:shared, self()})
     end
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end

@@ -8,12 +8,3 @@ config :mse_web, MseWeb.Web.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
-# Configure your database
-config :mse_web, MseWeb.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "mse_test",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox

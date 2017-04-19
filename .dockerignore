@@ -1,0 +1,11 @@
+.git
+_build
+cover
+deps
+doc
+test
+tmp
+erl_crash.dump
+*.ez
+node_modules
+apps/mse_web/priv/static

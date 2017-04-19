@@ -8,7 +8,7 @@ use Mix.Config
 # General application configuration
 config :mse_web,
   namespace: MseWeb,
-  ecto_repos: [MseWeb.Repo]
+  ecto_repos: []
 
 # Configures the endpoint
 config :mse_web, MseWeb.Web.Endpoint,

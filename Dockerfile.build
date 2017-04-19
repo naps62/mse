@@ -1,0 +1,54 @@
+FROM bitwalker/alpine-elixir-phoenix:1.4.2
+
+# Install python
+RUN \
+    echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    apk update && \
+    apk --no-cache --update add \
+      python \
+    rm -rf /var/cache/apk/*
+
+ENV HOME=/opt/app/ TERM=xterm
+
+WORKDIR /opt/app
+
+ENV MIX_ENV=prod
+
+RUN mix local.hex --force
+RUN mix local.rebar --force
+RUN npm install -g yarn
+
+# Cache elixir deps
+
+COPY mix.exs mix.lock ./
+
+RUN mkdir -p apps/db/config apps/mtgio/config apps/graph/config apps/mse_web/config apps/frontend
+COPY apps/db/config/* apps/db/config/
+COPY apps/db/mix.exs apps/db/
+
+COPY apps/mtgio/config/* apps/mtgio/config/
+COPY apps/mtgio/mix.exs apps/mtgio/
+
+COPY apps/mse_web/config/* apps/mse_web/config/
+COPY apps/mse_web/mix.exs apps/mse_web/
+
+COPY apps/graph/config/* apps/graph/config/
+COPY apps/graph/mix.exs apps/graph/
+
+RUN mix do deps.get, deps.compile
+
+COPY apps/frontend/package.json apps/frontend/
+COPY apps/frontend/yarn.lock apps/frontend/
+
+RUN cd apps/frontend && \
+    yarn install
+
+COPY . .
+
+RUN cd apps/frontend && \
+    ./node_modules/.bin/brunch build --production
+
+RUN cd apps/mse_web && \
+    mix phx.digest
+
+RUN mix release --env=prod --verbose

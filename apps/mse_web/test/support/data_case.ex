@@ -16,8 +16,6 @@ defmodule MseWeb.DataCase do
 
   using do
     quote do
-      alias MseWeb.Repo
-
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
@@ -26,10 +24,10 @@ defmodule MseWeb.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(MseWeb.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(DB.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(MseWeb.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(DB.Repo, {:shared, self()})
     end
 
     :ok
