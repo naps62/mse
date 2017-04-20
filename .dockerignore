@@ -7,5 +7,15 @@ test
 tmp
 erl_crash.dump
 *.ez
-node_modules
+.nvmrc
+README.md
+*.tar.gz
+
+apps/frontend/node_modules
+
+# test directories
 apps/mse_web/priv/static
+apps/db/test
+apps/graph/test
+apps/mse_web/test
+apps/mtgio/test
