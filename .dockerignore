@@ -9,7 +9,6 @@ erl_crash.dump
 *.ez
 .nvmrc
 README.md
-*.tar.gz
 
 apps/frontend/node_modules
 
