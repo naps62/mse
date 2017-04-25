@@ -1,7 +1,7 @@
 version: "2.0"
 services:
   web:
-    image: 4a3f7e9ee4a0
+    image: d310a50446bb
     command: foreground
     depends_on:
       - db
