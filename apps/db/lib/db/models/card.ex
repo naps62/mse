@@ -14,6 +14,6 @@ defmodule DB.Models.Card do
       references: :mtgio_id,
       type: :string
 
-    timestamps
+    timestamps()
   end
 end

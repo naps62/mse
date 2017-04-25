@@ -37,6 +37,8 @@ defmodule Graph.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
+      {:db, in_umbrella: true},
+
       {:absinthe, "~> 1.2"},
     ]
   end

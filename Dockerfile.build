@@ -23,14 +23,14 @@ RUN npm install -g yarn
 COPY mix.exs mix.lock ./
 
 RUN mkdir -p apps/db/config apps/mtgio/config apps/graph/config apps/mse_web/config apps/frontend
-COPY apps/db/config/* apps/db/config/
-COPY apps/db/mix.exs apps/db/
-
 COPY apps/mtgio/config/* apps/mtgio/config/
 COPY apps/mtgio/mix.exs apps/mtgio/
 
 COPY apps/mse_web/config/* apps/mse_web/config/
 COPY apps/mse_web/mix.exs apps/mse_web/
+
+COPY apps/db/config/* apps/db/config/
+COPY apps/db/mix.exs apps/db/
 
 COPY apps/graph/config/* apps/graph/config/
 COPY apps/graph/mix.exs apps/graph/

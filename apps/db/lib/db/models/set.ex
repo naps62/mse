@@ -13,6 +13,6 @@ defmodule DB.Models.Set do
       foreign_key: :set_mtgio_id,
       references: :mtgio_id
 
-    timestamps
+    timestamps()
   end
 end

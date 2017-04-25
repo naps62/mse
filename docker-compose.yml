@@ -1,9 +1,19 @@
-version: "3.0"
+version: "2.0"
 services:
   web:
-    image: naps62/mse:alpha.2
+    image: 4a3f7e9ee4a0
+    command: foreground
     depends_on:
       - db
-    command: foreground
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: "ecto://mse_prod:mse_prod@db/mse_prod"
+      PORT: 4000
+      POOL_SIZE: 10
   db:
     image: postgres:9.6.2
+    environment:
+      POSTGRES_DB: "mse_prod"
+      POSTGRES_USER: "mse_prod"
+      POSTGRES_PASSWORD: "mse_prod"
