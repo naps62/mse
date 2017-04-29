@@ -1,7 +1,8 @@
 version: "2.0"
 services:
+
   web:
-    image: d310a50446bb
+    image: 331e47ae1739
     command: foreground
     depends_on:
       - db
@@ -11,6 +12,7 @@ services:
       DATABASE_URL: "ecto://mse_prod:mse_prod@db/mse_prod"
       PORT: 4000
       POOL_SIZE: 10
+
   db:
     image: postgres:9.6.2
     environment:
