@@ -13,6 +13,12 @@ defmodule Mtgio.Sets do
     |> Repo.transaction
   end
 
+  def update do
+    Repo.all(Set)
+    |> Enum.reduce(Multi.new, &update_set/2)
+    |> Repo.transaction
+  end
+
   def add_set(set_data, multi) do
     case find_set(set_data) do
       nil -> Multi.insert(multi, set_data.code, set_changeset(%Set{}, set_data))
@@ -29,5 +35,14 @@ defmodule Mtgio.Sets do
     |> put_change(:mtgio_data, data)
     |> put_change(:mtgio_id, data.code)
     |> put_change(:name, Map.get(data, :name))
+  end
+
+  def update_set(set, multi) do
+    Multi.update(multi, set.id, update_set_changeset(set))
+  end
+
+  def update_set_changeset(%Set{} = set) do
+    change(set)
+    |> put_change(:name, Map.get(set.mtgio_data, "name"))
   end
 end

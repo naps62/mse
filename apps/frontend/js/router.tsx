@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import SetsPage from './pages/sets';
 import SetPage from './pages/set';
+import CardPage from './pages/card';
 import RouteNotFound from './pages/route_not_found';
 
 import Layout from './components/layout';
@@ -13,6 +14,7 @@ const Router = (props: any) => {
       <Switch>
         <Route exact path="/" component={SetsPage} />
         <Route exact path="/sets/:id" component={SetPage} />
+        <Route exact path="/cards/:id" component={CardPage} />
         <Route component={RouteNotFound} />
       </Switch>
     </Layout>

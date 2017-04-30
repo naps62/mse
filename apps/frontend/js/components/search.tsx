@@ -3,10 +3,15 @@ import TextField from 'material-ui/TextField/TextField';
 
 import debouncedEventHandler from '../helpers/debounced_event_handler';
 
+interface IProps {
+  hint: string,
+  onChange();
+}
+
 class Search extends React.Component<any, any> {
   render() {
     return <TextField
-      hintText="Filter sets"
+      hintText={this.props.hint}
       onChange={debouncedEventHandler(this.props.onChange, 300)}
     />;
   }

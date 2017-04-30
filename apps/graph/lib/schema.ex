@@ -7,7 +7,7 @@ defmodule Graph.Schema do
   query do
     @desc "Get all sets"
     field :sets, list_of(:set) do
-      arg :search, :string
+      arg :search, :string, default_value: ""
       resolve &Resolvers.Set.all/2
     end
 
@@ -20,7 +20,14 @@ defmodule Graph.Schema do
     @desc "Get all cards for a set"
     field :cards, list_of(:card) do
       arg :set_id, non_null(:id)
+      arg :search, :string, default_value: ""
       resolve &Resolvers.Card.for_set/2
+    end
+
+    @desc "Get a single card"
+    field :card, type: :card do
+      arg :id, non_null(:id)
+      resolve &Resolvers.Card.find/2
     end
   end
 end

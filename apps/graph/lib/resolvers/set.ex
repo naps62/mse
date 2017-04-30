@@ -2,7 +2,8 @@ defmodule Graph.Resolvers.Set do
   import Ecto.Query
 
   def all(%{search: search}, _info) do
-    query = from s in DB.Models.Set, where: ilike(s.name, ^"%#{search}%")
+    query = from s in DB.Models.Set,
+      where: ilike(s.name, ^"%#{search}%")
 
     {:ok, DB.Repo.all(query)}
   end
@@ -10,7 +11,7 @@ defmodule Graph.Resolvers.Set do
     {:ok, DB.Repo.all(DB.Models.Set)}
   end
 
-  def find(%{id: id}, _info) do
-    {:ok, DB.Repo.get(DB.Models.Set, id)}
+  def find(%{id: mtgio_id}, _info) do
+    {:ok, DB.Repo.get_by(DB.Models.Set, mtgio_id: mtgio_id)}
   end
 end

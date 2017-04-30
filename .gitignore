@@ -20,3 +20,5 @@ erl_crash.dump
 *.ez
 
 node_modules
+
+apps/mse_web/priv

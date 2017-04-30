@@ -5,23 +5,24 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 
 import { Link } from 'react-router-dom';
 
-interface ItemProps {
-  set: {
+interface IProps {
+  card: {
+    mtgio_id: string,
     name: string,
-    mtgio_id: string
   }
 };
 
-export default class Item extends React.Component<ItemProps, any> {
+class Item extends React.Component<IProps, any> {
   render() {
-    const set = this.props.set;
-    const url = `/sets/${set.mtgio_id}`;
+    const card = this.props.card;
+    const url = `/cards/${card.mtgio_id}`;
 
     return <Link to={url}>
       <ListItem
-        primaryText={set && set.name}
-        leftIcon={<Keyrune id={set.mtgio_id} className="ss-absolute-left" />}
+        primaryText={card && card.name}
       />
     </Link>;
   }
 }
+
+export default Item

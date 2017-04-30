@@ -2,38 +2,25 @@ import * as React from 'react';
 import {Card, CardActions} from 'material-ui/Card';
 
 import Search from '../components/search';
-import SetList from '../components/set_list';
+import SetSearchResults from '../components/set_search_results';
 import Querier from '../helpers/querier';
 
 class SetsPage extends React.Component<any, any> {
   constructor(props) {
     super(props);
-    this.state = {
-      query: '',
-      sets: [],
-    };
-    this.updateSearchResults('');
+    this.state = { query: '' };
   }
 
   onSearchChange = (event) => {
-    this.updateSearchResults(event.target.value);
-  }
-
-  updateSearchResults = (search) => {
-    const query = `query($search: String!) {
-      sets(search: $search) { id, name, mtgio_id }
-    }`;
-    const vars = { search };
-
-    Querier.query(query, vars).then(data => this.setState({ sets: data.sets }));
+    this.setState({ search: event.target.value })
   }
 
   render() {
     return <Card>
       <CardActions>
-        <Search onChange={this.onSearchChange} />
+        <Search onChange={this.onSearchChange} hint="Filter sets" />
       </CardActions>
-      <SetList sets={this.state.sets} />
+      <SetSearchResults search={this.state.search} />
     </Card>;
   }
 }

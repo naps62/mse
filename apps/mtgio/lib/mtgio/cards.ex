@@ -17,6 +17,12 @@ defmodule Mtgio.Cards do
     end
   end
 
+  def update do
+    Repo.all(Card)
+    |> Enum.reduce(Multi.new, &update_card/2)
+    |> Repo.transaction
+  end
+
   def import_page(cards) do
     cards
     |> Enum.reduce(Multi.new, &add_card/2)
@@ -40,5 +46,15 @@ defmodule Mtgio.Cards do
     |> put_change(:mtgio_id, data.id)
     |> put_change(:set_mtgio_id, Map.get(data, :set))
     |> put_change(:name, Map.get(data, :name))
+  end
+
+  def update_card(card, multi) do
+    Multi.update(multi, card.id, update_card_changeset(card))
+  end
+
+  def update_card_changeset(%Card{} = card) do
+    change(card)
+    |> put_change(:name, Map.get(card.mtgio_data, "name"))
+    |> put_change(:image_url, Map.get(card.mtgio_data, "imageUrl"))
   end
 end
