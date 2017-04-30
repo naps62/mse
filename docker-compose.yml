@@ -12,6 +12,8 @@ services:
       DATABASE_URL: "ecto://mse_prod:mse_prod@db/mse_prod"
       PORT: 4000
       POOL_SIZE: 10
+      ADMIN_USERNAME: naps62
+      ADMIN_PASSOWRD: naps62
 
   db:
     image: postgres:9.6.2

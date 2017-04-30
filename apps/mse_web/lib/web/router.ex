@@ -10,6 +10,10 @@ defmodule MseWeb.Web.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :admin_basic_auth do
+    plug BasicAuth, use_config: {:mse_web, :admin_basic_auth}
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -25,6 +29,7 @@ defmodule MseWeb.Web.Router do
 
   scope "/admin", ExAdmin do
     pipe_through :browser
+    pipe_through :admin_basic_auth
 
     admin_routes()
   end

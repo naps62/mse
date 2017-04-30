@@ -30,9 +30,14 @@ config :ex_admin,
     MseWeb.Web.ExAdmin.Dashboard,
   ]
 
+config :mse_web, admin_basic_auth: [
+  username: {:system, "ADMIN_USERNAME"},
+  password: {:system, "ADMIN_PASSWORD"},
+  realm: "Admin Area"
+]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
 config :xain, :after_callback, {Phoenix.HTML, :raw}
-
