@@ -8,19 +8,30 @@ import WithQuery from '../decorators/with_query';
 
 class Set extends React.Component<any, any> {
   render() {
-    return <div>{this.props.data.set.name}</div>;
+    return <div>
+      {this.props.data.set.name}
+    </div>;
   }
 }
 
-export default WithQuery(Set, {
-  query: `
-    query x($id: Int) {
-      set(id: $id) { id, name, mtgio_id }
-    }
+export default Set;
 
-  `,
-  vars: (props) => ({
-    id: props.match.params.id
-  }),
-  initialData: {set: {}},
-});
+// export default WithQuery(Set, {
+//   query: `
+//     query x($id: Int) {
+//       set(id: $id) {
+//         id,
+//         name,
+//         mtgio_id,
+//         cards {
+//           name
+//         }
+//       }
+//     }
+
+//   `,
+//   vars: (props) => ({
+//     id: props.match.params.id
+//   }),
+//   initialData: {set: {}},
+// });

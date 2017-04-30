@@ -16,5 +16,11 @@ defmodule Graph.Schema do
       arg :id, non_null(:id)
       resolve &Resolvers.Set.find/2
     end
+
+    @desc "Get all cards for a set"
+    field :cards, list_of(:card) do
+      arg :set_id, non_null(:id)
+      resolve &Resolvers.Card.for_set/2
+    end
   end
 end

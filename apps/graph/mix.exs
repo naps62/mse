@@ -40,6 +40,7 @@ defmodule Graph.Mixfile do
       {:db, in_umbrella: true},
 
       {:absinthe, "~> 1.2"},
+      {:absinthe_ecto, github: "absinthe-graphql/absinthe_ecto"},
     ]
   end
 end

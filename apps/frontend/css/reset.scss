@@ -3,6 +3,9 @@ a {
 }
 
 html,
-body {
+body,
+main,
+#root {
   margin: 0;
+  height: 100%;
 }
