@@ -13,6 +13,7 @@ defmodule Graph.Schema.Types do
     field :name, :string
     field :mtgio_id, :string
     field :image_url, :string
+    field :manacost, :string
     field :set, :set
   end
 end

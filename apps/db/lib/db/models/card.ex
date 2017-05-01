@@ -6,6 +6,7 @@ defmodule DB.Models.Card do
   schema "cards" do
     field :name, :string
     field :image_url, :string
+    field :manacost, :string
 
     field :mtgio_id, :string
     field :mtgio_data, :map

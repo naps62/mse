@@ -5,7 +5,7 @@ import {Card, CardText, CardMedia, CardTitle, CardActions} from 'material-ui/Car
 
 import CardList from '../components/card_list';
 import Search from '../components/search';
-import Querier from '../helpers/querier';
+import Manacost from '../components/manacost';
 
 interface IProps {
   data?: {
@@ -13,6 +13,7 @@ interface IProps {
     card: {
       name: string,
       image_url: string,
+      manacost: string,
     }
   },
 }
@@ -30,6 +31,7 @@ class CardPage extends React.Component<IProps, any> {
       <CardTitle title={card.name} />
       <CardText>
         <img src={card.image_url} />
+        <Manacost str={card.manacost} />
       </CardText>
     </Card>;
   }
@@ -40,6 +42,7 @@ const query = gql`
     card(id: $id) {
       name,
       image_url,
+      manacost
     }
   }
 `;

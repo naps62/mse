@@ -3,7 +3,6 @@ import {Card, CardActions} from 'material-ui/Card';
 
 import Search from '../components/search';
 import SetSearchResults from '../components/set_search_results';
-import Querier from '../helpers/querier';
 
 class SetsPage extends React.Component<any, any> {
   constructor(props) {
