@@ -5,12 +5,13 @@ import {Card, CardTitle, CardActions} from 'material-ui/Card';
 
 import CardSearchResults from '../components/card_search_results';
 import Search from '../components/search';
-import Querier from '../helpers/querier';
+import Keyrune from '../components/keyrune';
 
 interface IProps {
   data?: {
     loading: boolean,
     set: {
+      mtgio_id: string,
       name: string,
     },
   },
@@ -31,6 +32,15 @@ class SetPage extends React.Component<IProps, any> {
     this.setState({ search: event.target.value })
   }
 
+  renderTitle() {
+    const set = this.props.data.set;
+
+    return <div>
+      <Keyrune id={set.mtgio_id} />
+      {set.name}
+    </div>;
+  }
+
   render() {
     if (this.props.data.loading) {
       return <Card>
@@ -38,7 +48,7 @@ class SetPage extends React.Component<IProps, any> {
     }
 
     return <Card>
-      <CardTitle title={this.props.data.set.name} />
+      <CardTitle title={this.renderTitle()} />
       <CardActions>
         <Search onChange={this.onSearchChange} hint="Filter cards" />
       </CardActions>

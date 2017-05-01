@@ -28,6 +28,8 @@ config :ex_admin,
   module: MseWeb.Web,
   modules: [
     MseWeb.Web.ExAdmin.Dashboard,
+    MseWeb.Web.ExAdmin.Set,
+    MseWeb.Web.ExAdmin.Card,
   ]
 
 config :mse_web, admin_basic_auth: [
