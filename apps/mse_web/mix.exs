@@ -48,7 +48,9 @@ defmodule MseWeb.Mixfile do
       {:poison, "~> 3.0"},
       {:absinthe_plug, "~> 1.2"},
       {:ex_admin, github: "smpallen99/ex_admin"},
-      {:basic_auth, "~> 2.0.0"}
+      {:basic_auth, "~> 2.0.0"},
+      {:exq, "~> 0.8.6"},
+      {:phoenix_slime, "~> 0.8.0"}
     ]
   end
 

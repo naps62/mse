@@ -20,16 +20,17 @@ defmodule MseWeb.Web.Router do
 
   forward "/graphql", Absinthe.Plug, schema: Graph.Schema
 
-  # Other scopes may use custom stacks.
-  scope "/api", MseWeb.Web do
-    pipe_through :api
+  scope "/admin", as: :admin do
+    pipe_through [:browser, :admin_basic_auth]
 
-    resources "/sets", API.SetController, only: [:index, :show]
+    scope "/imports", as: :imports do
+      resources "/sets", MseWeb.Web.Admin.Imports.SetController, only: [:update], singleton: true
+      resources "/cards", MseWeb.Web.Admin.Imports.CardController, only: [:update], singleton: true
+    end
   end
 
   scope "/admin", ExAdmin do
-    pipe_through :browser
-    pipe_through :admin_basic_auth
+    pipe_through [:browser, :admin_basic_auth]
 
     admin_routes()
   end
