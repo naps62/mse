@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -15,4 +15,4 @@ mix docker.publish --tag $TAG
 
 eval $(docker-machine env docker-test)
 docker-compose down web
-docker-compose up -d --no-deps web
+TAG=$TAG docker-compose up -d --no-deps web

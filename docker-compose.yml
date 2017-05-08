@@ -2,7 +2,7 @@ version: "2.0"
 services:
 
   web:
-    image: naps62/mse:alpha.3
+    image: "naps62/mse:${TAG}"
     command: foreground
     depends_on:
       - db
