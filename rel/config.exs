@@ -41,7 +41,7 @@ end
 # will be used by default
 
 release :mse do
-  set version: "0.1.0"
+  set version: Mix.Project.config[:version]
   set applications: [
     db: :permanent,
     graph: :permanent,
