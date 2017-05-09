@@ -4,7 +4,7 @@ set -e
 
 source ./bin/utils/set-env
 
-echo $MSE_VERSION
+TAG=$MSE_VERSION
 
 if [ "$TAG" == "" ]; then
   echo "No tag given"
@@ -14,6 +14,9 @@ fi
 mix docker.build
 mix docker.release
 mix docker.publish --tag $TAG
+
+git tag $TAG
+git push --tags &
 
 eval $(docker-machine env docker-test)
 docker-compose build

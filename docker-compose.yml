@@ -15,6 +15,7 @@ services:
       POOL_SIZE: 10
       ADMIN_USERNAME: naps62
       ADMIN_PASSWORD: naps62
+      REDIS_PASSWORD: naps62
 
   db:
     image: postgres:9.6.2
@@ -24,4 +25,7 @@ services:
       POSTGRES_PASSWORD: "mse_prod"
 
   redis:
-    image: "redis:3.0"
+    build:
+      context: "./docker"
+      dockerfile: "Dockerfile.redis"
+    command: "redis-server /usr/local/etc/redis/redis.conf --requirepass naps62"

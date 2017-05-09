@@ -11,4 +11,7 @@ import_config "../apps/*/config/config.exs"
 
 import_config "#{Mix.env}.exs"
 
-config :mix_docker, image: "naps62/mse"
+config :mix_docker,
+  image: "naps62/mse",
+  dockerfile_build: "docker/Dockerfile.build",
+  dockerfile_release: "docker/Dockerfile.release"

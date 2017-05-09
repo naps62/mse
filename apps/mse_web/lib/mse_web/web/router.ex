@@ -18,6 +18,14 @@ defmodule MseWeb.Web.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :exq do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :put_secure_browser_headers
+    plug ExqUi.RouterPlug, namespace: "exq"
+  end
+
   forward "/graphql", Absinthe.Plug, schema: Graph.Schema
 
   scope "/admin", as: :admin do
@@ -33,6 +41,12 @@ defmodule MseWeb.Web.Router do
     pipe_through [:browser, :admin_basic_auth]
 
     admin_routes()
+  end
+
+  scope "/exq", ExqUi do
+    pipe_through :exq
+
+    forward "/", RouterPlug.Router, :index
   end
 
   scope "/", MseWeb.Web do
