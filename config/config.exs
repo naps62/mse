@@ -13,5 +13,5 @@ import_config "#{Mix.env}.exs"
 
 config :mix_docker,
   image: "naps62/mse",
-  dockerfile_build: "docker/Dockerfile.build",
-  dockerfile_release: "docker/Dockerfile.release"
+  dockerfile_build: "Dockerfile.build",
+  dockerfile_release: "Dockerfile.release"

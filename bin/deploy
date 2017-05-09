@@ -18,7 +18,6 @@ mix docker.publish --tag $TAG
 git tag $TAG
 git push --tags &
 
-eval $(docker-machine env docker-test)
-docker-compose build
-docker-compose stop web
-docker-compose up -d
+./bin/production build
+./bin/production stop web
+./bin/production up -d
