@@ -1,0 +1,3 @@
+#!/bin/bash
+
+export MSE_VERSION=`./bin/utils/current-version`

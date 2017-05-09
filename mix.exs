@@ -4,6 +4,7 @@ defmodule Mse.Mixfile do
 
   def project do
     [apps_path: "apps",
+     version: "alpha.8",
      apps: [
        :db, :mse_web, :graph, :mtgio,
      ],

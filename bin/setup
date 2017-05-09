@@ -1,6 +1,10 @@
 #!/bin/sh
 
+set -e
+source ./bin/utils/set-env
+
 DB_MIX="cd apps/db; mix"
+
 
 mix deps.get
 

@@ -2,10 +2,11 @@ version: "2.0"
 services:
 
   web:
-    image: "naps62/mse:${TAG}"
+    image: "naps62/mse:${MSE_VERSION}"
     command: foreground
     depends_on:
       - db
+      - redis
     ports:
       - "4000:4000"
     environment:
@@ -21,3 +22,6 @@ services:
       POSTGRES_DB: "mse_prod"
       POSTGRES_USER: "mse_prod"
       POSTGRES_PASSWORD: "mse_prod"
+
+  redis:
+    image: "redis:3.0"

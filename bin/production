@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+source ./bin/utils/set-env
+
+eval $(docker-machine env docker-test)
+
+docker-compose $@

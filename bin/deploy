@@ -2,8 +2,9 @@
 
 set -e
 
-TAG=$1
-export TAG
+source ./bin/utils/set-env
+
+echo $MSE_VERSION
 
 if [ "$TAG" == "" ]; then
   echo "No tag given"
