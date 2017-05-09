@@ -3,6 +3,7 @@
 set -e
 
 TAG=$1
+export TAG
 
 if [ "$TAG" == "" ]; then
   echo "No tag given"
@@ -14,5 +15,6 @@ mix docker.release
 mix docker.publish --tag $TAG
 
 eval $(docker-machine env docker-test)
-docker-compose down web
-TAG=$TAG docker-compose up -d --no-deps web
+docker-compose build
+docker-compose stop web
+docker-compose up -d

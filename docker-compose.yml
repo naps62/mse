@@ -13,7 +13,7 @@ services:
       PORT: 4000
       POOL_SIZE: 10
       ADMIN_USERNAME: naps62
-      ADMIN_PASSOWRD: naps62
+      ADMIN_PASSWORD: naps62
 
   db:
     image: postgres:9.6.2

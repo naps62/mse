@@ -46,7 +46,7 @@ defmodule Mtgio.Cards do
     |> put_change(:mtgio_id, data.id)
     |> put_change(:set_mtgio_id, Map.get(data, :set))
     |> put_change(:name, Map.get(data, :name))
-    |> put_change(:manacost, Map.get(card.mtgio_data, :manaCost))
+    |> put_change(:manacost, Map.get(data, :manaCost))
   end
 
   def update_card(card, multi) do
