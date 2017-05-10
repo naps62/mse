@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo `mix run -e "IO.puts Mix.Project.config[:version]" 2> /dev/null`
+cat mix.exs | grep version | cut -d '"' -f2
+
