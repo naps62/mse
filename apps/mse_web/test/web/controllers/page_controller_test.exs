@@ -1,5 +1,5 @@
-defmodule MseWeb.Web.PageControllerTest do
-  use MseWeb.Web.ConnCase
+defmodule Mse.Web.PageControllerTest do
+  use Mse.Web.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

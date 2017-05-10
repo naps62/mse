@@ -1,5 +1,5 @@
-defmodule MseWeb.Web.Admin.Imports.SetController do
-  use MseWeb.Web, :controller
+defmodule Mse.Web.Admin.Imports.SetController do
+  use Mse.Web, :controller
   import ExAdmin.Utils
 
   def update(conn, _params) do

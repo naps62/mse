@@ -1,4 +1,4 @@
-defmodule MseWeb.Web.ChannelCase do
+defmodule Mse.Web.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,7 +21,7 @@ defmodule MseWeb.Web.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint MseWeb.Web.Endpoint
+      @endpoint Mse.Web.Endpoint
     end
   end
 

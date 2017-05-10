@@ -1,4 +1,4 @@
-defmodule MseWeb.Mixfile do
+defmodule Mse.Web.Mixfile do
   use Mix.Project
 
   def project do
@@ -20,7 +20,7 @@ defmodule MseWeb.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {MseWeb.Application, []},
+    [mod: {Mse.Web.Application, []},
      extra_applications: [:logger, :runtime_tools, :absinthe_plug]]
   end
 

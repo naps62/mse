@@ -1,8 +1,8 @@
-defmodule MseWeb.Web.UserSocket do
+defmodule Mse.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "sets", MseWeb.Web.SetChannel
+  # channel "sets", Mse.Web.SetChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -30,7 +30,7 @@ defmodule MseWeb.Web.UserSocket do
   # Would allow you to broadcast a "disconnect" event and terminate
   # all active sockets and channels for a given user:
   #
-  #     MseWeb.Web.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
+  #     Mse.Web.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil

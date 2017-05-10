@@ -1,4 +1,4 @@
-defmodule MseWeb.Web.ExAdmin.Card do
+defmodule Mse.Web.ExAdmin.Card do
   use ExAdmin.Register
 
   register_resource DB.Models.Card do
@@ -26,7 +26,7 @@ defmodule MseWeb.Web.ExAdmin.Card do
     end
 
     sidebar "", only: :show do
-      Phoenix.View.render MseWeb.Web.AdminView, "card_image.html", image: resource.image_url
+      Phoenix.View.render Mse.Web.AdminView, "card_image.html", image: resource.image_url
     end
   end
 end

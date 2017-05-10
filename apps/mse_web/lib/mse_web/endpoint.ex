@@ -1,7 +1,7 @@
-defmodule MseWeb.Web.Endpoint do
+defmodule Mse.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :mse_web
 
-  socket "/socket", MseWeb.Web.UserSocket
+  socket "/socket", Mse.Web.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,7 +38,7 @@ defmodule MseWeb.Web.Endpoint do
     key: "_mse_web_key",
     signing_salt: "rfKxBGwY"
 
-  plug MseWeb.Web.Router
+  plug Mse.Web.Router
 
   @doc """
   Dynamically loads configuration from the system environment

@@ -1,4 +1,4 @@
-defmodule MseWeb.DataCase do
+defmodule Mse.Web.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -19,7 +19,7 @@ defmodule MseWeb.DataCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import MseWeb.DataCase
+      import Mse.Web.DataCase
     end
   end
 

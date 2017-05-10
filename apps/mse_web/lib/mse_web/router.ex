@@ -1,5 +1,5 @@
-defmodule MseWeb.Web.Router do
-  use MseWeb.Web, :router
+defmodule Mse.Web.Router do
+  use Mse.Web, :router
   use ExAdmin.Router
 
   pipeline :browser do
@@ -32,8 +32,8 @@ defmodule MseWeb.Web.Router do
     pipe_through [:browser, :admin_basic_auth]
 
     scope "/imports", as: :imports do
-      resources "/sets", MseWeb.Web.Admin.Imports.SetController, only: [:update], singleton: true
-      resources "/cards", MseWeb.Web.Admin.Imports.CardController, only: [:update], singleton: true
+      resources "/sets", Mse.Web.Admin.Imports.SetController, only: [:update], singleton: true
+      resources "/cards", Mse.Web.Admin.Imports.CardController, only: [:update], singleton: true
     end
   end
 
@@ -49,7 +49,7 @@ defmodule MseWeb.Web.Router do
     forward "/", RouterPlug.Router, :index
   end
 
-  scope "/", MseWeb.Web do
+  scope "/", Mse.Web do
     pipe_through :browser # Use the default browser stack
 
     get "/*path", PageController, :index

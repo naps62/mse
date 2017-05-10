@@ -7,15 +7,15 @@ use Mix.Config
 
 # General application configuration
 config :mse_web,
-  namespace: MseWeb,
+  namespace: Mse.Web,
   ecto_repos: []
 
 # Configures the endpoint
-config :mse_web, MseWeb.Web.Endpoint,
+config :mse_web, Mse.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "xSb85QxDsTZAo/cCpUIZgUyV7vPPE2aBgwe3CcWz1ORMpoKIvu4PnEGfVVWej0Dy",
-  render_errors: [view: MseWeb.Web.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: MseWeb.PubSub,
+  render_errors: [view: Mse.Web.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Mse.Web.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -25,11 +25,11 @@ config :logger, :console,
 
 config :ex_admin,
   repo: DB.Repo,
-  module: MseWeb.Web,
+  module: Mse.Web,
   modules: [
-    MseWeb.Web.ExAdmin.Dashboard,
-    MseWeb.Web.ExAdmin.Set,
-    MseWeb.Web.ExAdmin.Card,
+    Mse.Web.ExAdmin.Dashboard,
+    Mse.Web.ExAdmin.Set,
+    Mse.Web.ExAdmin.Card,
   ]
 
 config :mse_web, admin_basic_auth: [

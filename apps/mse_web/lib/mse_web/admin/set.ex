@@ -1,4 +1,4 @@
-defmodule MseWeb.Web.ExAdmin.Set do
+defmodule Mse.Web.ExAdmin.Set do
   use ExAdmin.Register
 
   register_resource DB.Models.Set do
