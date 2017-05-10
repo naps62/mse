@@ -3,7 +3,7 @@ defmodule Mse.Web.Admin.Imports.CardController do
   import ExAdmin.Utils
 
   def update(conn, _params) do
-    Mtgio.Cards.import
+    Exq.enqueue(Exq, "default", Mse.Web.Workers.Admin.UpdateCards, [])
 
     redirect(conn, to: admin_path)
   end
