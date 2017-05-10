@@ -44,7 +44,7 @@ defmodule MseWeb.Web.Router do
   end
 
   scope "/exq", ExqUi do
-    pipe_through [:exq, :admin_basic_auth]
+    pipe_through [:admin_basic_auth, :exq]
 
     forward "/", RouterPlug.Router, :index
   end
