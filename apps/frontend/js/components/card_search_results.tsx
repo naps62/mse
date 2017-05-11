@@ -6,13 +6,6 @@ import TextField from 'material-ui/TextField/TextField';
 
 import CardList from './card_list';
 
-interface IProps {
-  search: string,
-  setId: string,
-  data?: {
-    cards: Array<{ mtgio_id: string, name: string, image_url: string }>,
-  }
-}
 
 class CardSearchResults extends React.Component<IProps, any> {
   render() {

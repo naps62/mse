@@ -17,11 +17,11 @@ defmodule Graph.Schema do
       resolve &Resolvers.Set.find/2
     end
 
-    @desc "Get all cards for a set"
+    @desc "Search for cards"
     field :cards, list_of(:card) do
-      arg :set_id, non_null(:id)
+      arg :set_id, :id
       arg :search, :string, default_value: ""
-      resolve &Resolvers.Card.for_set/2
+      resolve &Resolvers.Card.search/2
     end
 
     @desc "Get a single card"

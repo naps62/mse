@@ -2,7 +2,7 @@ import * as React from "react";
 
 interface KeyruneProps {
   id: string,
-  className: string,
+  className?: string,
 }
 
 const Keyrune = ({ id, className }: KeyruneProps) => {
