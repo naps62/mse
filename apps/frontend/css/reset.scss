@@ -4,8 +4,11 @@ a {
 
 html,
 body,
-main,
-#root {
+main {
   margin: 0;
   height: 100%;
+}
+
+#root {
+  min-height: 100%
 }

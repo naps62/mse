@@ -9,6 +9,7 @@ interface IProps {
   card: {
     mtgio_id: string,
     name: string,
+    set: { name: string },
   }
 };
 
@@ -19,7 +20,8 @@ class Item extends React.Component<IProps, any> {
 
     return <Link to={url}>
       <ListItem
-        primaryText={card && card.name}
+        primaryText={card.name}
+        secondaryText={card.set.name}
       />
     </Link>;
   }

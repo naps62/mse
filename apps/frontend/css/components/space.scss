@@ -1,0 +1,15 @@
+$Space-sizes: (
+  'small': 10,
+  'base': 20,
+  'large': 40,
+);
+
+@each $name, $size in $Space-sizes {
+  .Space.bottom.#{$name} {
+    margin-bottom: #{$size}px;
+  }
+
+  .Space.right.#{$name} {
+    margin-right: #{$size}px;
+  }
+}

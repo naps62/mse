@@ -1,17 +1,31 @@
 defmodule Graph.Resolvers.Set do
   import Ecto.Query
 
-  def all(%{search: search}, _info) do
-    query = from s in DB.Models.Set,
-      where: ilike(s.name, ^"%#{search}%")
+  alias DB.{Models.Set, Repo}
 
-    {:ok, DB.Repo.all(query)}
-  end
-  def all(_args, _info) do
-    {:ok, DB.Repo.all(DB.Models.Set)}
+  def search(params, _info) do
+    query = search_query(params)
+
+    {:ok, Repo.all(query)}
   end
 
   def find(%{id: mtgio_id}, _info) do
-    {:ok, DB.Repo.get_by(DB.Models.Set, mtgio_id: mtgio_id)}
+    {:ok, Repo.get_by(scope(), mtgio_id: mtgio_id)}
+  end
+
+  defp search_query(params) do
+    params
+    |> Enum.reduce(scope(), &add_query_param/2)
+  end
+
+  defp add_query_param({:search, ""}, query), do: query
+  defp add_query_param({:search, search}, query), do:
+    query |> where([s], ilike(s.name, ^"%#{search}%"))
+
+  defp add_query_param({:limit, limit}, query), do:
+    query |> limit(^limit)
+
+  defp scope do
+    Set
   end
 end

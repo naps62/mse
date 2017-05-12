@@ -5,7 +5,7 @@ import { List, ListItem } from 'material-ui/List';
 import Item from './card_list/item';
 
 interface IProps {
-  cards: Array<{ mtgio_id: string, name: string }>,
+  cards: Array<{ mtgio_id: string, name: string, set: { name: string } }>,
 }
 
 class CardList extends React.Component<IProps, any> {

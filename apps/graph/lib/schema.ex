@@ -5,10 +5,11 @@ defmodule Graph.Schema do
   import_types Graph.Schema.Types
 
   query do
-    @desc "Get all sets"
+    @desc "Search for sets"
     field :sets, list_of(:set) do
       arg :search, :string, default_value: ""
-      resolve &Resolvers.Set.all/2
+      arg :limit, :integer, default_value: :infinity
+      resolve &Resolvers.Set.search/2
     end
 
     @desc "Get a single set"
@@ -21,6 +22,7 @@ defmodule Graph.Schema do
     field :cards, list_of(:card) do
       arg :set_id, :id
       arg :search, :string, default_value: ""
+      arg :limit, :integer, default_value: :infinity
       resolve &Resolvers.Card.search/2
     end
 
