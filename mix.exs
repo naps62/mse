@@ -3,7 +3,7 @@ defmodule Mse.Mixfile do
 
   def project do
     [apps_path: "apps",
-     version: "alpha.11",
+     version: "alpha.12",
      apps: [
        :db, :mse_web, :graph, :mtgio,
      ],
