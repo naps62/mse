@@ -1,9 +1,9 @@
-defmodule DB.Repo.Migrations.AddManacostToCards do
+defmodule DB.Repo.Migrations.RemoveManacostFromCards do
   use Ecto.Migration
 
   def change do
     alter table(:cards) do
-      add :manacost, :string
+      remove :manacost
     end
   end
 end

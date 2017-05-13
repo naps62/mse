@@ -18,7 +18,7 @@ class CardSearchResults extends React.Component<IProps, any> {
 const query = gql`
   query($setId: String!, $search: String!) {
     cards(setId: $setId, search: $search) {
-      mtgio_id,
+      id,
       name,
       image_url
     }

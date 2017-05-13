@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 interface IProps {
   card: {
-    mtgio_id: string,
+    id: number,
     name: string,
     set: { name: string },
   }
@@ -16,7 +16,7 @@ interface IProps {
 class Item extends React.Component<IProps, any> {
   render() {
     const card = this.props.card;
-    const url = `/cards/${card.mtgio_id}`;
+    const url = `/cards/${card.id}`;
 
     return <Link to={url}>
       <ListItem

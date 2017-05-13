@@ -24,8 +24,8 @@ class SetSearchResults extends React.Component<SetSearchResultsProps, any> {
 const query = gql`
   query($search: String!) {
     sets(search: $search) {
+      id,
       name,
-      mtgio_id
     }
   }
 `;

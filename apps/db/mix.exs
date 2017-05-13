@@ -40,6 +40,8 @@ defmodule DB.Mixfile do
     [
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 2.1"},
+      {:timex, "~> 3.1"},
+      {:timex_ecto, "~> 3.1"},
       {:poison, "~> 3.0"}
     ]
   end

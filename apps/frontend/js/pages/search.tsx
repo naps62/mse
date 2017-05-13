@@ -11,7 +11,7 @@ import Space from '../components/space';
 interface ISearchResultsProps {
   search: string,
   data?: {
-    sets: Array<{ id: string, name: string, mtgio_id: string }>,
+    sets: Array<{ id: number, name: string, mtgio_id: string }>,
   }
 }
 
@@ -34,13 +34,13 @@ const SearchResults = (props: ISearchResultsProps) => (
 const query = gql`
   query Search($search: String!) {
     sets(search: $search, limit: 10) {
-      name,
-      mtgio_id
+      id,
+      name
     },
 
     cards(search: $search, limit: 10) {
+      id,
       name,
-      mtgio_id,
       image_url,
       set { name }
     }

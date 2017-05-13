@@ -5,16 +5,26 @@ defmodule DB.Models.Card do
 
   schema "cards" do
     field :name, :string
+    field :rarity, :string
+    field :version, :string
+    field :artist, :string
     field :image_url, :string
-    field :manacost, :string
 
-    field :mtgio_id, :string
+    field :mkm_basic_data, :map
+    field :mkm_detailed_data, :map
+    field :mkm_id, :integer
+    field :mkm_basic_updated_at, Timex.Ecto.DateTime
+    field :mkm_detailed_updated_at, Timex.Ecto.DateTime
+
     field :mtgio_data, :map
+    field :mtgio_id, :string
+    field :mtgio_updated_at, Timex.Ecto.DateTime
 
-    belongs_to :set, DB.Models.Set,
-      foreign_key: :set_mtgio_id,
-      references: :mtgio_id,
-      type: :string
+    field :gatherer_data, :map
+    field :gatherer_id, :string
+
+    belongs_to :set, DB.Models.Set
+    belongs_to :single, DB.Models.Single
 
     timestamps()
   end

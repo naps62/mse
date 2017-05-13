@@ -40,7 +40,6 @@ defmodule Mtgio.Mixfile do
       {:db, in_umbrella: true},
 
       {:mtg_api, "~> 0.1.0"}
-
     ]
   end
 end

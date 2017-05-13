@@ -10,7 +10,8 @@ defmodule DB.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      worker(DB.Repo, [])
+      worker(DB.Repo, []),
+      worker(DB.SilentRepo, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

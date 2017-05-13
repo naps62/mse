@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 
 interface ItemProps {
   set: {
+    id: number,
     name: string,
-    mtgio_id: string
   }
 };
 

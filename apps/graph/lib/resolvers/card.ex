@@ -19,12 +19,13 @@ defmodule Graph.Resolvers.Card do
   end
 
   defp add_query_param({:set_id, nil}, query), do: query
-  defp add_query_param({:set_id, set_id}), do:
+  defp add_query_param({:set_id, set_id}, query), do:
     query |> where(set_mtgio_id: ^set_id)
 
   defp add_query_param({:search, search}, query), do:
     query |> where([c], ilike(c.name, ^"%#{search}%"))
 
+  defp add_query_param({:limit, :infinity}, query), do: query
   defp add_query_param({:limit, limit}, query), do:
     query |> limit(^limit)
 

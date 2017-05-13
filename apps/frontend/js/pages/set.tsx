@@ -11,7 +11,7 @@ interface ISearchResultsProps {
   search: string,
   setId: string,
   data?: {
-    cards: Array<{ mtgio_id: string, name: string, image_url: string }>,
+    cards: Array<{ id: number, name: string, image_url: string }>,
   }
 }
 
@@ -23,9 +23,10 @@ const SearchResultsWithQuery = graphql(
   gql`
     query($setId: String!, $search: String!) {
       cards(setId: $setId, search: $search) {
-        mtgio_id,
+        id,
         name,
-        image_url
+        image_url,
+        set { name }
       }
     }`,
   {
@@ -38,7 +39,7 @@ interface IProps {
   data?: {
     loading: boolean,
     set: {
-      mtgio_id: string,
+      id: number,
       name: string,
     },
   },
@@ -88,9 +89,8 @@ export default graphql(
   gql`
     query($id: ID!) {
       set(id: $id) {
-        mtgio_id,
+        id,
         name,
-        mtgio_id,
       }
     }`,
   {

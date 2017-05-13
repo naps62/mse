@@ -3,6 +3,7 @@ defmodule Graph.Schema.Types do
   use Absinthe.Ecto, repo: DB.Repo
 
   object :set do
+    field :id, :integer
     field :name, :string
     field :mtgio_id, :string
 
@@ -10,6 +11,7 @@ defmodule Graph.Schema.Types do
   end
 
   object :card do
+    field :id, :integer
     field :name, :string
     field :mtgio_id, :string
     field :image_url, :string

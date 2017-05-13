@@ -29,6 +29,7 @@ config :ex_admin,
   modules: [
     Mse.Web.ExAdmin.Dashboard,
     Mse.Web.ExAdmin.Set,
+    Mse.Web.ExAdmin.Single,
     Mse.Web.ExAdmin.Card,
   ]
 
