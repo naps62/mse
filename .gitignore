@@ -24,3 +24,4 @@ node_modules
 apps/mse_web/priv
 
 mkm-prod.exs
+backups/

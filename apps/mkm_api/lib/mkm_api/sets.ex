@@ -1,4 +1,4 @@
-defmodule MkmImporter.Sets do
+defmodule MkmAPI.Sets do
   alias Ecto.Multi
   import Ecto.{Query, Changeset}
 
@@ -40,13 +40,8 @@ defmodule MkmImporter.Sets do
     |> put_change(:mkm_data, data)
     |> put_change(:mkm_id, data["idExpansion"])
     |> put_change(:mkm_name, data["enName"])
-    |> put_change(:name, short_name_for(data["enName"]))
+    |> put_change(:name, data["enName"])
     |> put_change(:mkm_updated_at, Timex.now)
     |> validate_required([:mkm_id, :mkm_data])
   end
-
-  defp short_name_for("Duel Decks: " <> short_name), do: short_name
-  defp short_name_for("From the Vault: " <> short_name), do: short_name
-  defp short_name_for("Premium Deck Series: " <> short_name), do: short_name
-  defp short_name_for(full_name), do: full_name
 end

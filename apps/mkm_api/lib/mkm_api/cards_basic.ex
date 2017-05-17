@@ -1,4 +1,4 @@
-defmodule MkmImporter.CardsBasic do
+defmodule MkmAPI.CardsBasic do
   alias Ecto.Multi
   import Ecto.{Query, Changeset}
 

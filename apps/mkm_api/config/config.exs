@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :mkm_importer, key: :value
+#     config :mkm_api, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:mkm_importer, :key)
+#     Application.get_env(:mkm_api, :key)
 #
 # Or configure a 3rd-party app:
 #

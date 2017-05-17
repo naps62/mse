@@ -1,2 +1,0 @@
-defmodule MkmImporter do
-end

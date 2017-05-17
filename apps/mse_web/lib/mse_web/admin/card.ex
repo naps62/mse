@@ -8,6 +8,7 @@ defmodule Mse.Web.ExAdmin.Card do
     filter only: [:name]
 
     scope :all, default: true
+    scope :no_mtgio_data, &where(&1, [c], is_nil(c.mtgio_data))
 
     query do
       %{show: [preload: [:set, :single]]}

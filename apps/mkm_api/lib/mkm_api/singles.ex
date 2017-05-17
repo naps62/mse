@@ -1,4 +1,4 @@
-defmodule MkmImporter.Singles do
+defmodule MkmAPI.Singles do
   import Ecto.{Query, Changeset}
 
   alias DB.{SilentRepo, Models.Card, Models.Single}

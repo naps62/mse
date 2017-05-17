@@ -19,7 +19,7 @@ defmodule Mtgio.Cards do
 
   def update do
     Repo.all(Card)
-    |> Enum.reduce(Multi.new, &update_card/2)
+    |> Enum.reduce(Multi.new, &parse_card/2)
     |> Repo.transaction
   end
 
@@ -31,13 +31,17 @@ defmodule Mtgio.Cards do
 
   def add_card(card_data, multi) do
     case find_card(card_data) do
-      nil -> Multi.insert(multi, card_data.id, card_changeset(%Card{}, card_data))
-      card -> Multi.update(multi, card_data.id, card_changeset(card, card_data))
+      nil ->
+        IO.puts "Could not find matching card for #{card_data[:name]}"
+        multi
+
+      card ->
+        Multi.update(multi, card_data.id, card_changeset(card, card_data))
     end
   end
 
-  def find_card(%{id: mtgio_id}) do
-    Card |> where(mtgio_id: ^mtgio_id) |> Repo.one
+  def find_card(%{name: name}) do
+    Card |> where(name: ^name) |> Repo.one
   end
 
   def card_changeset(%Card{} = card, data) do
@@ -50,11 +54,11 @@ defmodule Mtgio.Cards do
     |> put_change(:image_url, Map.get(data, :imageUrl))
   end
 
-  def update_card(card, multi) do
-    Multi.update(multi, card.id, update_card_changeset(card))
+  def parse_card(card, multi) do
+    Multi.update(multi, card.id, parse_card_changeset(card))
   end
 
-  def update_card_changeset(%Card{} = card) do
+  def parse_card_changeset(%Card{} = card) do
     change(card)
     |> put_change(:name, Map.get(card.mtgio_data, "name"))
     |> put_change(:image_url, Map.get(card.mtgio_data, "imageUrl"))

@@ -1,4 +1,4 @@
-defmodule MkmImporter.All do
+defmodule MkmAPI.All do
   alias DB.Models.{Card, Set}
   alias DB.SilentRepo
 
@@ -13,7 +13,7 @@ defmodule MkmImporter.All do
 
   defp fetch_new_sets do
     Mix.shell.info "Looking for new sets"
-    MkmImporter.Sets.fetch
+    MkmAPI.Sets.fetch
 
     count = new_sets_query() |> SilentRepo.aggregate(:count, :id)
 
@@ -25,7 +25,7 @@ defmodule MkmImporter.All do
 
     new_sets_query()
     |> SilentRepo.all
-    |> Enum.each(&MkmImporter.CardsBasic.fetch/1)
+    |> Enum.each(&MkmAPI.CardsBasic.fetch/1)
 
     count = new_cards_query() |> SilentRepo.aggregate(:count, :id)
 
@@ -36,7 +36,7 @@ defmodule MkmImporter.All do
     count = cards_without_single_query() |> SilentRepo.aggregate(:count, :id)
 
     Mix.shell.info "Found #{count} cards without single. Importing"
-    MkmImporter.Singles.fetch()
+    MkmAPI.Singles.fetch()
 
     Mix.shell.info "Singles up-to-date"
   end
@@ -48,7 +48,7 @@ defmodule MkmImporter.All do
     Mix.shell.info "Found #{count} cards without detailed data. Importing"
     cards_without_detailed_data_query()
     |> SilentRepo.all
-    |> Enum.each(&MkmImporter.CardsDetailed.fetch/1)
+    |> Enum.each(&MkmAPI.CardsDetailed.fetch/1)
 
     Mix.shell.info "Singles up-to-date"
   end
