@@ -18,8 +18,6 @@ defmodule Mse.Web.ExAdmin.Single do
     show single do
       attributes_table do
         row :name
-        row :mkm_id
-        row :mtgio_id
       end
 
       panel "Cards" do

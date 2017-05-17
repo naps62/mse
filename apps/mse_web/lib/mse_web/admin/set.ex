@@ -20,7 +20,6 @@ defmodule Mse.Web.ExAdmin.Set do
     show set do
       attributes_table do
         row :name
-        row :mtgio_id
       end
 
       panel "Cards" do
