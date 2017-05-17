@@ -7,14 +7,30 @@ defmodule Mse.Web.ExAdmin.Single do
 
     filter only: [:name]
 
+    query do
+      %{show: [preload: [:cards]]}
+    end
+
     index do
       column :name, link: true
     end
 
-    show set do
+    show single do
       attributes_table do
         row :name
+        row :mkm_id
+        row :mtgio_id
       end
+
+      panel "Cards" do
+        table_for(single.cards) do
+          column :name, link: true
+        end
+      end
+    end
+
+    sidebar "", only: :show do
+      Phoenix.View.render Mse.Web.AdminView, "card_image.html", image: resource.image_url
     end
   end
 end

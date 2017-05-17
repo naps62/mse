@@ -31,7 +31,7 @@ defmodule Mse.Web.Router do
   scope "/admin", as: :admin do
     pipe_through [:browser, :admin_basic_auth]
 
-    scope "/imports", as: :imports do
+    scope "/mkm", as: :imports do
       resources "/sets", Mse.Web.Admin.Imports.SetController, only: [:update], singleton: true
       resources "/cards", Mse.Web.Admin.Imports.CardController, only: [:update], singleton: true
     end

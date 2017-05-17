@@ -10,7 +10,7 @@ defmodule Mse.Web.ExAdmin.Card do
     scope :all, default: true
 
     query do
-      %{show: [preload: [:set]]}
+      %{show: [preload: [:set, :single]]}
     end
 
     index do
@@ -20,8 +20,10 @@ defmodule Mse.Web.ExAdmin.Card do
     show card do
       attributes_table do
         row :name
+        row :mkm_id
         row :mtgio_id
         row :set, link: true
+        row :single, link: true
       end
     end
 
