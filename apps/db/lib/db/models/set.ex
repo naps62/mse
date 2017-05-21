@@ -18,6 +18,7 @@ defmodule DB.Models.Set do
 
     field :gatherer_data, :map
     field :gatherer_code, :string
+    field :gatherer_updated_at, Timex.Ecto.DateTime
 
     has_many :cards, DB.Models.Card
 

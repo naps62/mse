@@ -10,7 +10,7 @@ const Keyrune = ({ id, className }: KeyruneProps) => {
     return null;
   }
 
-  const classes = `ss ss-2x ss-${id.toLowerCase()} ${className}`;
+  const classes = `ss ss-2x ss-${id.toString().toLowerCase()} ${className}`;
 
   return <i className={classes} />;
 }

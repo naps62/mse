@@ -9,8 +9,8 @@ defmodule Graph.Resolvers.Set do
     {:ok, Repo.all(query)}
   end
 
-  def find(%{id: mtgio_id}, _info) do
-    {:ok, Repo.get_by(scope(), mtgio_id: mtgio_id)}
+  def find(%{id: id}, _info) do
+    {:ok, Repo.get(scope(), id)}
   end
 
   defp search_query(params) do

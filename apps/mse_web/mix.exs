@@ -52,6 +52,7 @@ defmodule Mse.Web.Mixfile do
       {:phoenix_slime, "~> 0.8.0"},
       {:exq, github: "stavro/exq", ref: "40838d6", override: true},
       {:exq_ui, "~> 0.8.6"},
+      {:scrivener_ecto, "~> 1.2.2", override: true},
     ]
   end
 

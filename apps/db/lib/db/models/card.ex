@@ -22,6 +22,7 @@ defmodule DB.Models.Card do
 
     field :gatherer_data, :map
     field :gatherer_id, :string
+    field :gatherer_updated_at, Timex.Ecto.DateTime
 
     belongs_to :set, DB.Models.Set
     belongs_to :single, DB.Models.Single

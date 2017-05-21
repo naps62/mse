@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import {Card, CardTitle, CardActions} from 'material-ui/Card';
 
+import ICard from '../helpers/interfaces';
+
 import Search from '../components/search';
 import Keyrune from '../components/keyrune';
 import CardList from '../components/card_list';
@@ -11,7 +13,7 @@ interface ISearchResultsProps {
   search: string,
   setId: string,
   data?: {
-    cards: Array<{ id: number, name: string, image_url: string }>,
+    cards: Array<ICard>,
   }
 }
 
@@ -94,7 +96,7 @@ export default graphql(
       }
     }`,
   {
-  options: ({ match }) => ({
-    variables: { id: match.params.id },
-  })
+    options: ({ match }) => ({
+      variables: { id: match.params.id },
+    }),
 })(SetPage);

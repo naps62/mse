@@ -31,7 +31,8 @@ config :ex_admin,
     Mse.Web.ExAdmin.Set,
     Mse.Web.ExAdmin.Single,
     Mse.Web.ExAdmin.Card,
-  ]
+  ],
+  head_template: {Mse.Web.AdminView, "head.html"}
 
 config :mse_web, admin_basic_auth: [
   username: {:system, "ADMIN_USERNAME"},

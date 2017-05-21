@@ -1,8 +1,8 @@
-defmodule DB.Mixfile do
+defmodule Gatherer.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :db,
+    [app: :gatherer,
      version: "0.1.0",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -19,8 +19,7 @@ defmodule DB.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger],
-     mod: {DB.Application, []}]
+    [extra_applications: [:logger]]
   end
 
   # Dependencies can be Hex packages:
@@ -38,13 +37,10 @@ defmodule DB.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 2.1"},
-      {:timex, "~> 3.1"},
-      {:timex_ecto, "~> 3.1"},
-      {:poison, "~> 3.0"},
-      {:scrivener, "~> 2.0"},
-      {:scrivener_ecto, "~> 1.2.2"},
+      {:db, in_umbrella: true},
+
+      {:sweet_xml, "~> 0.6.4"},
+      {:timex, "~> 3.0"},
     ]
   end
 end

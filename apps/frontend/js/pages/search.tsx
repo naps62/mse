@@ -65,7 +65,7 @@ class SearchPage extends React.Component<any, any> {
 
   renderBlankSlate() {
     return <Card>
-      <CardHeader title="Type something to find sets or cards" />
+      <CardHeader title="Search for sets or cards" />
     </Card>;
   }
 

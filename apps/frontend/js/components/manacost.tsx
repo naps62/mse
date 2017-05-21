@@ -6,7 +6,8 @@ interface IProps {
 }
 
 class Manacost extends React.Component<IProps, any> {
-  static regex = new RegExp('\{[0-9A-Z]}\}')
+  static regex = new RegExp('\{[0-9A-Z]}\}');
+
   renderCosts() {
     if (!this.props.str) {
       return null;
@@ -14,7 +15,9 @@ class Manacost extends React.Component<IProps, any> {
 
     const parts = this.props.str.split(Manacost.regex);
 
-    return _.map(parts, part => <div className={`ManaIcon sprite-${part.charAt(1)}`} />);
+    return _.map(parts, part =>
+      <div className={`ManaIcon sprite-${part.charAt(1)}`} />
+    );
   }
 
   render() {

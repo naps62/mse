@@ -3,8 +3,8 @@ defmodule Graph.Resolvers.Card do
 
   alias DB.{Models.Card, Repo}
 
-  def find(%{id: mtgio_id}, _info) do
-    {:ok, Repo.get_by(scope(), mtgio_id: mtgio_id)}
+  def find(%{id: id}, _info) do
+    {:ok, Repo.get_by(scope(), id: id)}
   end
 
   def search(params, _info) do
@@ -20,7 +20,7 @@ defmodule Graph.Resolvers.Card do
 
   defp add_query_param({:set_id, nil}, query), do: query
   defp add_query_param({:set_id, set_id}, query), do:
-    query |> where(set_mtgio_id: ^set_id)
+    query |> where(set_id: ^set_id)
 
   defp add_query_param({:search, search}, query), do:
     query |> where([c], ilike(c.name, ^"%#{search}%"))
