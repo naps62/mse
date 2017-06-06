@@ -12,8 +12,8 @@ defmodule Mse.Web.ExAdmin.Set do
     filter only: [:name]
 
     scope :all, default: true
-    scope :no_mtgio_data, &where(&1, [s], is_nil(s.mtgio_data))
     scope :no_gatherer_data, &where(&1, [s], is_nil(s.gatherer_data))
+    scope :no_mtgio_data, &where(&1, [s], is_nil(s.mtgio_data))
 
     query do
       %{show: [preload: [cards: :single]]}
@@ -23,7 +23,8 @@ defmodule Mse.Web.ExAdmin.Set do
       column :name, link: true
       column :mkm_code
       column :gatherer_code
-      column :card_count, &(Helpers.count(where(Card, [c], c.set_id == ^&1.id)))
+      column :card_count, [label: "Cards"], &(Helpers.count(where(Card, [c], c.set_id == ^&1.id)))
+      column :cards_without_gatherer, [label: "Cards w/o Gatherer"], &(Helpers.count(where(Card, [c], c.set_id == ^&1.id and is_nil(c.gatherer_data))))
     end
 
     show set do

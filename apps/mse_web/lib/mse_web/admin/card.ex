@@ -11,8 +11,9 @@ defmodule Mse.Web.ExAdmin.Card do
     filter only: [:name]
 
     scope :all, default: true
-    scope :no_mtgio_data, &where(&1, [c], is_nil(c.mtgio_data))
     scope :no_gatherer_data, &where(&1, [c], is_nil(c.gatherer_data))
+    scope :no_mtgio_data, &where(&1, [c], is_nil(c.mtgio_data))
+    scope :no_single, &where(&1, [c], is_nil(c.single_id))
 
     query do
       %{

@@ -30,6 +30,6 @@ defmodule Graph.Resolvers.Card do
     query |> limit(^limit)
 
   defp scope do
-    Card |> preload(:set)
+    Card |> preload([:set, :single])
   end
 end

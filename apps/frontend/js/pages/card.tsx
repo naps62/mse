@@ -31,7 +31,9 @@ class CardPage extends React.Component<IProps, any> {
       <CardTitle title={card.name} />
       <CardText>
         <img src={card.image_url} />
-        <Manacost str={card.manacost} />
+        {card.single.type}
+        {card.single.ability}
+        <Manacost str={card.single.manacost} />
       </CardText>
     </Card>;
   }
@@ -42,7 +44,12 @@ const query = gql`
     card(id: $id) {
       name,
       image_url,
-      manacost
+      single {
+        manacost,
+        type,
+        name,
+        ability,
+      }
     }
   }
 `;

@@ -19,7 +19,7 @@ export default class Item extends React.Component<ItemProps, any> {
     return <Link to={url}>
       <ListItem
         primaryText={set && set.name}
-        leftIcon={<Keyrune id={set.id} className="ss-absolute-left" />}
+        leftIcon={<Keyrune id={set.gatherer_code} className="ss-absolute-left" />}
       />
     </Link>;
   }

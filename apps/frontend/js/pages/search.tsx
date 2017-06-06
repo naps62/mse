@@ -35,7 +35,8 @@ const query = gql`
   query Search($search: String!) {
     sets(search: $search, limit: 10) {
       id,
-      name
+      name,
+      gatherer_code,
     },
 
     cards(search: $search, limit: 10) {
