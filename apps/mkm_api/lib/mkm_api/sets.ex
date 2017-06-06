@@ -39,6 +39,7 @@ defmodule MkmAPI.Sets do
     change(set)
     |> put_change(:mkm_data, data)
     |> put_change(:mkm_id, data["idExpansion"])
+    |> put_change(:mkm_code, data["abbreviation"])
     |> put_change(:mkm_name, data["enName"])
     |> put_change(:name, data["enName"])
     |> put_change(:mkm_updated_at, Timex.now)

@@ -7,40 +7,26 @@ defmodule Gatherer.Cards do
 
   def import(data) do
     data
-    |> Enum.reduce(Multi.new, &update_card/2)
+    |> Enum.reduce(Multi.new, &update_cards/2)
     |> SilentRepo.transaction
   end
 
-  defp update_card(data, multi) do
-    case find_card(data) do
-      nil ->
-        IO.puts "Warning: could not find card #{data.id} - #{data.name}"
-        multi
-      card ->
-        Multi.update(multi, card.id, changecard(card, data))
-    end
+  defp update_cards(data, multi) do
+    data
+    |> find_cards
+    |> Enum.reduce(multi, &update_individual_card(&1, &2, data))
   end
 
-  defp find_card(%{id: id, name: name, set: set_gatherer_code}) do
-    case find_set(set_gatherer_code) do
-      nil ->
-        nil
-      set ->
-        find_card_in_set(set, id, name)
-    end
+  defp update_individual_card(card, multi, data) do
+    Multi.update(multi, card.id, changecard(card, data))
   end
 
-  defp find_set(set_gatherer_code) do
-    Set
-    |> where([s], s.gatherer_code == ^set_gatherer_code)
-    |> SilentRepo.one
-  end
-
-  defp find_card_in_set(set, id, name) do
-    set
-    |> Ecto.assoc(:cards)
-    |> where([c], c.gatherer_id == ^id or c.name == ^name)
-    |> SilentRepo.one
+  defp find_cards(%{id: id, name: name, set: set_gatherer_code}) do
+    Card
+    |> join(:inner, [card], s in assoc(card, :set))
+    |> where([_card, set], set.gatherer_code == ^set_gatherer_code)
+    |> where([card, _set], card.gatherer_id == ^id or card.name == ^name)
+    |> SilentRepo.all
   end
 
   defp changecard(card, data) do

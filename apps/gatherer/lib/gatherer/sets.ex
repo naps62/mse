@@ -12,20 +12,25 @@ defmodule Gatherer.Sets do
   end
 
   defp update_sets(data, multi) do
-    case find_set(data) do
-      nil ->
-        IO.puts "Warning: could not find set #{data.code} - #{data.name}"
-        multi
-      set ->
-        IO.puts "Updating set #{data.code} - #{data.name}"
-        Multi.update(multi, set.id, changeset(set, data))
-    end
+    data
+    |> find_sets
+    |> Enum.reduce(multi, &update_individual_set(&1, &2, data))
   end
 
-  defp find_set(%{code: code, name: name}) do
+  defp update_individual_set(set, multi, data) do
+    IO.puts "Updating set #{data.code} - #{data.name}"
+    Multi.update(multi, set.id, changeset(set, data))
+  end
+
+  defp find_sets(%{code: code, name: name}) do
     Set
-    |> where([e], e.gatherer_code == ^code or ilike(e.name, ^name))
-    |> SilentRepo.one
+    |> where(
+      [e], e.gatherer_code == ^code or
+      e.mkm_code == ^code or
+      ilike(e.name, ^name) or
+      ilike(e.name, ^"#{name}: Promos")
+    )
+    |> SilentRepo.all
   end
 
   defp changeset(set, data) do

@@ -15,7 +15,7 @@ defmodule Mse.Web.ExAdmin.Single do
     scope :no_gatherer_data, &where(&1, [c], is_nil(c.manacost))
 
     query do
-      %{show: [preload: [:cards]]}
+      %{show: [preload: [cards: :set]]}
     end
 
     index do
@@ -48,9 +48,7 @@ defmodule Mse.Web.ExAdmin.Single do
       panel "Cards" do
         table_for(single.cards) do
           column :name, link: true
-          column :manacost, fn(_card) ->
-            Manacost.present(single.manacost) |> Enum.map(&raw/1)
-          end
+          column :set, link: true
           column :rarity
           column :version
           column :artist

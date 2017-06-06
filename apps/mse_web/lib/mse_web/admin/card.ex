@@ -23,6 +23,7 @@ defmodule Mse.Web.ExAdmin.Card do
 
     index do
       column :name, link: true
+      column :mkm_price_trend
       column :manacost, fn(card) ->
         Manacost.present(card.single) |> Enum.map(&raw/1)
       end
@@ -44,8 +45,13 @@ defmodule Mse.Web.ExAdmin.Card do
         row :mkm_detailed_updated_at
       end
 
+      attributes_table "Gatherer" do
+        row :gatherer_id
+        row :gatherer_updated_at
+      end
+
       attributes_table "Single" do
-        row :name, &(&1.single.name)
+        row :single, link: true
         row :type, &(&1.single.type)
         row :manacost, fn(card) ->
           Manacost.present(card.single) |> Enum.map(&raw/1)

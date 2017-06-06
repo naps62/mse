@@ -21,6 +21,8 @@ defmodule Mse.Web.ExAdmin.Set do
 
     index do
       column :name, link: true
+      column :mkm_code
+      column :gatherer_code
       column :card_count, &(Helpers.count(where(Card, [c], c.set_id == ^&1.id)))
     end
 
