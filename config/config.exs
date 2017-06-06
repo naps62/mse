@@ -15,3 +15,11 @@ config :mix_docker,
   image: "naps62/mse",
   dockerfile_build: "Dockerfile.build",
   dockerfile_release: "Dockerfile.release"
+
+config :money,
+  default_currency: :EUR,
+  separator: " ",
+  delimiter: " ",
+  symbol: true,
+  symbol_on_right: true,
+  symbol_space: true

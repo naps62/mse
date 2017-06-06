@@ -19,6 +19,11 @@ defmodule MkmAPI.CardsDetailed do
     end
   end
 
+  def parse(%Card{} = card) do
+    changeset(card, card.mkm_detailed_data)
+    |> SilentRepo.update
+  end
+
   defp cards_with_outdated_detailed_data_first do
     Card
     |> order_by([c], [
@@ -30,6 +35,7 @@ defmodule MkmAPI.CardsDetailed do
 
   defp changeset(card, data) do
     change(card)
+    |> put_change(:mkm_price_trend, round(data["priceGuide"]["TREND"] * 100))
     |> put_change(:mkm_detailed_data, data)
     |> put_change(:mkm_detailed_updated_at, Timex.now)
   end

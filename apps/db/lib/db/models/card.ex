@@ -15,6 +15,7 @@ defmodule DB.Models.Card do
     field :mkm_id, :integer
     field :mkm_basic_updated_at, Timex.Ecto.DateTime
     field :mkm_detailed_updated_at, Timex.Ecto.DateTime
+    field :mkm_price_trend, Money.Ecto.Type
 
     field :mtgio_data, :map
     field :mtgio_id, :string

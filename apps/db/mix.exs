@@ -45,6 +45,7 @@ defmodule DB.Mixfile do
       {:poison, "~> 3.0"},
       {:scrivener, "~> 2.0"},
       {:scrivener_ecto, "~> 1.2.2"},
+      {:money, "~> 1.2.1"},
     ]
   end
 end

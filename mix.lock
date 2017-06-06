@@ -32,6 +32,7 @@
   "mimerl": {:hex, :mimerl, "1.0.2", "993f9b0e084083405ed8252b99460c4f0563e41729ab42d9074fd5e52439be88", [:rebar3], []},
   "mix_docker": {:git, "https://github.com/Recruitee/mix_docker.git", "4fc33d0e497b66f1a3238af207bbaf4b4850936f", [ref: "4fc33d0"]},
   "mkm": {:git, "https://github.com/naps62/mkm.git", "828c9591c494a840f7505d8d4565438d732a8a66", [ref: "828c959"]},
+  "money": {:hex, :money, "1.2.1", "fdcc7b021b894dbcc2cd0f57d2ccdd2224eced747231337a849424ffaa196b13", [:mix], [{:ecto, "~> 1.0 or ~> 2.0 or ~> 2.1", [hex: :ecto, optional: true]}, {:phoenix_html, "~> 2.0", [hex: :phoenix_html, optional: true]}]},
   "mtg": {:hex, :mtg, "0.2.0", "b24063dc845486ad1201c6025356ba10dbecc434d5b05fe868e5f2ca1274572c", [:mix], [{:httpoison, "~> 0.10.0", [hex: :httpoison, optional: false]}, {:poison, "~> 3.0", [hex: :poison, optional: false]}]},
   "mtg_api": {:hex, :mtg_api, "0.1.0", "8c0d3785650f1a09b99c0d5c7a3bad8a9c40c0e98c9a4b3a19c655b8cd2e1278", [:mix], [{:httpoison, "~> 0.10.0", [hex: :httpoison, optional: false]}, {:poison, "~> 3.0", [hex: :poison, optional: false]}]},
   "phoenix": {:hex, :phoenix, "1.3.0-rc.1", "0d04948a4bd24823f101024c07b6a4d35e58f1fd92a465c1bc75dd37acd1041a", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}, {:phoenix_pubsub, "~> 1.0", [hex: :phoenix_pubsub, optional: false]}, {:plug, "~> 1.3.2 or ~> 1.4", [hex: :plug, optional: false]}, {:poison, "~> 2.2 or ~> 3.0", [hex: :poison, optional: false]}]},

@@ -2,6 +2,7 @@ defmodule Mse.Web.ExAdmin.Card do
   use ExAdmin.Register
 
   alias MseWeb.Presenters.Manacost
+  alias MseWeb.Admin.Helpers
 
   register_resource DB.Models.Card do
     clear_action_items!()
@@ -34,6 +35,13 @@ defmodule Mse.Web.ExAdmin.Card do
         row :mtgio_id
         row :set, link: true
         row :single, link: true
+      end
+
+      attributes_table "Magic Card Market" do
+        row :mkm_id
+        row :mkm_price_trend
+        row :mkm_basic_updated_at
+        row :mkm_detailed_updated_at
       end
 
       attributes_table "Single" do

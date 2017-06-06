@@ -33,13 +33,13 @@ defmodule Mse.Web.ExAdmin.Set do
         row :mkm_id
         row :mkm_name
         row :mkm_code
-        row :mkm_updated_at, &Helpers.formatted_datetime(&1.mkm_updated_at)
-        row :mkm_cards_updated_at, &Helpers.formatted_datetime(&1.mkm_cards_updated_at)
+        row :mkm_updated_at
+        row :mkm_cards_updated_at
       end
 
       attributes_table "Gatherer" do
         row :gatherer_code
-        row :gatherer_updated_at, &Helpers.formatted_datetime(&1.gatherer_updated_at)
+        row :gatherer_updated_at
       end
 
       attributes_table "MTGIO" do
