@@ -1,7 +1,5 @@
 # Mse
 
-**TODO: Add description**
-
 ## Provisioning a server
 
 

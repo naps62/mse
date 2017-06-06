@@ -16,8 +16,8 @@ defmodule DB.Stream do
         results = repo.all(from _ in query, offset: ^offset, limit: ^batch_size)
 
         if length(results) < batch_size,
-          do: { results, :done },
-          else: { results, offset + batch_size }
+          do: {results, :done},
+          else: {results, offset + batch_size}
     end)
 
     batches_stream |> Stream.concat

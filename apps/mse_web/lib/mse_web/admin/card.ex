@@ -24,7 +24,7 @@ defmodule Mse.Web.ExAdmin.Card do
     index do
       column :name, link: true
       column :manacost, fn(card) ->
-        Manacost.present(card.single.manacost) |> Enum.map(&raw/1)
+        Manacost.present(card.single) |> Enum.map(&raw/1)
       end
     end
 
@@ -48,7 +48,7 @@ defmodule Mse.Web.ExAdmin.Card do
         row :name, &(&1.single.name)
         row :type, &(&1.single.type)
         row :manacost, fn(card) ->
-          Manacost.present(card.single.manacost) |> Enum.map(&raw/1)
+          Manacost.present(card.single) |> Enum.map(&raw/1)
         end
         row :ability, &(&1.single.ability)
         row :color, &(&1.single.color)

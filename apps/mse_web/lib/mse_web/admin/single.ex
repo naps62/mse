@@ -22,7 +22,7 @@ defmodule Mse.Web.ExAdmin.Single do
       column :name, link: true
       column :type
       column :manacost, fn(single) ->
-        Manacost.present(single.manacost) |> Enum.map(&raw/1)
+        Manacost.present(single) |> Enum.map(&raw/1)
       end
       column :card_count, &(Helpers.count(where(Card, [c], c.single_id == ^&1.id)))
     end
@@ -32,7 +32,7 @@ defmodule Mse.Web.ExAdmin.Single do
         row :name
         row :type
         row :manacost, fn(single) ->
-          Manacost.present(single.manacost) |> Enum.map(&raw/1)
+          Manacost.present(single) |> Enum.map(&raw/1)
         end
         row :ability
         row :color

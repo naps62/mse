@@ -13,7 +13,7 @@ defmodule Mtgio.Cards do
         import_page(cards)
         __MODULE__.import(page + 1)
 
-      _ -> IO.inspect "Something went wrong on Mtgio.Cards.import/0"
+      _ -> Mix.shell.info "Something went wrong on Mtgio.Cards.import/0"
     end
   end
 
