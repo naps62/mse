@@ -1,0 +1,13 @@
+@import "../utilities/media";
+
+.CardInfo {
+  display: flex;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.CardInfo-data {
+  flex-grow: 1;
+}

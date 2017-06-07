@@ -1,0 +1,11 @@
+$Space-sizes: (
+  'small': 10,
+  'base': 20,
+  'large': 40,
+);
+
+@each $name, $size in $Space-sizes {
+  .Info.#{$name} {
+    padding: #{$size}px;
+  }
+}

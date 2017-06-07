@@ -2,7 +2,7 @@ defmodule Mse.Web.ExAdmin.Single do
   use ExAdmin.Register
 
   alias DB.Models.Card
-  alias MseWeb.Presenters.Manacost
+  alias MseWeb.Presenters.{Manacost, Ability}
   alias MseWeb.Admin.Helpers
 
   register_resource DB.Models.Single do
@@ -34,7 +34,9 @@ defmodule Mse.Web.ExAdmin.Single do
         row :manacost, fn(single) ->
           Manacost.present(single) |> Enum.map(&raw/1)
         end
-        row :ability
+        row :ability, fn(single) ->
+          Ability.present(single) |> Enum.map(&raw/1)
+        end
         row :color
         row :power
         row :toughness

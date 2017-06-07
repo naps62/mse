@@ -61,7 +61,7 @@ defmodule MkmAPI.CardsBasic do
 
   defp parse_card(card) do
     card_changeset(card, card.mkm_basic_data, card.set)
-    |> SilentRepo.update
+    |> DB.Repo.update
   end
 
   defp card_changeset(card, data, set) do
@@ -73,7 +73,8 @@ defmodule MkmAPI.CardsBasic do
     |> put_change(:single_id, single_id_for(card, data))
     |> put_change(:name, data["enName"])
     |> put_change(:rarity, String.downcase(data["rarity"]))
-    |> put_change(:image_url, image_url(relative_url: data["image"]))
+    |> put_change(:image_url, mkm_relative_url(data["image"]))
+    |> put_change(:mkm_url, mkm_relative_url(data["website"]))
   end
 
   defp update_set_timestamp(multi, set) do
@@ -91,6 +92,7 @@ defmodule MkmAPI.CardsBasic do
   defp single_id_for(%Card{single_id: id}, _), do:
     id
 
-  defp image_url(relative_url: "." <> relative_url), do:
+  defp mkm_relative_url("." <> relative_url), do: mkm_relative_url(relative_url)
+  defp mkm_relative_url(relative_url), do:
     "https://mkmapi.eu" <> relative_url
 end

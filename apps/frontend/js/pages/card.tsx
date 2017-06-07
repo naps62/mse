@@ -1,11 +1,11 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import {Card, CardText, CardMedia, CardTitle, CardActions} from 'material-ui/Card';
+import {Card, CardHeader, CardText, CardMedia, CardTitle, CardActions} from 'material-ui/Card';
 
 import CardList from '../components/card_list';
 import Search from '../components/search';
-import Manacost from '../components/manacost';
+import CardInfo from '../components/card_info';
 
 interface IProps {
   data?: {
@@ -14,6 +14,12 @@ interface IProps {
       name: string,
       image_url: string,
       manacost: string,
+      ability: string,
+      mkm_price_trend: string,
+      mkm_url: string,
+      set: {
+        name: string,
+      }
     }
   },
 }
@@ -28,12 +34,13 @@ class CardPage extends React.Component<IProps, any> {
     const card = this.props.data.card;
 
     return <Card>
-      <CardTitle title={card.name} />
+      <CardTitle
+        title={card.name}
+        subtitle={card.set.name}
+      />
+
       <CardText>
-        <img src={card.image_url} />
-        {card.single.type}
-        {card.single.ability}
-        <Manacost str={card.single.manacost} />
+        <CardInfo card={card} />
       </CardText>
     </Card>;
   }
@@ -44,11 +51,16 @@ const query = gql`
     card(id: $id) {
       name,
       image_url,
+      mkm_price_trend,
+      mkm_url,
       single {
         manacost,
         type,
         name,
         ability,
+      },
+      set {
+        name,
       }
     }
   }
