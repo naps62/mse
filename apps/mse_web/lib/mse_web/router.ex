@@ -35,6 +35,10 @@ defmodule Mse.Web.Router do
       resources "/sets", Mse.Web.Admin.Imports.SetController, only: [:update], singleton: true
       resources "/cards", Mse.Web.Admin.Imports.CardController, only: [:update], singleton: true
     end
+
+    scope "/gatherer", as: :gatherer do
+      resources "/imports", Mse.Web.Admin.Gatherer.ImportsController, only: [:create]
+    end
   end
 
   scope "/admin", ExAdmin do

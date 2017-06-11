@@ -1,8 +1,8 @@
 .box
   .box-body
     .boxy.box-primary
-      h3 Update database from sources
+      h3 Upload Gatherer XML
     .box-body
-      ul
-        li = button "Update MTGIO Sets", to: admin_imports_set_path(@conn, :update), method: :put, class: "btn btn-primary"
-        li = button "Update MTGIO Cards", to: admin_imports_card_path(@conn, :update), method: :patch, class: "btn btn-primary"
+      = form_for @conn, admin_gatherer_imports_path(@conn, :create), [as: :gatherer_import, multipart: true], fn f ->
+        = file_input f, :xml
+        = submit "Upload"
