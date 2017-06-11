@@ -18,17 +18,17 @@ defmodule Gatherer.Sets do
   end
 
   defp update_individual_set(set, multi, data) do
-    IO.puts "Updating set #{data.code} - #{data.name}"
+    IO.puts "Updating set #{set.id} #{data.code} - #{data.name}"
     Multi.update(multi, set.id, changeset(set, data))
   end
 
   defp find_sets(%{code: code, name: name}) do
     Set
     |> where(
-      [e], e.gatherer_code == ^code or
-      e.mkm_code == ^code or
-      ilike(e.name, ^name) or
-      ilike(e.name, ^"#{name}: Promos")
+      [e], (e.gatherer_code == ^code) or
+      (e.gatherer_code != ^code and e.mkm_code == ^code) or
+      (e.gatherer_code != ^code and ilike(e.name, ^name)) or
+      (e.gatherer_code != ^code and ilike(e.name, ^"#{name}: Promos"))
     )
     |> SilentRepo.all
   end
