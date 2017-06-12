@@ -16,6 +16,11 @@ defmodule DB.Models.Single do
     field :mkm_id, :integer
     field :mkm_updated_at, Timex.Ecto.DateTime
 
+    field :gatherer_data, :map
+
+    field :mtgjson_name, :string
+    field :mtgjson_data, :map
+
     has_many :cards, DB.Models.Card
 
     timestamps()

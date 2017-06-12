@@ -13,6 +13,8 @@ defmodule Mse.Web.ExAdmin.Card do
     scope :all, default: true
     scope :no_gatherer_data, &where(&1, [c], is_nil(c.gatherer_data))
     scope :no_mtgio_data, &where(&1, [c], is_nil(c.mtgio_data))
+    scope :no_mtgjson_data, &where(&1, [c], is_nil(c.mtgjson_data))
+    scope :no_data_at_all, &where(&1, [c], is_nil(c.gatherer_data) and is_nil(c.mtgjson_data))
     scope :no_single, &where(&1, [c], is_nil(c.single_id))
 
     query do
@@ -37,6 +39,8 @@ defmodule Mse.Web.ExAdmin.Card do
         row :mtgio_id
         row :set, link: true
         row :single, link: true
+        row :artist
+        row :rarity
       end
 
       attributes_table "Magic Card Market" do

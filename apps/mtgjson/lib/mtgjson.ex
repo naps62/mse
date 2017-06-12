@@ -1,0 +1,2 @@
+defmodule Mtgjson do
+end

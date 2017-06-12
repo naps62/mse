@@ -1,5 +1,5 @@
 defmodule Gatherer.Cards do
-  alias DB.{SilentRepo, Models.Card, Models.Set}
+  alias DB.{SilentRepo, Models.Card}
   alias Ecto.Multi
 
   import Ecto.Query
@@ -35,6 +35,12 @@ defmodule Gatherer.Cards do
     |> put_change(:gatherer_id, data[:id])
     |> put_change(:gatherer_updated_at, Timex.now)
     |> put_change(:artist, data[:artist])
-    |> put_change(:rarity, data[:rarity])
+    |> put_change(:rarity, gatherer_rarity(data[:rarity]))
   end
+
+  defp gatherer_rarity("R"), do: "rare"
+  defp gatherer_rarity("C"), do: "common"
+  defp gatherer_rarity("U"), do: "uncommon"
+  defp gatherer_rarity("M"), do: "mythic"
+  defp gatherer_rarity(str), do: str
 end

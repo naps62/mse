@@ -19,6 +19,7 @@ defmodule Gatherer.Singles do
     |> put_change(:color, field_in_cards(single, :color))
     |> put_change(:power, field_in_cards(single, :power, :integer))
     |> put_change(:toughness, field_in_cards(single, :toughness, :integer))
+    |> put_change(:gatherer_data, %{})
     |> SilentRepo.update
   end
 
