@@ -1,2 +1,0 @@
-defmodule MtgioImporter do
-end

@@ -18,10 +18,6 @@ defmodule DB.Models.Card do
     field :mkm_detailed_updated_at, Timex.Ecto.DateTime
     field :mkm_price_trend, Money.Ecto.Type
 
-    field :mtgio_data, :map
-    field :mtgio_id, :string
-    field :mtgio_updated_at, Timex.Ecto.DateTime
-
     field :gatherer_data, :map
     field :gatherer_id, :string
     field :gatherer_updated_at, Timex.Ecto.DateTime

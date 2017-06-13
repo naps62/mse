@@ -13,9 +13,6 @@ defmodule DB.Models.Set do
     field :mkm_updated_at, Timex.Ecto.DateTime
     field :mkm_cards_updated_at, Timex.Ecto.DateTime
 
-    field :mtgio_id, :string
-    field :mtgio_data, :map
-
     field :gatherer_data, :map
     field :gatherer_code, :string
     field :gatherer_updated_at, Timex.Ecto.DateTime

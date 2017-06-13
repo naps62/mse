@@ -13,7 +13,6 @@ defmodule Mse.Web.ExAdmin.Set do
 
     scope :all, default: true
     scope :no_gatherer_data, &where(&1, [s], is_nil(s.gatherer_data))
-    scope :no_mtgio_data, &where(&1, [s], is_nil(s.mtgio_data))
     scope :no_mtgjson_data, &where(&1, [s], is_nil(s.mtgjson_data))
     scope :no_data_at_all, &where(&1, [s], is_nil(s.gatherer_data) and is_nil(s.mtgjson_data))
 
@@ -46,10 +45,6 @@ defmodule Mse.Web.ExAdmin.Set do
       attributes_table "Gatherer" do
         row :gatherer_code
         row :gatherer_updated_at
-      end
-
-      attributes_table "MTGIO" do
-        row :mtgio_id
       end
 
       panel "Cards" do

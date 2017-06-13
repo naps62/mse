@@ -66,7 +66,7 @@ class SetPage extends React.Component<IProps, any> {
     const set = this.props.data.set;
 
     return <div>
-      <Keyrune id={set.mtgio_id} />
+      <Keyrune id={set.id} />
       {set.name}
     </div>;
   }

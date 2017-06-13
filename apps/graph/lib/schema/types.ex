@@ -22,7 +22,6 @@ defmodule Graph.Schema.Types do
     field :mkm_url, :string
     field :mkm_price_trend, :string
 
-    field :mtgio_id, :string
     field :gatherer_id, :string
 
     field :set, :set
