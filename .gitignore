@@ -26,3 +26,4 @@ apps/mse_web/priv
 mkm-prod.exs
 backups/
 data
+dump.rdb
