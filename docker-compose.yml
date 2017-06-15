@@ -23,9 +23,14 @@ services:
       POSTGRES_DB: "mse_prod"
       POSTGRES_USER: "mse_prod"
       POSTGRES_PASSWORD: "mse_prod"
+    volumes:
+      - data-volume:/var/lib/postgresql
 
   redis:
     build:
       context: "./docker"
       dockerfile: "Dockerfile.redis"
     command: "redis-server /usr/local/etc/redis/redis.conf --requirepass naps62"
+
+volumes:
+  data-volume:
