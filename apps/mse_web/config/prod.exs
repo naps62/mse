@@ -15,7 +15,7 @@ use Mix.Config
 # which you typically run after static files are built.
 config :mse_web, Mse.Web.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "localhost", port: {:system, "PORT"}],
+  url: [host: "localhost", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
   root: ".",
