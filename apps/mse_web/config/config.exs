@@ -47,8 +47,8 @@ config :phoenix, :template_engines,
 config :exq_ui,
   server: false
 
+config :xain, :after_callback, {Phoenix.HTML, :raw}
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
-
-config :xain, :after_callback, {Phoenix.HTML, :raw}
