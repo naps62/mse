@@ -5,9 +5,15 @@ defmodule Mtgjson.Sets do
   import Ecto.Query
   import Ecto.Changeset
 
-  def import(file) do
-    file
+  def import({:data, data}) do
+    data
     |> Parser.parse
+    |> Enum.each(&update_set/1)
+  end
+
+  def import({:file, file}) do
+    file
+    |> Parser.parse_from_file
     |> Enum.each(&update_set/1)
   end
 

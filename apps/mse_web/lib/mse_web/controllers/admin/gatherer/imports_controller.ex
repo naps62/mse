@@ -7,6 +7,6 @@ defmodule Mse.Web.Admin.Gatherer.ImportsController do
 
     Exq.enqueue(Exq, "default", Mse.Web.Workers.Admin.GathererImport, [path])
 
-    redirect(conn, to: admin_path)
+    redirect(conn, to: admin_path())
   end
 end

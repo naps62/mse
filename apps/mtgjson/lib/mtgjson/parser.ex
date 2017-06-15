@@ -1,7 +1,9 @@
 defmodule Mtgjson.Parser do
-  def parse(file) do
+  def parse(str), do: Poison.decode!(str)
+
+  def parse_from_file(file) do
     {:ok, doc} = File.read(file)
 
-    Poison.decode!(doc)
+    parse(doc)
   end
 end

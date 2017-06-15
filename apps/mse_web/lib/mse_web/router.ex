@@ -39,6 +39,10 @@ defmodule Mse.Web.Router do
     scope "/gatherer", as: :gatherer do
       resources "/imports", Mse.Web.Admin.Gatherer.ImportsController, only: [:create]
     end
+
+    scope "/mtgjson", as: :mtgjson do
+      resources "/imports", Mse.Web.Admin.Mtgjson.ImportsController, only: [:create]
+    end
   end
 
   scope "/admin", ExAdmin do

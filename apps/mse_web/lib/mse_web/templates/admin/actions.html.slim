@@ -6,3 +6,10 @@
       = form_for @conn, admin_gatherer_imports_path(@conn, :create), [as: :gatherer_import, multipart: true], fn f ->
         = file_input f, :xml
         = submit "Upload"
+
+.box
+  .box-body
+    .boxy.box-primary
+      h3 Update data from MTG JSON (https://mtgjson.com)
+    .box-body
+      = button("Start update job", to: admin_mtgjson_imports_path(@conn, :create), method: :post)

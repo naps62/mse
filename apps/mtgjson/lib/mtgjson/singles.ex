@@ -6,9 +6,15 @@ defmodule Mtgjson.Singles do
   import Ecto.Query
   import Ecto.Changeset
 
+  def import({:data, data}) do
+    data
+    |> Parser.parse
+    |> Enum.each(&update_single/1)
+  end
+
   def import(file) do
     file
-    |> Parser.parse
+    |> Parser.parse_from_file
     |> Enum.each(&update_single/1)
   end
 
@@ -17,7 +23,6 @@ defmodule Mtgjson.Singles do
       nil ->
         IO.puts "No single called #{name} found"
       single ->
-        IO.puts "Updating #{name}"
         changeset(single, data)
         |> SilentRepo.update
     end

@@ -40,6 +40,7 @@ defmodule Mtgjson.Mixfile do
       {:db, in_umbrella: true},
 
       {:poison, "~> 3.0"},
+      {:httpoison, "~> 0.11.1"}
     ]
   end
 end
