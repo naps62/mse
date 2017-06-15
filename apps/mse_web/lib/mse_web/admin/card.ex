@@ -25,10 +25,11 @@ defmodule Mse.Web.ExAdmin.Card do
 
     index do
       column :name, link: true
-      column :mkm_price_trend
       column :manacost, fn(card) ->
         Manacost.present(card.single) |> Enum.map(&raw/1)
       end
+      column :mkm_price_trend
+      column :mkm_detailed_updated_at
     end
 
     show card do

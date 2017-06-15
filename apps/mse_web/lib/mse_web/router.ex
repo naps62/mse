@@ -31,17 +31,12 @@ defmodule Mse.Web.Router do
   scope "/admin", as: :admin do
     pipe_through [:browser, :admin_basic_auth]
 
-    scope "/mkm", as: :imports do
-      resources "/sets", Mse.Web.Admin.Imports.SetController, only: [:update], singleton: true
-      resources "/cards", Mse.Web.Admin.Imports.CardController, only: [:update], singleton: true
-    end
-
     scope "/gatherer", as: :gatherer do
-      resources "/imports", Mse.Web.Admin.Gatherer.ImportsController, only: [:create]
+      resources "/imports", Mse.Web.Admin.GathererController, only: [:create]
     end
 
     scope "/mtgjson", as: :mtgjson do
-      resources "/imports", Mse.Web.Admin.Mtgjson.ImportsController, only: [:create]
+      resources "/imports", Mse.Web.Admin.MtgjsonController, only: [:create]
     end
   end
 

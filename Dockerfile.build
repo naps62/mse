@@ -38,6 +38,9 @@ COPY apps/mse_web/mix.exs apps/mse_web/
 COPY apps/db/config/* apps/db/config/
 COPY apps/db/mix.exs apps/db/
 
+COPY apps/workers/config/* apps/workers/config/
+COPY apps/workers/mix.exs apps/workers/
+
 COPY apps/graph/config/* apps/graph/config/
 COPY apps/graph/mix.exs apps/graph/
 

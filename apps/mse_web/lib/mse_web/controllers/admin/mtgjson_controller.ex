@@ -1,9 +1,9 @@
-defmodule Mse.Web.Admin.Mtgjson.ImportsController do
+defmodule Mse.Web.Admin.MtgjsonController do
   use Mse.Web, :controller
   import ExAdmin.Utils
 
   def create(conn, _params) do
-    Exq.enqueue(Exq, "default", Mse.Web.Workers.Admin.MtgjsonImport, [])
+    Exq.enqueue(Exq, "default", Workers.Admin.MtgjsonImport, [])
 
     redirect(conn, to: admin_path())
   end

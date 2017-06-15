@@ -5,7 +5,7 @@ defmodule Mse.Mixfile do
     [apps_path: "apps",
      version: "alpha.12",
      apps: [
-       :db, :mse_web, :graph, :gatherer, :mkm_api, :mtgjson
+       :db, :workers, :mse_web, :graph, :gatherer, :mkm_api, :mtgjson
      ],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
