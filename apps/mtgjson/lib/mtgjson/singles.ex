@@ -1,6 +1,5 @@
 defmodule Mtgjson.Singles do
   alias DB.{SilentRepo, Models.Single}
-  alias Ecto.Multi
   alias Mtgjson.Parser
 
   import Ecto.Query

@@ -2,7 +2,6 @@ defmodule Mse.Web.ExAdmin.Card do
   use ExAdmin.Register
 
   alias MseWeb.Presenters.Manacost
-  alias MseWeb.Admin.Helpers
 
   register_resource DB.Models.Card do
     clear_action_items!()
@@ -32,7 +31,7 @@ defmodule Mse.Web.ExAdmin.Card do
       column :mkm_detailed_updated_at
     end
 
-    show card do
+    show _card do
       attributes_table "Card" do
         row :name
         row :mkm_id

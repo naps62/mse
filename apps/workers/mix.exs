@@ -39,6 +39,7 @@ defmodule Workers.Mixfile do
   defp deps do
     [
       {:quantum, ">= 2.0.0-beta.1"},
+      {:exq, github: "stavro/exq", ref: "40838d6", override: true},
       {:timex, "~> 3.0"},
     ]
   end

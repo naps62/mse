@@ -1,6 +1,4 @@
 defmodule MseWeb.Presenters.Ability do
-  alias Phoenix.HTML
-
   alias DB.Models.Single
 
   def present(nil), do: []
