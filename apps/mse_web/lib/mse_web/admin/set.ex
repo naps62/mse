@@ -39,12 +39,12 @@ defmodule Mse.Web.ExAdmin.Set do
         row :mkm_name
         row :mkm_code
         row :mkm_updated_at
-        row :mkm_cards_updated_at
+        row :mkm_cards_updated_at, &Helpers.relative_date(&1.mkm_cards_updated_at)
       end
 
       attributes_table "Gatherer" do
         row :gatherer_code
-        row :gatherer_updated_at
+        row :gatherer_updated_at, &Helpers.relative_date(&1.gatherer_updated_at)
       end
 
       panel "Cards" do

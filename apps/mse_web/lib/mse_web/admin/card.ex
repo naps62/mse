@@ -2,6 +2,7 @@ defmodule Mse.Web.ExAdmin.Card do
   use ExAdmin.Register
 
   alias MseWeb.Presenters.Manacost
+  alias MseWeb.Admin.Helpers
 
   register_resource DB.Models.Card do
     clear_action_items!()
@@ -28,7 +29,7 @@ defmodule Mse.Web.ExAdmin.Card do
         Manacost.present(card.single) |> Enum.map(&raw/1)
       end
       column :mkm_price_trend
-      column :mkm_detailed_updated_at
+      column :mkm_detailed_updated_at, &Helpers.relative_date(&1.mkm_detailed_updated_at)
     end
 
     show _card do
@@ -45,13 +46,13 @@ defmodule Mse.Web.ExAdmin.Card do
         row :mkm_id
         row :mkm_price_trend
         row :mkm_url
-        row :mkm_basic_updated_at
-        row :mkm_detailed_updated_at
+        row :mkm_basic_updated_at, &Helpers.relative_date(&1.mkm_basic_updated_at)
+        row :mkm_detailed_updated_at, &Helpers.relative_date(&1.mkm_detailed_updated_at)
       end
 
       attributes_table "Gatherer" do
         row :gatherer_id
-        row :gatherer_updated_at
+        row :gatherer_updated_at, &Helpers.relative_date(&1.gatherer_updated_at)
       end
 
       attributes_table "Single" do

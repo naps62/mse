@@ -46,7 +46,7 @@ defmodule Mse.Web.ExAdmin.Single do
 
       attributes_table "Magic Card Market" do
         row :mkm_id
-        row :mkm_updated_at
+        row :mkm_updated_at, &Helpers.relative_date(&1.mkm_updated_at)
       end
 
       panel "Cards" do
