@@ -31,6 +31,7 @@ defmodule Mse.Web.Router do
   scope "/admin", as: :admin do
     pipe_through [:browser, :admin_basic_auth]
 
+    resources "/mkm", Mse.Web.Admin.MKMController, only: [:update], singleton: true
     resources "/gatherer", Mse.Web.Admin.GathererController, only: [:update], singleton: true
     resources "/mtgjson", Mse.Web.Admin.MtgjsonController, only: [:update], singleton: true
   end

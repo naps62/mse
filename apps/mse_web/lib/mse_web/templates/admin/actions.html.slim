@@ -1,6 +1,13 @@
 .box
   .box-body
     .boxy.box-primary
+      h3 Update data from Magic Card Markeet
+    .box-body
+      = button("Update MKM data", to: admin_mkm_path(@conn, :update, sets: true), method: :put)
+
+.box
+  .box-body
+    .boxy.box-primary
       h3 Upload Gatherer XML
     .box-body
       = form_for @conn, admin_gatherer_path(@conn, :update), [as: :gatherer_import, multipart: true], fn f ->

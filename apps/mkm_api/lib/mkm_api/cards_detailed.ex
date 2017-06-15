@@ -3,6 +3,11 @@ defmodule MkmAPI.CardsDetailed do
 
   alias DB.{SilentRepo, Models.Card}
 
+  def fetch(:new) do
+    new_cards_only()
+    |> Enum.each(&fetch/1)
+  end
+
   def fetch do
     cards_with_outdated_detailed_data_first()
     |> Enum.each(&fetch/1)
@@ -30,6 +35,12 @@ defmodule MkmAPI.CardsDetailed do
       desc: is_nil(c.mkm_detailed_updated_at),
       asc: c.mkm_detailed_updated_at,
     ])
+    |> SilentRepo.all
+  end
+
+  defp new_cards_only do
+    Card
+    |> where([c], is_nil(c.mkm_detailed_updated_at))
     |> SilentRepo.all
   end
 

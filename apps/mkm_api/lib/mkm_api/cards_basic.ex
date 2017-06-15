@@ -5,7 +5,7 @@ defmodule MkmAPI.CardsBasic do
   alias DB.{SilentRepo, Models.Card, Models.Set, Models.Single}
 
   def fetch do
-    sets_with_outdated_cards_first()
+    sets_with_new_cards()
     |> Enum.each(&fetch/1)
   end
 
@@ -22,7 +22,7 @@ defmodule MkmAPI.CardsBasic do
   end
 
   def parse do
-    sets_with_outdated_cards_first()
+    sets_with_new_cards()
     |> Enum.each(&parse/1)
   end
 
@@ -34,12 +34,11 @@ defmodule MkmAPI.CardsBasic do
     |> Enum.each(&parse_card/1)
   end
 
-  defp sets_with_outdated_cards_first do
+  defp sets_with_new_cards do
     Set
-    |> order_by([s], [
-      desc: is_nil(s.mkm_cards_updated_at),
-      asc: s.mkm_cards_updated_at,
-    ])
+    |> join(:left, [s], c in assoc(s, :cards))
+    |> where([s, c], is_nil(c.mkm_basic_updated_at))
+    |> select([s, c], s)
     |> SilentRepo.all
   end
 
