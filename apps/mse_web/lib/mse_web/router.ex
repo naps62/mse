@@ -31,13 +31,8 @@ defmodule Mse.Web.Router do
   scope "/admin", as: :admin do
     pipe_through [:browser, :admin_basic_auth]
 
-    scope "/gatherer", as: :gatherer do
-      resources "/imports", Mse.Web.Admin.GathererController, only: [:create]
-    end
-
-    scope "/mtgjson", as: :mtgjson do
-      resources "/imports", Mse.Web.Admin.MtgjsonController, only: [:create]
-    end
+    resources "/gatherer", Mse.Web.Admin.GathererController, only: [:update], singleton: true
+    resources "/mtgjson", Mse.Web.Admin.MtgjsonController, only: [:update], singleton: true
   end
 
   scope "/admin", ExAdmin do
