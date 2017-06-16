@@ -8,9 +8,7 @@ shared_repo_config = [
 ]
 
 config :db, DB.SilentRepo,
-  shared_repo_config ++ [
-    loggers: [],
-  ]
+  shared_repo_config
 
 config :db, DB.Repo,
   shared_repo_config
