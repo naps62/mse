@@ -1,5 +1,4 @@
 defmodule MkmAPI.Sets do
-  alias Ecto.Multi
   import Ecto.{Query, Changeset}
 
   alias DB.{SilentRepo, Models.Set}
@@ -8,22 +7,20 @@ defmodule MkmAPI.Sets do
     {:ok, sets} = MKM.expansions
 
     sets
-    |> Enum.reduce(Multi.new, &add_or_update_set/2)
-    |> SilentRepo.transaction
+    |> Enum.each(&add_or_update_set/1)
   end
 
   def parse do
     Set
     |> SilentRepo.all
-    |> Enum.reduce(Multi.new, &parse_set/2)
-    |> SilentRepo.transaction
+    |> Enum.each(&parse_set/1)
   end
 
 
-  defp add_or_update_set(%{"idExpansion" => mkm_set_id} = set_data, multi) do
+  defp add_or_update_set(set_data) do
     case find_set(set_data) do
-      nil -> Multi.insert(multi, mkm_set_id, set_changeset(%Set{}, set_data))
-      set -> Multi.update(multi, mkm_set_id, set_changeset(set, set_data))
+      nil -> SilentRepo.insert(set_changeset(%Set{}, set_data))
+      set -> SilentRepo.update(set_changeset(set, set_data))
     end
   end
 
@@ -31,8 +28,8 @@ defmodule MkmAPI.Sets do
     Set |> where(mkm_id: ^mkm_id) |> SilentRepo.one
   end
 
-  defp parse_set(%Set{id: id, mkm_data: mkm_data} = set, multi) do
-    Multi.update(multi, id, set_changeset(set, mkm_data))
+  defp parse_set(%Set{mkm_data: mkm_data} = set) do
+    SilentRepo.update(set_changeset(set, mkm_data))
   end
 
   def set_changeset(set, data) do

@@ -1,5 +1,4 @@
 defmodule MkmAPI.CardsBasic do
-  alias Ecto.Multi
   import Ecto.{Query, Changeset}
 
   alias DB.{SilentRepo, Models.Card, Models.Set, Models.Single}
@@ -15,10 +14,11 @@ defmodule MkmAPI.CardsBasic do
       _ -> []
     end
 
-    cards_data
-    |> Enum.reduce(Multi.new, &insert_or_update_card_for_set(set, &1, &2))
-    |> update_set_timestamp(set)
-    |> SilentRepo.transaction
+    SilentRepo.transaction fn ->
+      cards_data
+      |> Enum.each(&insert_or_update_card_for_set(set, &1))
+      update_set_timestamp(set)
+    end
   end
 
   def parse do
@@ -42,13 +42,13 @@ defmodule MkmAPI.CardsBasic do
     |> SilentRepo.all
   end
 
-  defp insert_or_update_card_for_set(set, %{"idProduct" => mkm_id} = card_data, multi) do
+  defp insert_or_update_card_for_set(set, card_data) do
     case find_card(card_data) do
       nil ->
         new_card = %Card{}
-        Multi.insert(multi, mkm_id, card_changeset(new_card, card_data, set))
+        SilentRepo.insert(card_changeset(new_card, card_data, set))
       card ->
-        Multi.update(multi, mkm_id, card_changeset(card, card_data, set))
+        SilentRepo.update(card_changeset(card, card_data, set))
     end
   end
 
@@ -76,11 +76,11 @@ defmodule MkmAPI.CardsBasic do
     |> put_change(:mkm_url, mkm_relative_url(data["website"]))
   end
 
-  defp update_set_timestamp(multi, set) do
+  defp update_set_timestamp(set) do
     changeset = change(set)
     |> put_change(:mkm_cards_updated_at, Timex.now)
 
-    Multi.update(multi, "set_timestamp", changeset)
+    SilentRepo.update(changeset)
   end
 
   defp single_id_for(%Card{single_id: nil}, data), do:
