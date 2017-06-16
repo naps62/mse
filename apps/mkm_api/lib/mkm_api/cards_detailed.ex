@@ -10,7 +10,7 @@ defmodule MkmAPI.CardsDetailed do
 
   def fetch do
     cards_with_outdated_detailed_data_first()
-    |> Enum.each(&fetch/1)
+    |> Stream.each(&fetch/1)
   end
 
   def fetch(%Card{mkm_id: mkm_id} = card) do
@@ -35,13 +35,13 @@ defmodule MkmAPI.CardsDetailed do
       desc: is_nil(c.mkm_detailed_updated_at),
       asc: c.mkm_detailed_updated_at,
     ])
-    |> SilentRepo.all
+    |> DB.Stream.stream
   end
 
   defp new_cards_only do
     Card
     |> where([c], is_nil(c.mkm_detailed_updated_at))
-    |> SilentRepo.all
+    |> DB.Stream.stream
   end
 
   defp changeset(card, data) do
