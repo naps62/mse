@@ -41,6 +41,7 @@ defmodule Workers.Mixfile do
       {:db, in_umbrella: true},
       {:gatherer, in_umbrella: true},
       {:mtgjson, in_umbrella: true},
+      {:mkm_api, in_umbrella: true},
 
       {:quantum, ">= 2.0.0-beta.1"},
       {:exq, github: "stavro/exq", ref: "40838d6", override: true},
