@@ -8,7 +8,7 @@ defmodule DB.Stream do
   #     query = from u in MyApp.User, select: u.email
   #     stream = EctoBatchStream.stream(MyApp.Repo, query)
   #     stream |> Stream.take(3) |> Enum.to_list # => […]
-  def stream(repo, query, batch_size \\ @batch_size) do
+  def stream(query, repo, batch_size \\ @batch_size) do
     batches_stream = Stream.unfold(0, fn
       :done ->
         nil

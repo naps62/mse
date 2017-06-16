@@ -5,8 +5,8 @@ defmodule Gatherer.Singles do
   import Ecto.Changeset
 
   def import do
-    SilentRepo
-    |> DB.Stream.stream(Single)
+    Single
+    |> DB.Stream.stream(SilentRepo)
     |> Stream.each(&update_single/1)
     |> Stream.run
   end

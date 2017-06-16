@@ -35,13 +35,13 @@ defmodule MkmAPI.CardsDetailed do
       desc: is_nil(c.mkm_detailed_updated_at),
       asc: c.mkm_detailed_updated_at,
     ])
-    |> DB.Stream.stream
+    |> DB.Stream.stream(SilentRepo)
   end
 
   defp new_cards_only do
     Card
     |> where([c], is_nil(c.mkm_detailed_updated_at))
-    |> DB.Stream.stream
+    |> DB.Stream.stream(SilentRepo)
   end
 
   defp changeset(card, data) do
