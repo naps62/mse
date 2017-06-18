@@ -5,13 +5,15 @@ defmodule MkmAPI.Singles do
 
   def fetch do
     cards_with_oudated_single()
-    |> Enum.map(&fetch_single_for_card/1)
+    |> Stream.each(&fetch_single_for_card/1)
+    |> Stream.run
   end
 
   def parse do
     Single
-    |> SilentRepo.all
-    |> Enum.each(&parse_single/1)
+    |> DB.Stream.stream(SilentRepo)
+    |> Stream.each(&parse_single/1)
+    |> Stream.run
   end
 
   defp cards_with_oudated_single do
@@ -19,7 +21,7 @@ defmodule MkmAPI.Singles do
     |> where([c], is_nil(c.single_id))
     |> where([c], not is_nil(c.mkm_basic_data))
     |> preload(:single)
-    |> SilentRepo.all
+    |> DB.Stream.stream
   end
 
   defp fetch_single_for_card(%Card{} = card) do

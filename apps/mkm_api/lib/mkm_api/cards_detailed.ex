@@ -11,6 +11,7 @@ defmodule MkmAPI.CardsDetailed do
   def fetch do
     cards_with_outdated_detailed_data_first()
     |> Stream.each(&fetch/1)
+    |> Stream.run
   end
 
   def fetch(%Card{mkm_id: mkm_id} = card) do
