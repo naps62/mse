@@ -51,6 +51,7 @@
   "redix": {:hex, :redix, "0.6.1", "20986b0e02f02b13e6f53c79a1ae70aa83147488c408f40275ec261f5bb0a6d0", [:mix], [{:connection, "~> 1.0", [hex: :connection, optional: false]}]},
   "scrivener": {:hex, :scrivener, "2.3.0", "16b1d744202d47233798205447b35592d96a209241c566304f84ddef63c718b2", [:mix], []},
   "scrivener_ecto": {:hex, :scrivener_ecto, "1.2.2", "811e4016dc19836a12c746989d2b9b495c3a9e739a2531c4b58226219109ff51", [:mix], [{:ecto, "~> 2.0", [hex: :ecto, optional: false]}, {:postgrex, "~> 0.11.0 or ~> 0.12.0 or ~> 0.13.0", [hex: :postgrex, optional: true]}, {:scrivener, "~> 2.3", [hex: :scrivener, optional: false]}]},
+  "sentry": {:hex, :sentry, "4.0.3", "73d1b6a0ef79ddc5b499190ac03d6cdd5a81783835c6b8e655437ec6e71ed96a", [:mix], [{:hackney, "~> 1.8.0 or 1.6.5", [hex: :hackney, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: true]}, {:poison, "~> 1.5 or ~> 2.0 or ~> 3.0", [hex: :poison, optional: false]}, {:uuid, "~> 1.0", [hex: :uuid, optional: false]}]},
   "slime": {:hex, :slime, "0.16.0", "4f9c677ca37b2817cd10422ecb42c524fe904d3630acf242b81dfe189900272a", [:mix], []},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.1", "28a4d65b7f59893bc2c7de786dec1e1555bd742d336043fe644ae956c3497fbe", [:make, :rebar], []},
   "sweet_xml": {:hex, :sweet_xml, "0.6.5", "dd9cde443212b505d1b5f9758feb2000e66a14d3c449f04c572f3048c66e6697", [:mix], []},

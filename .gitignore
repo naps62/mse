@@ -27,3 +27,4 @@ mkm-prod.exs
 backups/
 data
 dump.rdb
+config/*.secret.exs
