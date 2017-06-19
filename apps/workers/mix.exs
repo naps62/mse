@@ -44,7 +44,7 @@ defmodule Workers.Mixfile do
       {:mkm_api, in_umbrella: true},
 
       {:quantum, ">= 2.0.0-beta.1"},
-      {:exq, github: "stavro/exq", ref: "40838d6", override: true},
+      {:exq, "~> 0.9.0"},
       {:timex, "~> 3.0"},
     ]
   end

@@ -49,10 +49,10 @@ defmodule Mse.Web.Mixfile do
       {:poison, "~> 3.0"},
       {:absinthe_plug, "~> 1.2"},
       {:ex_admin, github: "smpallen99/ex_admin"},
-      {:basic_auth, "~> 2.0.0"},
+      {:basic_auth, "~> 2.1.3"},
       {:phoenix_slime, "~> 0.9.0"},
-      {:exq, github: "stavro/exq", ref: "40838d6", override: true},
-      {:exq_ui, "~> 0.8.6"},
+      {:exq, "~> 0.9.0"},
+      {:exq_ui, "~> 0.9.0"},
       {:scrivener_ecto, "~> 1.2.2", override: true},
     ]
   end
