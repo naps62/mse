@@ -21,7 +21,7 @@ defmodule MkmAPI.Singles do
     |> where([c], is_nil(c.single_id))
     |> where([c], not is_nil(c.mkm_basic_data))
     |> preload(:single)
-    |> DB.Stream.stream
+    |> DB.Stream.stream(SilentRepo)
   end
 
   defp fetch_single_for_card(%Card{} = card) do

@@ -22,7 +22,7 @@ RUN npm install -g yarn
 
 COPY mix.exs mix.lock ./
 
-RUN mkdir -p apps/db/config apps/mtgio/config apps/graph/config apps/mse_web/config apps/frontend apps/mkm_api
+RUN mkdir -p config apps/db/config apps/mtgio/config apps/graph/config apps/mse_web/config apps/frontend apps/mkm_api
 COPY apps/mkm_api/config/* apps/mkm_api/config/
 COPY apps/mkm_api/mix.exs apps/mkm_api/
 
@@ -44,6 +44,8 @@ COPY apps/workers/mix.exs apps/workers/
 COPY apps/graph/config/* apps/graph/config/
 COPY apps/graph/mix.exs apps/graph/
 
+COPY config/* config/
+
 RUN mix do deps.get, deps.compile
 
 COPY apps/frontend/package.json apps/frontend/
@@ -60,4 +62,4 @@ RUN cd apps/frontend && \
 RUN cd apps/mse_web && \
     mix phx.digest
 
-RUN mix release --env=prod --verbose
+RUN mix release --env=prod
