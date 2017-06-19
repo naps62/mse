@@ -21,7 +21,7 @@ defmodule Mse.Web.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Mse.Web.Application, []},
-     extra_applications: [:logger, :runtime_tools, :absinthe_plug]]
+     extra_applications: [:logger, :runtime_tools, :absinthe_plug, :sentry]]
   end
 
   # Specifies which paths to compile per environment.
