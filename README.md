@@ -1,7 +1,12 @@
 # Mse
 
-## Provisioning a server
+## Resources
 
+* [Production server](http://mse.subvisual.pt)
+* [Error tracking - Sentry](https://sentry.io/miguel-palhas/mse/)
+* [Logging - Timber](https://app.timber.io/organizations/miguel-palhas/apps/mse-production)
+
+## Provisioning a server
 
 Creating a Digital Ocean droplet with docker-machine:
 
