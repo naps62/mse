@@ -17,6 +17,7 @@ defmodule Mse.Mixfile do
       {:credo, "~> 0.7", only: [:dev, :test]},
       {:mix_docker, github: "Recruitee/mix_docker", ref: "4fc33d0"},
       {:sentry, "~> 4.0.3"},
+      {:timber, "~> 2.0"},
     ]
   end
 end

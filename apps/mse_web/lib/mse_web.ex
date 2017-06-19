@@ -18,7 +18,7 @@ defmodule Mse.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: Mse.Web
+      use Phoenix.Controller, log: false, namespace: Mse.Web
       import Plug.Conn
       import Mse.Web.Router.Helpers
       import Mse.Web.Gettext

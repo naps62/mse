@@ -8,3 +8,6 @@ config :sentry,
   tags: %{
     env: "production"
   }
+
+config :timber,
+  api_key: "TIMBER_API_KEY"
