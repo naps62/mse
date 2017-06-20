@@ -21,7 +21,7 @@ defmodule Mse.Web.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Mse.Web.Application, []},
-     extra_applications: [:logger, :runtime_tools, :absinthe_plug, :sentry, :logger_file_backend]]
+     extra_applications: [:logger, :runtime_tools, :absinthe_plug]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,7 +40,6 @@ defmodule Mse.Web.Mixfile do
       {:phoenix, "~> 1.3.0-rc", override: true},
       {:phoenix_ecto, "~> 3.2", override: true},
       {:postgrex, "~> 0.13.0", override: true},
-      {:logger_file_backend, "~> 0.0.9"},
 
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_html, "~> 2.6"},

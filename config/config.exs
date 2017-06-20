@@ -23,8 +23,3 @@ config :money,
   symbol: true,
   symbol_on_right: true,
   symbol_space: true
-
-import_config "config.secret.exs"
-
-# Import Timber, structured logging
-import_config "timber.exs"

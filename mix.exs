@@ -3,9 +3,9 @@ defmodule Mse.Mixfile do
 
   def project do
     [apps_path: "apps",
-     version: "alpha.32",
+     version: "alpha.33",
      apps: [
-       :db, :workers, :mse_web, :graph, :gatherer, :mkm_api, :mtgjson
+       :db, :workers, :mse_web, :graph, :gatherer, :mkm_api, :mtgjson, :mse_logging
      ],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -16,8 +16,6 @@ defmodule Mse.Mixfile do
     [
       {:credo, "~> 0.7", only: [:dev, :test]},
       {:mix_docker, github: "Recruitee/mix_docker", ref: "4fc33d0"},
-      {:sentry, "~> 4.0.3"},
-      {:timber, "~> 2.0"},
     ]
   end
 end

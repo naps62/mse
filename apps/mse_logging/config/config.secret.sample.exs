@@ -1,3 +1,5 @@
+use Mix.Config
+
 config :sentry,
   dsn: "SENTRY_DSN_HERE"
   use_error_logger: true,

@@ -44,6 +44,9 @@ COPY apps/workers/mix.exs apps/workers/
 COPY apps/graph/config/* apps/graph/config/
 COPY apps/graph/mix.exs apps/graph/
 
+COPY apps/mse_logging/config/* apps/mse_logging/config/
+COPY apps/mse_logging/mix.exs apps/mse_logging/
+
 COPY config/* config/
 
 RUN mix do deps.get, deps.compile
