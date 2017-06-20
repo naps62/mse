@@ -28,6 +28,7 @@
   "httpoison": {:hex, :httpoison, "0.11.2", "9e59f17a473ef6948f63c51db07320477bad8ba88cf1df60a3eee01150306665", [:mix], [{:hackney, "~> 1.8.0", [hex: :hackney, optional: false]}]},
   "idna": {:hex, :idna, "5.0.2", "ac203208ada855d95dc591a764b6e87259cb0e2a364218f215ad662daa8cd6b4", [:rebar3], [{:unicode_util_compat, "0.2.0", [hex: :unicode_util_compat, optional: false]}]},
   "inflex": {:hex, :inflex, "1.8.0", "7cfc752ae244b30b42ac9cf4c092771b485bc3424139aba4a933e54be8c63931", [:mix], []},
+  "logger_file_backend": {:hex, :logger_file_backend, "0.0.9", "5c2f7d4a28431e695cdf94d191523dbafe609321a67bb654254897f546c393db", [:mix], []},
   "metrics": {:hex, :metrics, "1.0.1", "25f094dea2cda98213cecc3aeff09e940299d950904393b2a29d191c346a8486", [:rebar3], []},
   "mime": {:hex, :mime, "1.1.0", "01c1d6f4083d8aa5c7b8c246ade95139620ef8effb009edde934e0ec3b28090a", [:mix], []},
   "mimerl": {:hex, :mimerl, "1.0.2", "993f9b0e084083405ed8252b99460c4f0563e41729ab42d9074fd5e52439be88", [:rebar3], []},
