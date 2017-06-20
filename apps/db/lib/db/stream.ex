@@ -1,5 +1,5 @@
 defmodule DB.Stream do
-  import Ecto.Query, only: [from: 1, from: 2]
+  import Ecto.Query, only: [from: 2]
 
   @batch_size 1000
 

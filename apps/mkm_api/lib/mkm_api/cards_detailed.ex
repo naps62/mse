@@ -8,12 +8,6 @@ defmodule MkmAPI.CardsDetailed do
     |> Enum.each(&fetch/1)
   end
 
-  def fetch do
-    cards_with_outdated_detailed_data_first()
-    |> Stream.each(&fetch/1)
-    |> Stream.run
-  end
-
   def fetch(%Card{mkm_id: mkm_id} = card) do
     case MKM.product(mkm_id: mkm_id) do
       {:ok, card_data} ->
@@ -23,6 +17,12 @@ defmodule MkmAPI.CardsDetailed do
       _ ->
         IO.puts "Could not update card with mkm_id: #{mkm_id}"
     end
+  end
+
+  def fetch do
+    cards_with_outdated_detailed_data_first()
+    |> Stream.each(&fetch/1)
+    |> Stream.run
   end
 
   def parse(%Card{} = card) do
