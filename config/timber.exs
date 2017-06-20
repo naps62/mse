@@ -5,7 +5,7 @@ config :mse_web, Mse.Web.Endpoint,
   instrumenters: [Timber.Integrations.PhoenixInstrumenter]
 
 # Structure Ecto logs
-config :mse_web, DB.Repo,
+config :db, DB.Repo,
   loggers: [{Timber.Integrations.EctoLogger, :log, [:info]}]
 
 # Use Timber as the logger backend
