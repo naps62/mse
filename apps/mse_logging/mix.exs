@@ -37,9 +37,6 @@ defmodule MseLogging.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:mse_web, in_umbrella: true},
-      {:db, in_umbrella: true},
-
       {:timber, "~> 2.0"},
       {:sentry, "~> 4.0.3"},
     ]

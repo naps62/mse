@@ -33,6 +33,7 @@ defmodule Mse.Web.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:mse_logging, in_umbrella: true},
       {:db, in_umbrella: true},
       {:workers, in_umbrella: true},
       {:graph, in_umbrella: true},
