@@ -24,7 +24,7 @@ services:
       POSTGRES_USER: "mse_prod"
       POSTGRES_PASSWORD: "mse_prod"
     volumes:
-      - data-volume:/var/lib/postgresql
+      - db-volume:/var/lib/postgresql/data
 
   redis:
     build:
@@ -33,4 +33,4 @@ services:
     command: "redis-server /usr/local/etc/redis/redis.conf --requirepass naps62"
 
 volumes:
-  data-volume:
+  db-volume:

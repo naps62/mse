@@ -7,5 +7,5 @@ config :exq,
   namespace: "exq",
   concurrency: 1000,
   queues: ["default"],
-  max_retries: 5,
+  max_retries: 0,
   password: {:system, "REDIS_PASSWORD"}
