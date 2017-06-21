@@ -19,4 +19,4 @@
     .boxy.box-primary
       h3 Update data from MTG JSON (https://mtgjson.com)
     .box-body
-      = button("Start update job", to: admin_mtgjson_path(@conn, :update), method: :post)
+      = button("Start update job", to: admin_mtgjson_path(@conn, :update), method: :put)
