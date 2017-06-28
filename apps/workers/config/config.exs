@@ -2,7 +2,7 @@ use Mix.Config
 
 config :workers, Workers.Scheduler,
   jobs: [
-    # {"* * * * *", {Workers.Recurrent.Heartbeat, :send, []}}
+    {"@hourly", {Workers.Recurrent.PriceUpdater, :run, []}}
   ]
 
 import_config "#{Mix.env}.exs"

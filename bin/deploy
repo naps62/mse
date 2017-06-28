@@ -11,6 +11,7 @@ if [ "$TAG" == "" ]; then
   exit
 fi
 
+echo $POSTGRES_USER
 mix docker.build
 mix docker.release
 mix docker.publish --tag $TAG
