@@ -28,3 +28,4 @@ backups/
 data
 dump.rdb
 config/*.secret.exs
+bin/utils/set-env.secret

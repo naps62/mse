@@ -10,19 +10,19 @@ services:
     ports:
       - "4000:4000"
     environment:
-      DATABASE_URL: "ecto://mse_prod:mse_prod@db/mse_prod"
+      DATABASE_URL: "ecto://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}"
       PORT: 4000
       POOL_SIZE: 10
-      ADMIN_USERNAME: naps62
-      ADMIN_PASSWORD: naps62
-      REDIS_PASSWORD: naps62
+      ADMIN_USERNAME: "${ADMIN_USERNAME}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
 
   db:
     image: postgres:9.6.2
     environment:
-      POSTGRES_DB: "mse_prod"
-      POSTGRES_USER: "mse_prod"
-      POSTGRES_PASSWORD: "mse_prod"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     volumes:
       - db-volume:/var/lib/postgresql/data
 
@@ -30,7 +30,22 @@ services:
     build:
       context: "./docker"
       dockerfile: "Dockerfile.redis"
-    command: "redis-server /usr/local/etc/redis/redis.conf --requirepass naps62"
+    command: "redis-server /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}"
+
+  # pgbackups:
+  #   image: schickling/postgres-backup-s3
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     SCHEDULE: "@daily"
+  #     S3_REGION: "eu-west-1"
+  #     S3_ACCESS_KEY_ID: 
+  #     S3_SECRET_ACCESS_KEY:
+  #     S3_BUCKET: "mse-production"
+  #     S3_PREFIX: "db-backups"
+  #     POSTGRES_DATABASE: "mse_prod"
+  #     POSTGRES_USER: "naps62"
+  #     POSTGRES_PASSWORD: "naps62"
 
 volumes:
   db-volume:
