@@ -2,7 +2,6 @@
 dec
 _build
 cover
-deps
 doc
 test
 tmp
@@ -10,7 +9,6 @@ erl_crash.dump
 *.ez
 .nvmrc
 README.md
-!deps/sentry
 
 apps/frontend/node_modules
 
