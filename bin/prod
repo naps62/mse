@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+source ./bin/utils/set-env
+
+# these are the exports from docker-machine, hardcoded here for speed
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://104.236.108.255:2376"
+export DOCKER_CERT_PATH="/home/naps62/.docker/machine/machines/docker-test"
+export DOCKER_MACHINE_NAME="docker-test"
+
+ARGS=$@
+
+case "$@" in
+  "console" )
+    docker-compose exec web /opt/app/bin/mse remote_console
+    ;;
+
+  * )
+    docker-compose $@
+    ;;
+esac
