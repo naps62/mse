@@ -13,7 +13,7 @@ export DOCKER_MACHINE_NAME="docker-test"
 ARGS=$@
 
 case "$@" in
-  "console" )
+  "iex" )
     docker-compose exec web /opt/app/bin/mse remote_console
     ;;
 

@@ -25,5 +25,5 @@ eval $(docker-machine env docker-test)
 Deploy:
 
 ```sh
-docker-compose up -d
+bin/prod up -d
 ```

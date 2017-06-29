@@ -19,6 +19,6 @@ mix docker.publish --tag $TAG
 git tag $TAG
 git push --tags &
 
-./bin/production build
-./bin/production stop web
-./bin/production up -d
+./bin/prod build
+./bin/prod stop web
+./bin/prod up -d
