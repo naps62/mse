@@ -11,6 +11,10 @@ import_config "../apps/*/config/config.exs"
 
 import_config "#{Mix.env}.exs"
 
+if Mix.env == :prod or Mix.env == :dev do
+  import_config "mkm-prod.exs"
+end
+
 config :mix_docker,
   image: "naps62/mse",
   dockerfile_build: "docker/Dockerfile.build",

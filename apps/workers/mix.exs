@@ -40,7 +40,7 @@ defmodule Workers.Mixfile do
     [
       {:db, in_umbrella: true},
 
-      {:mse_mkm_api, github: "naps62/mse-mkm_api"},
+      {:mse_mkm_api, github: "naps62/mse-mkm_api", ref: "329a8ab"},
       {:mse_gatherer, github: "naps62/mse-gatherer", ref: "6ed1454"},
       {:mse_mtgjson, github: "naps62/mse-mtgjson", ref: "9949a5a"},
 
