@@ -1,5 +1,5 @@
-defmodule Mse.Web.Admin.GathererController do
-  use Mse.Web, :controller
+defmodule Mse.Admin.GathererController do
+  use Mse.Admin, :controller
   import ExAdmin.Utils
 
   def update(conn, %{"gatherer_import" => %{"xml" => xml}}) do
@@ -7,6 +7,6 @@ defmodule Mse.Web.Admin.GathererController do
 
     Exq.enqueue(Exq, "default", Workers.Admin.GathererImport, [path])
 
-    redirect(conn, to: admin_path())
+    redirect(conn, to: "/")
   end
 end

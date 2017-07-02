@@ -6,8 +6,8 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :mse_web, Mse.Web.Endpoint,
-  http: [port: 4000],
+config :mse_web, MseWeb.Endpoint,
+  http: [port: 4001],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -31,13 +31,13 @@ config :mse_web, Mse.Web.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :mse_web, Mse.Web.Endpoint,
+config :mse_web, MseWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/mse_web/web/views/.*(ex)$},
-      ~r{lib/mse_web/web/templates/.*(eex)$}
+      ~r{lib/mse_web/views/.*(ex)$},
+      ~r{lib/mse_web/templates/.*(eex)$}
     ]
   ]
 

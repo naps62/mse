@@ -1,3 +1,3 @@
-defmodule Mse.Web.PageView do
-  use Mse.Web, :view
+defmodule MseWeb.PageView do
+  use MseWeb, :view
 end

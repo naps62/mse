@@ -1,4 +1,4 @@
-defmodule Mse.Web.ErrorHelpers do
+defmodule MseWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule Mse.Web.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Mse.Web.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(MseWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Mse.Web.Gettext, "errors", msg, opts)
+      Gettext.dgettext(MseWeb.Gettext, "errors", msg, opts)
     end
   end
 end

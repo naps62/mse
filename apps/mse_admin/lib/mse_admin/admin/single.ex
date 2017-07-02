@@ -1,9 +1,9 @@
-defmodule Mse.Web.ExAdmin.Single do
+defmodule Mse.Admin.ExAdmin.Single do
   use ExAdmin.Register
 
   alias DB.Models.Card
-  alias MseWeb.Presenters.{Manacost, Ability}
-  alias MseWeb.Admin.Helpers
+  alias Mse.Admin.Presenters.{Manacost, Ability}
+  alias Mse.Admin.Helpers
 
   register_resource DB.Models.Single do
     clear_action_items!()
@@ -61,7 +61,7 @@ defmodule Mse.Web.ExAdmin.Single do
     end
 
     sidebar "", only: :show do
-      Phoenix.View.render Mse.Web.AdminView, "card_image.html", image: resource.image_url
+      Phoenix.View.render Mse.AdminView, "card_image.html", image: resource.image_url
     end
   end
 end

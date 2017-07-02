@@ -1,3 +1,3 @@
-defmodule Mse.Web.LayoutView do
-  use Mse.Web, :view
+defmodule MseWeb.LayoutView do
+  use MseWeb, :view
 end

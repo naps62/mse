@@ -1,4 +1,4 @@
-defmodule MseWeb.Admin.Helpers do
+defmodule Mse.Admin.Helpers do
   alias DB.Repo
 
   def count(query), do:
