@@ -1,5 +1,6 @@
 defmodule Workers.Recurrent.PriceUpdater do
   alias DB.Models.Card
+  alias DB.SilentRepo
 
   import Ecto.Query
 

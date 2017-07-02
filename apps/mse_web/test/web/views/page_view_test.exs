@@ -1,3 +1,3 @@
-defmodule Mse.Web.PageViewTest do
-  use Mse.Web.ConnCase, async: true
+defmodule MseWeb.PageViewTest do
+  use MseWeb.ConnCase, async: true
 end

@@ -3,9 +3,9 @@ defmodule Mse.Mixfile do
 
   def project do
     [apps_path: "apps",
-     version: "alpha.39",
+     version: "alpha.40",
      apps: [
-       :db, :workers, :mse_web, :graph, :gatherer, :mkm_api, :mtgjson, :mse_logging
+       :db, :workers, :mse_proxy, :mse_web, :mse_admin, :mtgjson, :gatherer, :mkm_api, :graph, :mse_logging
      ],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,

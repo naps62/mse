@@ -1,7 +1,7 @@
-defmodule Mse.Web.Endpoint do
+defmodule MseWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :mse_web
 
-  socket "/socket", Mse.Web.UserSocket
+  socket "/socket", MseWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -42,7 +42,7 @@ defmodule Mse.Web.Endpoint do
   plug Timber.Integrations.ContextPlug
   plug Timber.Integrations.EventPlug
 
-  plug Mse.Web.Router
+  plug MseWeb.Router
 
   @doc """
   Dynamically loads configuration from the system environment

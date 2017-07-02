@@ -1,5 +1,5 @@
-defmodule Mse.Web.API.SetView do
-  use Mse.Web, :view
+defmodule MseWeb.API.SetView do
+  use MseWeb, :view
 
   def render("index.json", %{sets: sets}) do
     sets

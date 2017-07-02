@@ -1,7 +1,7 @@
 use Mix.Config
 
 # Update the instrumenters so that we can structure Phoenix logs
-config :mse_web, Mse.Web.Endpoint,
+config :mse_web, MseWeb.Endpoint,
   instrumenters: [Timber.Integrations.PhoenixInstrumenter]
 
 # Structure Ecto logs

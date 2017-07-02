@@ -1,5 +1,5 @@
-defmodule Mse.Web.PageController do
-  use Mse.Web, :controller
+defmodule MseWeb.PageController do
+  use MseWeb, :controller
 
   def index(conn, _params) do
     conn

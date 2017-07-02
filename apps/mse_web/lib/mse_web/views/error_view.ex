@@ -1,5 +1,5 @@
-defmodule Mse.Web.ErrorView do
-  use Mse.Web, :view
+defmodule MseWeb.ErrorView do
+  use MseWeb, :view
 
   def render("404.html", _assigns) do
     "Page not found"
