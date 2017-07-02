@@ -39,9 +39,10 @@ defmodule Workers.Mixfile do
   defp deps do
     [
       {:db, in_umbrella: true},
-      {:gatherer, in_umbrella: true},
-      {:mtgjson, in_umbrella: true},
-      {:mkm_api, in_umbrella: true},
+
+      {:mse_mkm_api, github: "naps62/mse-mkm_api"},
+      {:mse_gatherer, github: "naps62/mse-gatherer", ref: "6ed1454"},
+      {:mse_mtgjson, github: "naps62/mse-mtgjson", ref: "9949a5a"},
 
       {:quantum, ">= 2.0.0-beta.1"},
       {:exq, "~> 0.9.0"},

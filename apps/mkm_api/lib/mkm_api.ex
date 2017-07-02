@@ -1,2 +1,0 @@
-defmodule MkmAPI do
-end
