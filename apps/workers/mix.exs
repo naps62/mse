@@ -39,6 +39,9 @@ defmodule Workers.Mixfile do
   defp deps do
     [
       {:db, in_umbrella: true},
+      {:mkm_api, in_umbrella: true},
+      {:gatherer, in_umbrella: true},
+      {:mtgjson, in_umbrella: true},
 
       {:quantum, ">= 2.0.0-beta.1"},
       {:exq, "~> 0.9.0"},
