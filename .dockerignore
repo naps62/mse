@@ -19,5 +19,6 @@ apps/graph/test
 apps/mse_web/test
 apps/mtgio/test
 
+backups/
 data/
 mse.tar.gz
