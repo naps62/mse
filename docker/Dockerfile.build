@@ -36,6 +36,9 @@ COPY apps/mtgjson/mix.exs apps/mtgjson/
 COPY apps/mse_web/config/* apps/mse_web/config/
 COPY apps/mse_web/mix.exs apps/mse_web/
 
+COPY apps/mse_admin/config/* apps/mse_admin/config/
+COPY apps/mse_admin/mix.exs apps/mse_admin/
+
 COPY apps/db/config/* apps/db/config/
 COPY apps/db/mix.exs apps/db/
 
@@ -50,7 +53,8 @@ COPY apps/mse_logging/mix.exs apps/mse_logging/
 
 COPY config/* config/
 
-RUN mix do deps.get, deps.compile
+RUN mix deps.get
+RUN mix deps.compile
 
 COPY apps/frontend/package.json apps/frontend/
 COPY apps/frontend/yarn.lock apps/frontend/
