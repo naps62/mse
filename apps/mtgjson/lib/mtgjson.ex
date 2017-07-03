@@ -16,8 +16,6 @@ defmodule Mtgjson do
     with {:ok, response} <- HTTPoison.get(@base_url <> filename),
       {:ok, [{_, inflated_data}]} <- inflate(response.body)
     do
-      IO.inspect filename
-      IO.inspect handler
       handler.({:data, inflated_data})
     end
   end

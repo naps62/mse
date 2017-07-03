@@ -3,7 +3,7 @@ defmodule Mse.Admin.MtgjsonController do
   import ExAdmin.Utils
 
   def update(conn, _params) do
-    Exq.enqueue(Exq, "default", Workers.Admin.MtgjsonImport, [])
+    Workers.Admin.MtgjsonImport.perform_async()
 
     redirect(conn, to: "/")
   end

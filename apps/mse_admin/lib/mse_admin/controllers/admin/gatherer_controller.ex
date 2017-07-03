@@ -5,7 +5,7 @@ defmodule Mse.Admin.GathererController do
   def update(conn, %{"gatherer_import" => %{"xml" => xml}}) do
     %Plug.Upload{path: path} = xml
 
-    Exq.enqueue(Exq, "default", Workers.Admin.GathererImport, [path])
+    Workers.Admin.GathererImport.perform_async(path)
 
     redirect(conn, to: "/")
   end

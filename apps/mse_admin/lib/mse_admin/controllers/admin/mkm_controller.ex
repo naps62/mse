@@ -3,7 +3,7 @@ defmodule Mse.Admin.MKMController do
   import ExAdmin.Utils
 
   def update(conn, _params) do
-    Exq.enqueue(Exq, "default", Workers.Admin.MKMImport, [])
+    Workers.Admin.MKMImport.perform_async()
 
     redirect(conn, to: "/")
   end
