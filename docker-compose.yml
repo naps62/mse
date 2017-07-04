@@ -29,7 +29,7 @@ services:
   redis:
     build:
       context: "."
-      dockerfile: "Dockerfile.redis"
+      dockerfile: "docker/Dockerfile.redis"
     command: "redis-server /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}"
 
   pgbackups:

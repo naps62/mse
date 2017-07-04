@@ -6,9 +6,11 @@ source ./bin/utils/set-env
 
 ARGS=$@
 
+COMPOSE="docker-compose -f docker/docker-compose.yml"
+
 case "$@" in
   "iex" )
-    docker-compose exec web /opt/app/bin/mse remote_console
+    $COMPOSE exec web /opt/app/bin/mse remote_console
     ;;
 
   "db-restore")
@@ -16,6 +18,6 @@ case "$@" in
     ;;
 
   * )
-    docker-compose "$@"
+    $COMPOSE "$@"
     ;;
 esac

@@ -3,6 +3,7 @@ defmodule MseProxy.Endpoint do
 
   plug MseProxy.Plug, %{
     "admin.lvh.me" => Mse.Admin.Endpoint,
+    "admin.mtgsear.ch" => Mse.Admin.Endpoint,
     "default" => MseWeb.Endpoint
   }
 end
