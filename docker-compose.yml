@@ -6,7 +6,6 @@ services:
     command: foreground
     depends_on:
       - db
-      - redis
     ports:
       - "4000:4000"
     environment:
@@ -15,7 +14,6 @@ services:
       POOL_SIZE: 10
       ADMIN_USERNAME: "${ADMIN_USERNAME}"
       ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
-      REDIS_PASSWORD: "${REDIS_PASSWORD}"
 
   db:
     image: postgres:9.6.2
