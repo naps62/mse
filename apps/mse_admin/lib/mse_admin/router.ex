@@ -14,14 +14,6 @@ defmodule Mse.Admin.Router do
     # plug BasicAuth, use_config: {:mse_admin, :admin_basic_auth}
   end
 
-  pipeline :exq do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :put_secure_browser_headers
-    plug ExqUi.RouterPlug, namespace: "exq"
-  end
-
   scope "/", as: :admin do
     pipe_through [:browser, :admin_basic_auth]
 
@@ -34,11 +26,5 @@ defmodule Mse.Admin.Router do
     pipe_through [:browser, :admin_basic_auth]
 
     admin_routes()
-  end
-
-  scope "/exq", ExqUi do
-    pipe_through [:admin_basic_auth, :exq]
-
-    forward "/", RouterPlug.Router, :index
   end
 end

@@ -50,8 +50,6 @@ defmodule Mse.Admin.Mixfile do
       {:ex_admin, github: "smpallen99/ex_admin"},
       {:basic_auth, "~> 2.1.3"},
       {:phoenix_slime, "~> 0.9.0"},
-      {:exq, "~> 0.9.0"},
-      {:exq_ui, "~> 0.9.0"},
     ]
   end
 

@@ -51,7 +51,6 @@ defmodule MseWeb.Mixfile do
       {:absinthe_plug, "~> 1.2"},
       {:basic_auth, "~> 2.1.3"},
       {:phoenix_slime, "~> 0.9.0"},
-      {:exq, "~> 0.9.0"},
     ]
   end
 

@@ -6,7 +6,7 @@ source ./bin/utils/set-env
 
 ARGS=$@
 
-COMPOSE="docker-compose -f docker/docker-compose.yml"
+COMPOSE="docker-compose -f docker-compose.yml"
 
 case "$@" in
   "iex" )

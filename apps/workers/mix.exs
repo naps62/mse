@@ -44,7 +44,6 @@ defmodule Workers.Mixfile do
       {:mtgjson, in_umbrella: true},
 
       {:quantum, ">= 2.0.0-beta.1"},
-      {:exq, "~> 0.9.0"},
       {:timex, "~> 3.0"},
     ]
   end
