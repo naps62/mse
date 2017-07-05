@@ -1,8 +1,0 @@
-#!/bin/bash
-
-source ./bin/utils/set-env
-
-docker build -f Dockerfile.build -t naps62/mse:build .
-
-docker cp
-docker build -f Dockerfile.release -t naps62/mse:$MSE_VERSION .
