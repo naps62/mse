@@ -44,9 +44,6 @@ config :phoenix, :template_engines,
   slim: PhoenixSlime.Engine,
   slime: PhoenixSlime.Engine
 
-config :exq_ui,
-  server: false
-
 config :xain, :after_callback, {Phoenix.HTML, :raw}
 
 # Import environment specific config. This must remain at the bottom
