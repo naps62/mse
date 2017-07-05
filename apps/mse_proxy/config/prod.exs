@@ -14,7 +14,8 @@ use Mix.Config
 config :mse_proxy, MseProxy.Endpoint,
   http: [port: {:system, "PROXY_PORT"}],
   url: [host: "localhost", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  cache_static_manifest: "priv/static/manifest.json",
+  server: true
 
 # Do not print debug messages in production
 config :logger, level: :info
