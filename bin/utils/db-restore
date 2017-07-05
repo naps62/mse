@@ -54,5 +54,4 @@ ssh("gzip -f -d #{BACKUPS_HOST_PATH}/#{BACKUP_GZ_FILE}")
 puts "\n\nApplying..."
 
 restore_cmd="export PGPASSWORD=#{PG_PASSWORD} && psql -h db -U #{PG_USER} -d #{PG_DB} < #{BACKUPS_CONTAINER_PATH}/#{BACKUP_FILE}"
-puts restore_cmd
 puts `./bin/prod exec pgbackups sh -c "#{restore_cmd}"`
