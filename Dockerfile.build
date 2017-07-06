@@ -1,21 +1,30 @@
-FROM bitwalker/alpine-elixir-phoenix:1.4.2
+#
+# base
+#
+FROM bitwalker/alpine-elixir-phoenix:1.4.2 as base
 
-# Install python
-RUN \
-    echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    apk update && \
-    apk --no-cache --update add \
-      python \
-    rm -rf /var/cache/apk/*
-
-ENV HOME=/opt/app/ TERM=xterm
+ENV \
+    HOME=/opt/app/ \
+    TERM=xterm \
+    MIX_ENV=prod \
+    REPLACE_OS_VARS=true \
+    SHELL=/bin/sh
 
 WORKDIR /opt/app
 
-ENV MIX_ENV=prod
+#
+# build
+#
+FROM base as builder
 
-RUN mix local.hex --force
-RUN mix local.rebar --force
+#
+# unfortunately, python is needed to run node-sass
+RUN \
+    echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    apk update && \
+    apk --no-cache --update add python && \
+    rm -rf /var/cache/apk/*
+
 RUN npm install -g yarn
 
 RUN mkdir -p \
@@ -70,9 +79,22 @@ COPY apps/frontend/package.json apps/frontend/
 COPY apps/frontend/yarn.lock apps/frontend/
 RUN cd apps/frontend && yarn install
 
-COPY . .
-
+# Compile frontend app assets
+COPY apps/frontend apps/frontend
+COPY apps/mse_web apps/mse_web
 RUN cd apps/frontend && ./node_modules/.bin/brunch build --production
 RUN cd apps/mse_web  &&  mix phx.digest
 
+COPY rel rel
+COPY apps apps
+
 RUN mix release --env=prod
+
+#
+# RELEASE
+#
+FROM base as release
+
+COPY --from=builder /opt/app/_build/prod/rel/mse ./
+
+ENTRYPOINT ["/opt/app/bin/mse"]

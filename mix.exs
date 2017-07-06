@@ -24,7 +24,7 @@ defmodule Mse.Mixfile do
   defp deps do
     [
       {:credo, "~> 0.7", only: [:dev, :test]},
-      {:mix_docker, github: "Recruitee/mix_docker", ref: "4fc33d0"},
+      {:distillery, "1.3.4"}
     ]
   end
 end

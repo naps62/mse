@@ -27,7 +27,6 @@
   "metrics": {:hex, :metrics, "1.0.1", "25f094dea2cda98213cecc3aeff09e940299d950904393b2a29d191c346a8486", [:rebar3], [], "hexpm"},
   "mime": {:hex, :mime, "1.1.0", "01c1d6f4083d8aa5c7b8c246ade95139620ef8effb009edde934e0ec3b28090a", [:mix], [], "hexpm"},
   "mimerl": {:hex, :mimerl, "1.0.2", "993f9b0e084083405ed8252b99460c4f0563e41729ab42d9074fd5e52439be88", [:rebar3], [], "hexpm"},
-  "mix_docker": {:git, "https://github.com/Recruitee/mix_docker.git", "4fc33d0e497b66f1a3238af207bbaf4b4850936f", [ref: "4fc33d0"]},
   "mkm": {:git, "https://github.com/naps62/mkm.git", "828c9591c494a840f7505d8d4565438d732a8a66", [ref: "828c959"]},
   "money": {:hex, :money, "1.2.1", "fdcc7b021b894dbcc2cd0f57d2ccdd2224eced747231337a849424ffaa196b13", [:mix], [{:ecto, "~> 1.0 or ~> 2.0 or ~> 2.1", [hex: :ecto, repo: "hexpm", optional: true]}, {:phoenix_html, "~> 2.0", [hex: :phoenix_html, repo: "hexpm", optional: true]}], "hexpm"},
   "msgpax": {:hex, :msgpax, "1.1.0", "e31625e256db2decca1ae2b841f21b4d2483b1332649ce3ebc96c7ff7a4986e3", [:mix], [{:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: true]}], "hexpm"},
