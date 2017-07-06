@@ -3,16 +3,7 @@
 #
 FROM bitwalker/alpine-elixir-phoenix:1.4.2 as builder
 
-# Install python
-RUN \
-    echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    apk update && \
-    apk --no-cache --update add \
-      python \
-    rm -rf /var/cache/apk/*
-
 ENV HOME=/opt/app/ TERM=xterm
-
 WORKDIR /opt/app
 
 ENV MIX_ENV=prod
@@ -89,12 +80,10 @@ RUN mix release --env=prod
 #
 FROM bitwalker/alpine-elixir-phoenix:1.4.2
 
-RUN apk update && \
-    apk --no-cache --update add libgcc libstdc++ && \
-    rm -rf /var/cache/apk/*
+ENV HOME=/opt/app/ TERM=xterm
+WORKDIR /opt/app
 
-EXPOSE 4000
-ENV PORT=4000 MIX_ENV=prod REPLACE_OS_VARS=true SHELL=/bin/sh
+ENV MIX_ENV=prod REPLACE_OS_VARS=true SHELL=/bin/sh
 
 COPY --from=builder /opt/app/_build/prod/rel/mse ./
 
