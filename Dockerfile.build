@@ -19,43 +19,34 @@ RUN mix local.rebar --force
 RUN npm install -g yarn
 
 # Cache elixir deps
-
-COPY mix.exs mix.lock ./
-
 RUN mkdir -p config apps/db/config apps/mtgio/config apps/graph/config apps/mse_web/config apps/frontend apps/mkm_api
 
-COPY apps/mkm_api/config/* apps/mkm_api/config/
-COPY apps/mkm_api/mix.exs apps/mkm_api/
-
-COPY apps/gatherer/config/* apps/gatherer/config/
-COPY apps/gatherer/mix.exs apps/gatherer/
-
-COPY apps/mtgjson/config/* apps/mtgjson/config/
-COPY apps/mtgjson/mix.exs apps/mtgjson/
-
-COPY apps/mse_web/config/* apps/mse_web/config/
-COPY apps/mse_web/mix.exs apps/mse_web/
-
-COPY apps/mse_admin/config/* apps/mse_admin/config/
-COPY apps/mse_admin/mix.exs apps/mse_admin/
-
-COPY apps/db/config/* apps/db/config/
-COPY apps/db/mix.exs apps/db/
-
-COPY apps/workers/config/* apps/workers/config/
-COPY apps/workers/mix.exs apps/workers/
-
-COPY apps/graph/config/* apps/graph/config/
-COPY apps/graph/mix.exs apps/graph/
-
-COPY apps/mse_logging/config/* apps/mse_logging/config/
+COPY mix.exs mix.lock         ./
+COPY apps/mkm_api/mix.exs     apps/mkm_api/
+COPY apps/gatherer/mix.exs    apps/gatherer/
+COPY apps/mtgjson/mix.exs     apps/mtgjson/
+COPY apps/mse_web/mix.exs     apps/mse_web/
+COPY apps/mse_admin/mix.exs   apps/mse_admin/
+COPY apps/db/mix.exs          apps/db/
+COPY apps/workers/mix.exs     apps/workers/
+COPY apps/graph/mix.exs       apps/graph/
 COPY apps/mse_logging/mix.exs apps/mse_logging/
-
-COPY config/* config/
-
 RUN mix deps.get
+
+# Cache elixir deps compilation
+COPY apps/mkm_api/config/*     apps/mkm_api/config/
+COPY apps/gatherer/config/*    apps/gatherer/config/
+COPY apps/mtgjson/config/*     apps/mtgjson/config/
+COPY apps/mse_web/config/*     apps/mse_web/config/
+COPY apps/mse_admin/config/*   apps/mse_admin/config/
+COPY apps/db/config/*          apps/db/config/
+COPY apps/workers/config/*     apps/workers/config/
+COPY apps/graph/config/*       apps/graph/config/
+COPY apps/mse_logging/config/* apps/mse_logging/config/
+COPY config/* config/
 RUN mix deps.compile
 
+# Cache yarn packages
 COPY apps/frontend/package.json apps/frontend/
 COPY apps/frontend/yarn.lock apps/frontend/
 
