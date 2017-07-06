@@ -7,15 +7,15 @@ use Mix.Config
 
 # General application configuration
 config :mse_admin,
-  namespace: Mse.Admin,
+  namespace: MseAdmin,
   ecto_repos: []
 
 # Configures the endpoint
-config :mse_admin, Mse.Admin.Endpoint,
+config :mse_admin, MseAdmin.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "xSb85QxDsTZAo/cCpUIZgUyV7vPPE2aBgwe3CcWz1ORMpoKIvu4PnEGfVVWej0Dy",
-  render_errors: [view: Mse.Admin.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Mse.Admin.PubSub,
+  render_errors: [view: MseAdmin.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: MseAdmin.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -25,14 +25,14 @@ config :logger, :console,
 
 config :ex_admin,
   repo: DB.Repo,
-  module: Mse.Admin,
+  module: MseAdmin,
   modules: [
-    Mse.Admin.ExAdmin.Dashboard,
-    Mse.Admin.ExAdmin.Set,
-    Mse.Admin.ExAdmin.Single,
-    Mse.Admin.ExAdmin.Card,
+    MseAdmin.ExAdmin.Dashboard,
+    MseAdmin.ExAdmin.Set,
+    MseAdmin.ExAdmin.Single,
+    MseAdmin.ExAdmin.Card,
   ],
-  head_template: {Mse.Admin.AdminView, "head.html"}
+  head_template: {MseAdmin.AdminView, "head.html"}
 
 config :mse_admin, admin_basic_auth: [
   username: {:system, "ADMIN_USERNAME"},

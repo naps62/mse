@@ -1,4 +1,4 @@
-defmodule Mse.Admin.ErrorHelpers do
+defmodule MseAdmin.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule Mse.Admin.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Mse.Admin.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(MseAdmin.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Mse.Admin.Gettext, "errors", msg, opts)
+      Gettext.dgettext(MseAdmin.Gettext, "errors", msg, opts)
     end
   end
 end

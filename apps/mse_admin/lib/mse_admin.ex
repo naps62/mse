@@ -1,12 +1,12 @@
-defmodule Mse.Admin do
+defmodule MseAdmin do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Mse.Admin, :controller
-      use Mse.Admin, :view
+      use MseAdmin, :controller
+      use MseAdmin, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,17 +18,17 @@ defmodule Mse.Admin do
 
   def controller do
     quote do
-      use Phoenix.Controller, log: false, namespace: Mse.Admin
+      use Phoenix.Controller, log: false, namespace: MseAdmin
       import Plug.Conn
-      import Mse.Admin.Router.Helpers
-      import Mse.Admin.Gettext
+      import MseAdmin.Router.Helpers
+      import MseAdmin.Gettext
     end
   end
 
   def view do
     quote do
       use Phoenix.View, root: "lib/mse_admin/templates",
-                        namespace: Mse.Admin
+                        namespace: MseAdmin
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -36,9 +36,9 @@ defmodule Mse.Admin do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Mse.Admin.Router.Helpers
-      import Mse.Admin.ErrorHelpers
-      import Mse.Admin.Gettext
+      import MseAdmin.Router.Helpers
+      import MseAdmin.ErrorHelpers
+      import MseAdmin.Gettext
     end
   end
 
@@ -53,7 +53,7 @@ defmodule Mse.Admin do
   def channel do
     quote do
       use Phoenix.Channel
-      import Mse.Admin.Gettext
+      import MseAdmin.Gettext
     end
   end
 

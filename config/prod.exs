@@ -12,3 +12,5 @@ config :db, DB.SilentRepo,
 
 config :db, DB.Repo,
   shared_repo_config
+
+config :phoenix, :serve_endpoints, true

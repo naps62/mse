@@ -1,13 +1,15 @@
 #!/bin/bash
 
+set -e
+
 export MIX_ENV=prod
-export PROXY_PORT=4000
-export WEB_PORT=4001
-export ADMIN_PORT=4002
+export PORT=4000
 export ADMIN_USERNAME=""
 export ADMIN_PASSWORD=""
 export DATABASE_URL="ecto://naps62:@localhost/mse_prod"
 
-mix compile
+mix deps.compile
+mix release
 echo "Starting..."
-mix phx.server
+_build/prod/rel/mse/bin/mse foreground
+# mix phx.server

@@ -1,3 +1,3 @@
-defmodule Mse.Admin.LayoutView do
-  use Mse.Admin, :view
+defmodule MseAdmin.LayoutView do
+  use MseAdmin, :view
 end

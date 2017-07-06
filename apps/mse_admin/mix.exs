@@ -1,4 +1,4 @@
-defmodule Mse.Admin.Mixfile do
+defmodule MseAdmin.Mixfile do
   use Mix.Project
 
   def project do
@@ -20,7 +20,7 @@ defmodule Mse.Admin.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Mse.Admin.Application, []},
+    [mod: {MseAdmin.Application, []},
      extra_applications: [:logger, :runtime_tools]]
   end
 

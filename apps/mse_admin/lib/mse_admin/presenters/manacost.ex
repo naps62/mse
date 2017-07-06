@@ -1,4 +1,4 @@
-defmodule Mse.Admin.Presenters.Manacost do
+defmodule MseAdmin.Presenters.Manacost do
   alias Phoenix.HTML
 
   alias DB.Models.Single

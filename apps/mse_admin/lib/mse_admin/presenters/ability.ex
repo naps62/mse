@@ -1,4 +1,4 @@
-defmodule Mse.Admin.Presenters.Ability do
+defmodule MseAdmin.Presenters.Ability do
   alias DB.Models.Single
 
   def present(nil), do: []
@@ -8,6 +8,6 @@ defmodule Mse.Admin.Presenters.Ability do
     |> String.replace("£", "<br />")
     |> String.replace("#_", "<i>")
     |> String.replace("_#", "</i>")
-    |> Mse.Admin.Presenters.Manacost.present
+    |> MseAdmin.Presenters.Manacost.present
   end
 end

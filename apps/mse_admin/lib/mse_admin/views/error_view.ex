@@ -1,5 +1,5 @@
-defmodule Mse.Admin.ErrorView do
-  use Mse.Admin, :view
+defmodule MseAdmin.ErrorView do
+  use MseAdmin, :view
 
   def render("404.html", _assigns) do
     "Page not found"

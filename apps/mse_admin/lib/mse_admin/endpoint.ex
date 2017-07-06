@@ -1,7 +1,7 @@
-defmodule Mse.Admin.Endpoint do
+defmodule MseAdmin.Endpoint do
   use Phoenix.Endpoint, otp_app: :mse_admin
 
-  socket "/socket", Mse.Admin.UserSocket
+  socket "/socket", MseAdmin.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -42,7 +42,7 @@ defmodule Mse.Admin.Endpoint do
   plug Timber.Integrations.ContextPlug
   plug Timber.Integrations.EventPlug
 
-  plug Mse.Admin.Router
+  plug MseAdmin.Router
 
   @doc """
   Dynamically loads configuration from the system environment
@@ -51,8 +51,8 @@ defmodule Mse.Admin.Endpoint do
   It receives the endpoint configuration from the config files
   and must return the updated configuration.
   """
-  def load_from_system_env(config) do
-    port = System.get_env("ADMIN_PORT") || raise "expected the PORT environment variable to be set"
-    {:ok, Keyword.put(config, :http, [:inet6, port: port])}
-  end
+  # def load_from_system_env(config) do
+  #   port = System.get_env("ADMIN_PORT") || raise "expected the ADMIN_PORT environment variable to be set"
+  #   {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+  # end
 end

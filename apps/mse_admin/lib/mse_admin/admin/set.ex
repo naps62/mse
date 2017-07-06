@@ -1,9 +1,9 @@
-defmodule Mse.Admin.ExAdmin.Set do
+defmodule MseAdmin.ExAdmin.Set do
   use ExAdmin.Register
 
   alias DB.Models.Card
-  alias Mse.Admin.Presenters.Manacost
-  alias Mse.Admin.Helpers
+  alias MseAdmin.Presenters.Manacost
+  alias MseAdmin.Helpers
 
   register_resource DB.Models.Set do
     clear_action_items!()

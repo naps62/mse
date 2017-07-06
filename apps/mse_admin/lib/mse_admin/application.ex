@@ -1,4 +1,4 @@
-defmodule Mse.Admin.Application do
+defmodule MseAdmin.Application do
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
@@ -10,14 +10,14 @@ defmodule Mse.Admin.Application do
     children = [
       # Start the Ecto repository
       # Start the endpoint when the application starts
-      supervisor(Mse.Admin.Endpoint, []),
-      # Start your own worker by calling: Mse.Admin.Worker.start_link(arg1, arg2, arg3)
-      # worker(Mse.Admin.Worker, [arg1, arg2, arg3]),
+      supervisor(MseAdmin.Endpoint, []),
+      # Start your own worker by calling: MseAdmin.Worker.start_link(arg1, arg2, arg3)
+      # worker(MseAdmin.Worker, [arg1, arg2, arg3]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Mse.Admin.Supervisor]
+    opts = [strategy: :one_for_one, name: MseAdmin.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

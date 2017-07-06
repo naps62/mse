@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :mse_admin, Mse.Admin.Endpoint,
+config :mse_admin, MseAdmin.Endpoint,
   http: [port: 4002],
   server: false
 

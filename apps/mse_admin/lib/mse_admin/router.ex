@@ -1,5 +1,5 @@
-defmodule Mse.Admin.Router do
-  use Mse.Admin, :router
+defmodule MseAdmin.Router do
+  use MseAdmin, :router
   use ExAdmin.Router
 
   pipeline :browser do
@@ -17,9 +17,9 @@ defmodule Mse.Admin.Router do
   scope "/", as: :admin do
     pipe_through [:browser, :admin_basic_auth]
 
-    resources "/mkm", Mse.Admin.MKMController, only: [:update], singleton: true
-    resources "/gatherer", Mse.Admin.GathererController, only: [:update], singleton: true
-    resources "/mtgjson", Mse.Admin.MtgjsonController, only: [:update], singleton: true
+    resources "/mkm", MseAdmin.MKMController, only: [:update], singleton: true
+    resources "/gatherer", MseAdmin.GathererController, only: [:update], singleton: true
+    resources "/mtgjson", MseAdmin.MtgjsonController, only: [:update], singleton: true
   end
 
   scope "/", ExAdmin do

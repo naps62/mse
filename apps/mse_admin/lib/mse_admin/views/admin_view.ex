@@ -1,3 +1,3 @@
-defmodule Mse.Admin.AdminView do
-  use Mse.Admin, :view
+defmodule MseAdmin.AdminView do
+  use MseAdmin, :view
 end
