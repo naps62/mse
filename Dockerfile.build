@@ -18,48 +18,62 @@ RUN mix local.hex --force
 RUN mix local.rebar --force
 RUN npm install -g yarn
 
-# Cache elixir deps
-RUN mkdir -p config apps/db/config apps/mtgio/config apps/graph/config apps/mse_web/config apps/frontend apps/mkm_api
+RUN mkdir -p \
+    config \
+    apps/db/config \
+    apps/gatherer/config \
+    apps/graph/config \
+    apps/mkm_api/config \
+    apps/mse_admin/config
+    apps/mse_logging/config
+    apps/mse_proxy/config
+    apps/mse_web/config
+    apps/mtgjson/config
+    apps/workers/config
 
+# Cache elixir deps
 COPY mix.exs mix.lock         ./
-COPY apps/mkm_api/mix.exs     apps/mkm_api/
-COPY apps/gatherer/mix.exs    apps/gatherer/
-COPY apps/mtgjson/mix.exs     apps/mtgjson/
-COPY apps/mse_web/mix.exs     apps/mse_web/
-COPY apps/mse_admin/mix.exs   apps/mse_admin/
 COPY apps/db/mix.exs          apps/db/
-COPY apps/workers/mix.exs     apps/workers/
+COPY apps/gatherer/mix.exs    apps/gatherer/
 COPY apps/graph/mix.exs       apps/graph/
+COPY apps/mkm_api/mix.exs     apps/mkm_api/
+COPY apps/mse_admin/mix.exs   apps/mse_admin/
 COPY apps/mse_logging/mix.exs apps/mse_logging/
+COPY apps/mse_proxy/mix.exs   apps/mse_proxy/
+COPY apps/mse_web/mix.exs     apps/mse_web/
+COPY apps/mtgjson/mix.exs     apps/mtgjson/
+COPY apps/workers/mix.exs     apps/workers/
 RUN mix deps.get
 
 # Cache elixir deps compilation
-COPY apps/mkm_api/config/*     apps/mkm_api/config/
-COPY apps/gatherer/config/*    apps/gatherer/config/
-COPY apps/mtgjson/config/*     apps/mtgjson/config/
-COPY apps/mse_web/config/*     apps/mse_web/config/
-COPY apps/mse_admin/config/*   apps/mse_admin/config/
 COPY apps/db/config/*          apps/db/config/
-COPY apps/workers/config/*     apps/workers/config/
+COPY apps/gatherer/config/*    apps/gatherer/config/
 COPY apps/graph/config/*       apps/graph/config/
+COPY apps/mkm_api/config/*     apps/mkm_api/config/
+COPY apps/mse_admin/config/*   apps/mse_admin/config/
 COPY apps/mse_logging/config/* apps/mse_logging/config/
+COPY apps/mse_web/config/*     apps/mse_web/config/
+COPY apps/mse_proxy/config/*   apps/mse_proxy/config/
+COPY apps/mtgjson/config/*     apps/mtgjson/config/
+COPY apps/workers/config/*     apps/workers/config/
 COPY config/* config/
 RUN mix deps.compile
 
 # Compile admin app assets
-RUN cd apps/mse_admin/assets && yarn install
-RUN cd apps/mse_admin/assets && ./node_modules/.bin/brunch build --production
-RUN cd apps/mse_admin && mix phx.digest
+COPY apps/mse_admin/* apps/mse_admin/
+# RUN cd apps/mse_admin/assets && yarn install
+# RUN cd apps/mse_admin/assets && ./node_modules/.bin/brunch build --production
+# RUN cd apps/mse_admin && mix phx.digest
 
-# Cache yarn packages
-COPY apps/frontend/package.json apps/frontend/
-COPY apps/frontend/yarn.lock apps/frontend/
+# # Cache yarn packages
+# COPY apps/frontend/package.json apps/frontend/
+# COPY apps/frontend/yarn.lock apps/frontend/
 
-RUN cd apps/frontend && yarn install
+# RUN cd apps/frontend && yarn install
 
-COPY . .
+# COPY . .
 
-RUN cd apps/frontend && ./node_modules/.bin/brunch build --production
-RUN cd apps/mse_web  &&  mix phx.digest
+# RUN cd apps/frontend && ./node_modules/.bin/brunch build --production
+# RUN cd apps/mse_web  &&  mix phx.digest
 
-RUN mix release --env=prod
+# RUN mix release --env=prod
