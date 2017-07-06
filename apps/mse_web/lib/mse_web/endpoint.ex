@@ -43,16 +43,4 @@ defmodule MseWeb.Endpoint do
   plug Timber.Integrations.EventPlug
 
   plug MseWeb.Router
-
-  @doc """
-  Dynamically loads configuration from the system environment
-  on startup.
-
-  It receives the endpoint configuration from the config files
-  and must return the updated configuration.
-  """
-  # def load_from_system_env(config) do
-  #   port = System.get_env("WEB_PORT") || raise "expected the WEB_PORT environment variable to be set"
-  #   {:ok, Keyword.put(config, :http, [:inet6, port: port])}
-  # end
 end

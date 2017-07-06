@@ -8,10 +8,12 @@ services:
       - db
     ports:
       - "4000:4000"
-      - "4001:4001"
     environment:
+      MIX_ENV: prod
       DATABASE_URL: "ecto://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}"
-      PORT: 4000
+      PROXY_PORT: 4000
+      WEB_PORT: 4001
+      ADMIN_PORT: 4002
       POOL_SIZE: 10
       ADMIN_USERNAME: "${ADMIN_USERNAME}"
       ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
