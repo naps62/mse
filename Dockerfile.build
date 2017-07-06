@@ -46,19 +46,20 @@ COPY apps/mse_logging/config/* apps/mse_logging/config/
 COPY config/* config/
 RUN mix deps.compile
 
+# Compile admin app assets
+RUN cd apps/mse_admin/assets && yarn install
+RUN cd apps/mse_admin/assets && ./node_modules/.bin/brunch build --production
+RUN cd apps/mse_admin && mix phx.digest
+
 # Cache yarn packages
 COPY apps/frontend/package.json apps/frontend/
 COPY apps/frontend/yarn.lock apps/frontend/
 
-RUN cd apps/frontend && \
-    yarn install
+RUN cd apps/frontend && yarn install
 
 COPY . .
 
-RUN cd apps/frontend && \
-    ./node_modules/.bin/brunch build --production
-
-RUN cd apps/mse_web && \
-    mix phx.digest
+RUN cd apps/frontend && ./node_modules/.bin/brunch build --production
+RUN cd apps/mse_web  &&  mix phx.digest
 
 RUN mix release --env=prod
