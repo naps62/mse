@@ -1,4 +1,7 @@
-FROM bitwalker/alpine-elixir-phoenix:1.4.2
+#
+# build
+#
+FROM bitwalker/alpine-elixir-phoenix:1.4.2 as builder
 
 # Install python
 RUN \
@@ -70,9 +73,32 @@ COPY apps/frontend/package.json apps/frontend/
 COPY apps/frontend/yarn.lock apps/frontend/
 RUN cd apps/frontend && yarn install
 
-COPY . .
-
+# Compile frontend app assets
+COPY apps/frontend apps/frontend
+COPY apps/mse_web apps/mse_web
 RUN cd apps/frontend && ./node_modules/.bin/brunch build --production
 RUN cd apps/mse_web  &&  mix phx.digest
 
+COPY rel rel
+COPY apps apps
+
 RUN mix release --env=prod
+
+#
+# RELEASE
+#
+FROM bitwalker/alpine-elixir-phoenix:1.4.2
+
+RUN apk update && \
+    apk --no-cache --update add libgcc libstdc++ && \
+    rm -rf /var/cache/apk/*
+
+EXPOSE 4000
+ENV PORT=4000 MIX_ENV=prod REPLACE_OS_VARS=true SHELL=/bin/sh
+
+COPY --from=builder /opt/app/_build/prod/rel/mse ./
+
+RUN chown -R default ./
+USER default
+
+ENTRYPOINT ["/opt/app/bin/mse"]
