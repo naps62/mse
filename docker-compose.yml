@@ -10,8 +10,8 @@ services:
       - "4000:4000"
     environment:
       DATABASE_URL: "ecto://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}"
-      PROXY_PORT: 4001
-      WEB_PORT: 4000
+      PROXY_PORT: 4000
+      WEB_PORT: 4001
       ADMIN_PORT: 4002
       POOL_SIZE: 10
       ADMIN_USERNAME: "${ADMIN_USERNAME}"
