@@ -24,11 +24,11 @@ RUN mkdir -p \
     apps/gatherer/config \
     apps/graph/config \
     apps/mkm_api/config \
-    apps/mse_admin/config
-    apps/mse_logging/config
-    apps/mse_proxy/config
-    apps/mse_web/config
-    apps/mtgjson/config
+    apps/mse_admin/config \
+    apps/mse_logging/config \
+    apps/mse_proxy/config \
+    apps/mse_web/config \
+    apps/mtgjson/config \
     apps/workers/config
 
 # Cache elixir deps
@@ -60,20 +60,19 @@ COPY config/* config/
 RUN mix deps.compile
 
 # Compile admin app assets
-COPY apps/mse_admin/* apps/mse_admin/
-# RUN cd apps/mse_admin/assets && yarn install
-# RUN cd apps/mse_admin/assets && ./node_modules/.bin/brunch build --production
-# RUN cd apps/mse_admin && mix phx.digest
+COPY apps/mse_admin apps/mse_admin
+RUN cd apps/mse_admin/assets && yarn install
+RUN cd apps/mse_admin/assets && ./node_modules/.bin/brunch build --production
+RUN cd apps/mse_admin && mix phx.digest
 
-# # Cache yarn packages
-# COPY apps/frontend/package.json apps/frontend/
-# COPY apps/frontend/yarn.lock apps/frontend/
+# Cache yarn packages
+COPY apps/frontend/package.json apps/frontend/
+COPY apps/frontend/yarn.lock apps/frontend/
+RUN cd apps/frontend && yarn install
 
-# RUN cd apps/frontend && yarn install
+COPY . .
 
-# COPY . .
+RUN cd apps/frontend && ./node_modules/.bin/brunch build --production
+RUN cd apps/mse_web  &&  mix phx.digest
 
-# RUN cd apps/frontend && ./node_modules/.bin/brunch build --production
-# RUN cd apps/mse_web  &&  mix phx.digest
-
-# RUN mix release --env=prod
+RUN mix release --env=prod
