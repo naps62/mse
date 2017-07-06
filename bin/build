@@ -1,0 +1,29 @@
+#!/bin/bash
+
+source ./bin/utils/set-env
+
+unset DOCKER_HOST
+unset DOCKER_CERT_PATH
+unset DOCKER_TLS_VERIFY
+
+set -e
+
+echo "1. Building"
+# docker build -f Dockerfile.build -t naps62/mse:build .
+
+echo "2. Fetching mse.tar.gz"
+# cid=$RANDOM
+cid=12268
+# (docker rm -f mix_docker-$cid) || true
+# docker create --name mix_docker-$cid naps62/mse:build
+docker cp mix_docker-$cid:/opt/app/_build/prod/rel/mse/releases/$MSE_VERSION/mse.tar.gz mse.tar.gz
+docker rm -f mix_docker-$cid
+
+echo "3. Building release container"
+docker build -f Dockerfile.release -t naps62/mse:release .
+
+echo "4. Tagging"
+docker tag naps62/mse:release naps62/mse:$MSE_VERSION 
+
+echo "5. Pushing to docker hub"
+docker push naps62/mse:$MSE_VERSION
