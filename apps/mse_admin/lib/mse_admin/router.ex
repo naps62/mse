@@ -11,7 +11,7 @@ defmodule MseAdmin.Router do
   end
 
   pipeline :admin_basic_auth do
-    # plug BasicAuth, use_config: {:mse_admin, :admin_basic_auth}
+    plug BasicAuth, use_config: {:mse_admin, :admin_basic_auth}
   end
 
   scope "/", as: :admin do
