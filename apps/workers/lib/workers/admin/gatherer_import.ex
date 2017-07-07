@@ -1,9 +1,11 @@
 defmodule Workers.Admin.GathererImport do
+  require Logger
+
   def perform_async(file) do
     Task.async fn ->
-      IO.puts "Starting Gatherer import"
+      Logger.info("Workers.GathererImport: Starting")
       Gatherer.import(file)
-      IO.puts "Finished Gatherer import"
+      Logger.info("Workers.GathererImport: Finished")
     end
   end
 end

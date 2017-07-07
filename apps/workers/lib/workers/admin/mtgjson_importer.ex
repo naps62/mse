@@ -1,9 +1,11 @@
 defmodule Workers.Admin.MtgjsonImport do
+  require Logger
+
   def perform_async do
     Task.async fn ->
-      IO.puts "Starting mtgjson import"
+      Logger.info("Workers.MtgjsonImport: Starting")
       Mtgjson.download_and_import()
-      IO.puts "Finished mtgjson import"
+      Logger.info("Workers.MtgjsonImport: Finished")
     end
   end
 end

@@ -1,6 +1,5 @@
 defmodule MseProxy.Plug do
   @behaviour Plug
-  require Logger
 
   def init(hosts), do: hosts
 
