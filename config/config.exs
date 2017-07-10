@@ -16,11 +16,6 @@ if Mix.env == :prod or Mix.env == :dev do
   import_config "mkm-prod.exs"
 end
 
-config :mix_docker,
-  image: "naps62/mse",
-  dockerfile_build: "Dockerfile.build",
-  dockerfile_release: "Dockerfile.release"
-
 config :money,
   default_currency: :EUR,
   separator: " ",

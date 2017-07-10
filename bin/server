@@ -6,5 +6,4 @@ source ./bin/utils/set-env
 export ADMIN_USERNAME=""
 export ADMIN_PASSWORD=""
 
-redis-server &
 iex -S mix phx.server
