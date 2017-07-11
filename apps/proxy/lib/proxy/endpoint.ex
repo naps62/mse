@@ -1,7 +1,7 @@
-defmodule MseProxy.Endpoint do
-  use Phoenix.Endpoint, otp_app: :mse_proxy
+defmodule Proxy.Endpoint do
+  use Phoenix.Endpoint, otp_app: :proxy
 
-  plug MseProxy.Plug, %{
+  plug Proxy.Plug, %{
     "admin.lvh.me" => Admin.Web.Endpoint,
     "admin.mtgsear.ch" => Admin.Web.Endpoint,
     "default" => MseWeb.Endpoint

@@ -1,4 +1,4 @@
-defmodule MseProxy.Plug do
+defmodule Proxy.Plug do
   @behaviour Plug
 
   def init(hosts), do: hosts

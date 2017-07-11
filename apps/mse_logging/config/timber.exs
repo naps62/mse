@@ -5,7 +5,7 @@ config :mse_web, MseWeb.Endpoint,
   instrumenters: [Timber.Integrations.PhoenixInstrumenter]
 config :admin, Admin.Web.Endpoint,
   instrumenters: [Timber.Integrations.PhoenixInstrumenter]
-config :mse_proxy, Admin.Web.Endpoint,
+config :proxy, Admin.Web.Endpoint,
   instrumenters: [Timber.Integrations.PhoenixInstrumenter]
 
 # Structure Ecto logs

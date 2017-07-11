@@ -1,4 +1,4 @@
-# MseProxy
+# Proxy
 
 To start your Phoenix app:
 

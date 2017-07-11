@@ -5,7 +5,7 @@ defmodule Mse.Mixfile do
     [apps_path: "apps",
      version: "alpha.63",
      apps: [
-       :mse_proxy,
+       :proxy,
        :mse_web,
        :admin,
        :db,

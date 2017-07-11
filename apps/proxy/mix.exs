@@ -1,8 +1,8 @@
-defmodule MseProxy.Mixfile do
+defmodule Proxy.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :mse_proxy,
+    [app: :proxy,
      version: "0.0.1",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -20,7 +20,7 @@ defmodule MseProxy.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {MseProxy, []},
+    [mod: {Proxy, []},
      applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext]]
   end
 

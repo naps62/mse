@@ -45,7 +45,7 @@ release :mse do
   set applications: [
     db: :permanent,
     graph: :permanent,
-    mse_proxy: :permanent,
+    proxy: :permanent,
     mse_web: :permanent,
     admin: :permanent,
     mtgio: :permanent
