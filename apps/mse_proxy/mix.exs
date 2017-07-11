@@ -34,7 +34,7 @@ defmodule MseProxy.Mixfile do
   defp deps do
     [
       {:mse_web, in_umbrella: true},
-      {:mse_admin, in_umbrella: true},
+      {:admin, in_umbrella: true},
 
       {:phoenix, "~> 1.3.0-rc"},
       {:cowboy, "~> 1.0"}

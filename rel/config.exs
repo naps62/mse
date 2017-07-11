@@ -47,7 +47,7 @@ release :mse do
     graph: :permanent,
     mse_proxy: :permanent,
     mse_web: :permanent,
-    mse_admin: :permanent,
+    admin: :permanent,
     mtgio: :permanent
   ]
 end

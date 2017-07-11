@@ -7,7 +7,7 @@ defmodule Mse.Mixfile do
      apps: [
        :mse_proxy,
        :mse_web,
-       :mse_admin,
+       :admin,
        :db,
        :workers,
        :mtgjson,
