@@ -36,7 +36,7 @@ defmodule Proxy.Mixfile do
       {:mse_web, in_umbrella: true},
       {:admin, in_umbrella: true},
 
-      {:phoenix, "~> 1.3.0-rc"},
+      {:phoenix, "~> 1.3.0-rc", override: true},
       {:cowboy, "~> 1.0"}
     ]
   end
