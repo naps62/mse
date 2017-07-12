@@ -6,8 +6,8 @@ defmodule Workers.Admin.MKMImport do
       Logger.info("Workers.MKMImport: Starting")
       MkmAPI.Sets.fetch
       MkmAPI.CardsBasic.fetch
-      MkmAPI.CardsDetailed.fetch(:new)
-      MkmAPI.Singles.fetch
+      # MkmAPI.CardsDetailed.fetch(:new)
+      # MkmAPI.Singles.fetch
       Logger.info("Workers.MKMImport: Finished")
     end
   end
