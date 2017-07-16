@@ -24,7 +24,7 @@ defmodule MkmAPI.Mixfile do
 
       {:timex, "~> 3.0"},
 
-      {:mkm, github: "naps62/mkm", ref: "828c959"},
+      {:mkm, github: "naps62/mkm", ref: "0f39deb"},
     ]
   end
 end
