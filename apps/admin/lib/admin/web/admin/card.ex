@@ -15,6 +15,7 @@ defmodule Admin.Web.ExAdmin.Card do
     scope :no_mtgjson_data, &where(&1, [c], is_nil(c.mtgjson_data))
     scope :no_data_at_all, &where(&1, [c], is_nil(c.gatherer_data) and is_nil(c.mtgjson_data))
     scope :no_single, &where(&1, [c], is_nil(c.single_id))
+    scope :no_detailed_data, &where(&1, [c], is_nil(c.mkm_detailed_data))
 
     query do
       %{
