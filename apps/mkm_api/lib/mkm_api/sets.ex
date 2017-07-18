@@ -18,9 +18,11 @@ defmodule MkmAPI.Sets do
 
 
   defp add_or_update_set(set_data) do
-    case find_set(set_data) do
-      nil -> SilentRepo.insert(set_changeset(%Set{}, set_data))
-      set -> SilentRepo.update(set_changeset(set, set_data))
+    if !set_blacklisted(set_data) do
+      case find_set(set_data) do
+        nil -> SilentRepo.insert(set_changeset(%Set{}, set_data))
+        set -> SilentRepo.update(set_changeset(set, set_data))
+      end
     end
   end
 
@@ -41,5 +43,16 @@ defmodule MkmAPI.Sets do
     |> put_change(:name, data["enName"])
     |> put_change(:mkm_updated_at, Timex.now)
     |> validate_required([:mkm_id, :mkm_data])
+  end
+
+  @blacklisted_set_names [
+    ~r/^Filler Cards$/,
+    ~r/ Promos$/,
+    ~r/ Tokens$/,
+    ~r/^TokyoMTG Products$/,
+    ~r/^Tokens for MTG$/,
+  ]
+  defp set_blacklisted(%{"eName" => name}) do
+    Enum.any?(@blacklisted_set_names, &Regex.match?(&1, name))
   end
 end

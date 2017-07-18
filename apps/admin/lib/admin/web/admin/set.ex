@@ -24,9 +24,10 @@ defmodule Admin.Web.ExAdmin.Set do
       column :name, link: true
       column :mkm_code
       column :gatherer_code
-      column :mtgjson_code
+      column :mtgjson_codes
       column :card_count, [label: "Cards"], &(Helpers.count(where(Card, [c], c.set_id == ^&1.id)))
       column :cards_without_gatherer, [label: "Cards w/o Gatherer"], &(Helpers.count(where(Card, [c], c.set_id == ^&1.id and is_nil(c.gatherer_data))))
+      column :cards_without_mtgjson, [label: "Cards w/o Mtgjson"], &(Helpers.count(where(Card, [c], c.set_id == ^&1.id and is_nil(c.mtgjson_data))))
     end
 
     show set do

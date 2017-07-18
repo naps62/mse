@@ -10,7 +10,7 @@ defmodule Mtgjson.Cards do
   end
 
   defp update_card(set, %{"id" => id, "name" => name} = data) do
-    case find_card(set, id, name) do
+    case find_card(set, data) do
       nil ->
         IO.puts "No card found for #{set.name} - #{name}"
       card ->
@@ -19,15 +19,8 @@ defmodule Mtgjson.Cards do
     end
   end
 
-  defp find_card(set, id, name) do
-    set
-    |> Ecto.assoc(:cards)
-    |> where(
-      [c],
-      (c.mtgjson_id == ^id) or
-      (is_nil(c.mtgjson_id) and c.name == ^name)
-    )
-    |> SilentRepo.one
+  defp find_card(set, data) do
+    Mtgjson.Cards.Finder.find(set, data)
   end
 
   defp changeset(card, data) do

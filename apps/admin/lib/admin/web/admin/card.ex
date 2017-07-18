@@ -33,7 +33,7 @@ defmodule Admin.Web.ExAdmin.Card do
       column :mkm_detailed_updated_at, &Helpers.relative_date(&1.mkm_detailed_updated_at)
     end
 
-    show _card do
+    show card do
       attributes_table "Card" do
         row :name
         row :mkm_id
@@ -56,21 +56,23 @@ defmodule Admin.Web.ExAdmin.Card do
         row :gatherer_updated_at, &Helpers.relative_date(&1.gatherer_updated_at)
       end
 
-      attributes_table "Single" do
-        row :single, link: true
-        row :type, &(&1.single.type)
-        row :manacost, fn(card) ->
-          Manacost.present(card.single) |> Enum.map(&raw/1)
+      if card.single do
+        attributes_table "Single" do
+          row :single, link: true
+          row :type, &(&1.single |> Map.get(:type))
+          row :manacost, fn(card) ->
+            Manacost.present(card.single) |> Enum.map(&raw/1)
+          end
+          row :ability, &(&1.single.ability || "")
+          row :color, &(&1.single.color || "")
+          row :power, &(to_string(&1.single.power || ""))
+          row :toughness, &(to_string(&1.single.toughness || ""))
         end
-        row :ability, &(&1.single.ability)
-        row :color, &(&1.single.color)
-        row :power, &(&1.single.power)
-        row :toughness, &(&1.single.toughness)
       end
     end
 
     sidebar "", only: :show do
-      Phoenix.View.render Admin.WebView, "card_image.html", image: resource.image_url
+      Phoenix.View.render Admin.Web.AdminView, "card_image.html", image: resource.image_url
     end
   end
 end

@@ -12,7 +12,7 @@ config :admin, Admin.Web.Endpoint,
   code_reloader: false,
   check_origin: false,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-                    cd: Path.expand("../../frontend", __DIR__)]]
+                    cd: Path.expand("../assets", __DIR__)]]
 
 # ## SSL Support
 #

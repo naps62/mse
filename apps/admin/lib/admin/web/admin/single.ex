@@ -61,7 +61,7 @@ defmodule Admin.Web.ExAdmin.Single do
     end
 
     sidebar "", only: :show do
-      Phoenix.View.render Admin.WebView, "card_image.html", image: resource.image_url
+      Phoenix.View.render Admin.Web.AdminView, "card_image.html", image: resource.image_url
     end
   end
 end

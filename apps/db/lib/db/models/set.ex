@@ -17,7 +17,7 @@ defmodule DB.Models.Set do
     field :gatherer_code, :string
     field :gatherer_updated_at, Timex.Ecto.DateTime
 
-    field :mtgjson_code, :string
+    field :mtgjson_codes, {:array, :string}
     field :mtgjson_data, :map
 
     has_many :cards, DB.Models.Card

@@ -1,6 +1,8 @@
 defmodule MkmAPI.Singles do
   import Ecto.{Query, Changeset}
 
+  require Logger
+
   alias DB.{SilentRepo, Models.Card, Models.Single}
 
   def fetch do
@@ -31,6 +33,8 @@ defmodule MkmAPI.Singles do
           {:ok, single} = insert_or_update_single(single_data)
           associate_single_with_card(single, card)
         end)
+      {:error, message} ->
+        Logger.info("error importing single: " <> message)
     end
   end
 
