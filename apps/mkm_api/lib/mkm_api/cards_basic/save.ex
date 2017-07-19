@@ -22,6 +22,8 @@ defmodule MkmApi.CardsBasic.Save do
     double_faced: double_faced,
     back_face: back_face
   ) do
+    require Logger
+    Logger.info("looking for #{card_data["mkm_id"]}, #{double_faced}, #{back_face}")
     case find_card(card_data, double_faced: double_faced, back_face: back_face) do
       nil ->
         new_card = %Card{mkm_double_faced: double_faced, mkm_back_face: back_face}
