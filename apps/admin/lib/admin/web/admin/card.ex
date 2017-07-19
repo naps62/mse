@@ -36,9 +36,12 @@ defmodule Admin.Web.ExAdmin.Card do
     show card do
       attributes_table "Card" do
         row :name
+        row :mkm_name
         row :mkm_id
         row :set, link: true
         row :single, link: true
+        row :mkm_double_faced
+        row :mkm_back_face
         row :artist
         row :rarity
       end

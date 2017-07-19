@@ -52,7 +52,7 @@ defmodule MkmAPI.Sets do
     ~r/^TokyoMTG Products$/,
     ~r/^Tokens for MTG$/,
   ]
-  defp set_blacklisted(%{"eName" => name}) do
+  defp set_blacklisted(%{"enName" => name}) do
     Enum.any?(@blacklisted_set_names, &Regex.match?(&1, name))
   end
 end
