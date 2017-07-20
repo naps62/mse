@@ -14,11 +14,9 @@ defmodule MkmAPI.CardsBasic do
       _ -> []
     end
 
-    SilentRepo.transaction fn ->
-      cards_data
-      |> Enum.each(&insert_or_update_card_for_set(set, &1))
-      update_set_timestamp(set)
-    end
+    cards_data
+    |> Enum.each(&insert_or_update_card_for_set(set, &1))
+    update_set_timestamp(set)
   end
 
   defp sets_with_new_cards do
