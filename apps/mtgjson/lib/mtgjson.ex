@@ -2,7 +2,7 @@ defmodule Mtgjson do
   @base_url "https://mtgjson.com/json/"
 
   @mappings %{
-    # "AllSets.json.zip" => &Mtgjson.Sets.import/1,
+    "AllSets.json.zip" => &Mtgjson.Sets.import/1,
     "AllCards.json.zip" => &Mtgjson.Singles.import/1,
   }
 

@@ -10,16 +10,18 @@ defmodule Mtgjson.Cards do
   end
 
   defp update_card(set, %{"id" => id, "name" => name} = data) do
-    case find_card(set, data) do
-      nil ->
+    case find_cards(set, data) do
+      [] ->
         IO.puts "No card found for #{set.name} - #{name}"
-      card ->
-        changeset(card, data)
-        |> SilentRepo.update
+      cards ->
+        Enum.each(cards, fn(card) ->
+          changeset(card, data)
+          |> SilentRepo.update
+        end)
     end
   end
 
-  defp find_card(set, data) do
+  defp find_cards(set, data) do
     Mtgjson.Cards.Finder.find(set, data)
   end
 

@@ -6,21 +6,44 @@ defmodule Mtgjson.Cards.Finder do
   def find(set, data) do
     scope = Ecto.assoc(set, :cards)
 
-    find_card_by(scope, :mtgjson_id, data["mtgjson_id"]) ||
-      find_card_by(scope, :name, data["name"])
+    if is_terrain?(data) do
+      [find_terrain(scope, data)] |> Enum.reject(&(is_nil(&1)))
+    else
+      find_cards_by(scope, :mtgjson_id, data["mtgjson_id"]) ++
+        find_cards_by(scope, :name, data["name"])
+    end
   end
 
-  def find_card_by(_, _, nil) do
-    nil
+  def is_terrain?(%{"type" => "Basic Land" <> _}), do: true
+  def is_terrain?(_), do: false
+
+  # terrains from MKM come in the format "Mountain (Version 1)"
+  # this version number seems to match the imageName provided by mtgjson,
+  # and seems to be the only way to find a match
+  # so... fingers crossed
+  def find_terrain(scope, data) do
+    version = case Regex.run(~r/\d+$/, data["imageName"]) do
+      [first | rest] -> first
+      _ -> "1"
+    end
+    expected_mkm_name = "#{data["name"]} (Version #{version})"
+
+    scope
+    |> where([c], c.mkm_name == ^expected_mkm_name)
+    |> SilentRepo.one
   end
-  def find_card_by(scope, :mtgjson_id, mtgjson_id) do
+
+  def find_cards_by(_, _, nil) do
+    []
+  end
+  def find_cards_by(scope, :mtgjson_id, mtgjson_id) do
     scope
     |> where([c], c.mtgjson_id == ^mtgjson_id)
-    |> SilentRepo.one
+    |> SilentRepo.all
   end
-  def find_card_by(scope, :name, name) do
+  def find_cards_by(scope, :name, name) do
     scope
     |> where([c], c.name == ^name)
-    |> SilentRepo.one
+    |> SilentRepo.all
   end
 end

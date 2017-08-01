@@ -29,7 +29,7 @@ defmodule Mtgjson.Sets do
           changeset(set, mtgjson_code, data)
           |> SilentRepo.update
 
-          # Mtgjson.Cards.import(set, Map.get(data, "cards"))
+          Mtgjson.Cards.import(set, Map.get(data, "cards"))
         end
     end
   end
