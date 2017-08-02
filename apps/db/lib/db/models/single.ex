@@ -14,6 +14,8 @@ defmodule DB.Models.Single do
 
     field :mkm_data, :map
     field :mkm_id, :integer
+    field :mkm_double_faced, :boolean
+    field :mkm_back_face, :boolean
     field :mkm_updated_at, Timex.Ecto.DateTime
 
     field :gatherer_data, :map

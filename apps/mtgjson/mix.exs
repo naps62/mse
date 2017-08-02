@@ -38,6 +38,7 @@ defmodule Mtgjson.Mixfile do
   defp deps do
     [
       {:db, in_umbrella: true},
+      {:mse_logging, in_umbrella: true},
 
       {:poison, "~> 3.0"},
       {:httpoison, "~> 0.11.1"}

@@ -3,6 +3,11 @@ defmodule Mtgjson.Cards.Finder do
 
   import Ecto.Query
 
+  # on the left, names as given by mtgjson
+  # on the right, their corresponding names in our DB (% is used by SQL's LIKE function)
+  @card_name_overrides %{
+  }
+
   def find(set, data) do
     scope = Ecto.assoc(set, :cards)
 
@@ -42,8 +47,20 @@ defmodule Mtgjson.Cards.Finder do
     |> SilentRepo.all
   end
   def find_cards_by(scope, :name, name) do
-    scope
-    |> where([c], c.name == ^name)
-    |> SilentRepo.all
+    Map.get(@card_name_overrides, name, [name])
+    |> Enum.map(fn(name) ->
+      scope
+      |> where([c],
+               ilike(c.name, ^"#{name}") or
+               ilike(c.name, ^"#{ae_permutation(name)}") or
+               ilike(c.name, ^"#{name} (Version %)")
+      )
+      |> SilentRepo.all
+    end)
+    |> List.flatten
+  end
+
+  defp ae_permutation(name) do
+    String.replace(name, "Ae", "Æ")
   end
 end

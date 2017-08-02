@@ -11,13 +11,6 @@ defmodule MkmAPI.Singles do
     |> Stream.run
   end
 
-  def parse do
-    Single
-    |> DB.Stream.stream(SilentRepo)
-    |> Stream.each(&parse_single/1)
-    |> Stream.run
-  end
-
   defp cards_with_oudated_single do
     Card
     |> where([c], is_nil(c.single_id))
@@ -39,27 +32,7 @@ defmodule MkmAPI.Singles do
   end
 
   defp insert_or_update_single(%{"idMetaproduct" => mkm_id} = data) do
-    existing = Single
-    |> where([s], s.mkm_id == ^mkm_id)
-    |> SilentRepo.one
-
-    (existing || %Single{})
-    |> single_changeset(data)
-    |> SilentRepo.insert_or_update
-  end
-
-  defp parse_single(%Single{mkm_data: data} = single) do
-    single_changeset(single, data)
-    |> SilentRepo.update
-  end
-
-  defp single_changeset(single, data) do
-    change(single)
-    |> put_change(:mkm_data, data)
-    |> put_change(:mkm_id, data["idMetaproduct"])
-    |> put_change(:mkm_updated_at, Timex.now)
-    |> put_change(:name, data["enName"])
-    |> put_change(:image_url, image_url(relative_url: data["image"]))
+    MkmAPI.Singles.Save.save(data)
   end
 
   defp associate_single_with_card(single, card) do
@@ -67,7 +40,4 @@ defmodule MkmAPI.Singles do
     |> put_assoc(:single, single)
     |> SilentRepo.update
   end
-
-  defp image_url(relative_url: "." <> relative_url), do:
-    "https://mkmapi.eu" <> relative_url
 end

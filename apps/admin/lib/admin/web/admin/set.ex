@@ -17,7 +17,7 @@ defmodule Admin.Web.ExAdmin.Set do
     scope :no_data_at_all, &where(&1, [s], is_nil(s.gatherer_data) and is_nil(s.mtgjson_data))
 
     query do
-      %{show: [preload: [cards: :single]]}
+      %{show: [preload: []]}
     end
 
     index do
@@ -43,13 +43,22 @@ defmodule Admin.Web.ExAdmin.Set do
         row :mkm_cards_updated_at, &Helpers.relative_date(&1.mkm_cards_updated_at)
       end
 
+      attributes_table "Mtgjson" do
+        row :mtgjson_codes
+      end
+
       attributes_table "Gatherer" do
         row :gatherer_code
         row :gatherer_updated_at, &Helpers.relative_date(&1.gatherer_updated_at)
       end
 
       panel "Cards" do
-        table_for(set.cards) do
+        ordered_cards = Ecto.assoc(set, :cards)
+                        |> order_by(:name)
+                        |> preload(:single)
+                        |> DB.Repo.all
+
+        table_for(ordered_cards) do
           column :name, link: true
           column :manacost, fn(card) ->
             Manacost.present(card.single.manacost) |> Enum.map(&raw/1)

@@ -3,16 +3,19 @@ defmodule Mtgjson.Cards do
 
   import Ecto.Query
   import Ecto.Changeset
+  alias MseLogging.FileLogger
+
+  @logfile "mtgjson.cards.log"
 
   def import(set, cards) do
     cards
     |> Enum.each(&update_card(set, &1))
   end
 
-  defp update_card(set, %{"id" => id, "name" => name} = data) do
+  defp update_card(set, %{"name" => name} = data) do
     case find_cards(set, data) do
       [] ->
-        IO.puts "No card found for #{set.name} - #{name}"
+        FileLogger.append(@logfile, "No card found for set: #{set.name}, #{name}")
       cards ->
         Enum.each(cards, fn(card) ->
           changeset(card, data)

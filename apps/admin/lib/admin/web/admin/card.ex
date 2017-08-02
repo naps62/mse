@@ -19,13 +19,15 @@ defmodule Admin.Web.ExAdmin.Card do
 
     query do
       %{
-        index: [preload: [:single]],
+        index: [preload: [:single, :set]],
         show: [preload: [:set, :single]]
       }
     end
 
     index do
       column :name, link: true
+      column :set, link: true
+      column :single, link: true
       column :manacost, fn(card) ->
         Manacost.present(card.single) |> Enum.map(&raw/1)
       end

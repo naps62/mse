@@ -18,22 +18,20 @@ defmodule Mtgjson.Singles do
   end
 
   defp update_single({name, data}) do
-    case find_single(name) do
+    case find_singles(data) do
       nil ->
         IO.puts "No single called #{name} found"
-      single ->
-        changeset(single, data)
-        |> SilentRepo.update
+      singles ->
+        singles
+        |> Enum.each(fn(single) ->
+          changeset(single, data)
+          |> SilentRepo.update
+        end)
     end
   end
 
-  defp find_single(name) do
-    Single
-    |> where(
-      [e], (e.mtgjson_name == ^name) or
-      (is_nil(e.mtgjson_name) and e.name == ^name)
-    )
-    |> SilentRepo.one
+  defp find_singles(data) do
+    Mtgjson.Singles.Finder.find(data)
   end
 
   defp changeset(single, data) do
