@@ -3,7 +3,7 @@ defmodule Mse.Mixfile do
 
   def project do
     [apps_path: "apps",
-     version: "alpha.75",
+     version: "alpha.76",
      apps: [
        :proxy,
        :mse_web,
