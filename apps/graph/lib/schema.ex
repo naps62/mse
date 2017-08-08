@@ -15,6 +15,7 @@ defmodule Graph.Schema do
     @desc "Get a single set"
     field :set, type: :set do
       arg :id, non_null(:id)
+
       resolve &Resolvers.Set.find/2
     end
 
