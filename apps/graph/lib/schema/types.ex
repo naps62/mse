@@ -33,7 +33,8 @@ defmodule Graph.Schema.Types do
 
     field :gatherer_id, :string
 
-    field :mkm_data, :json
+    field :mkm_basic_data, :json
+    field :mkm_detailed_data, :json
     field :mtgjson_data, :json
     field :gatherer_data, :json
 

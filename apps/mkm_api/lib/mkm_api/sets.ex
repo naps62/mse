@@ -46,8 +46,19 @@ defmodule MkmAPI.Sets do
   end
 
   @blacklisted_set_names [
+    # ~r/ Promos$/,
+    # ~r/^Salvat-Hachette/,
+    # ~r/^Foreign /,
+    # ~r/Misprints$/,
+    # ~r/^Promos$/,
+    # ~r/^Simplified Chinese Alternate Art Cards$/,
+    # ~r/^Renaissance$/,
+    # ~r/^Rinascimento$/,
+    # ~r/^Unstable$/,
+    # ~r/^Summer Magic$/,
+    # ~r/ Italian$/,
+
     ~r/^Filler Cards$/,
-    ~r/ Promos$/,
     ~r/ Tokens$/,
     ~r/^TokyoMTG Products$/,
     ~r/^Tokens for MTG$/,
@@ -57,20 +68,10 @@ defmodule MkmAPI.Sets do
     ~r/^Pro Tour 1996:/,
     ~r/^Starcity Games:/,
     ~r/^Rk post Products$/,
-    ~r/^Salvat-Hachette/,
     ~r/^Oversized Box Toppers$/,
-    ~r/^Foreign /,
-    ~r/Misprints$/,
-    ~r/^Promos$/,
     ~r/^Armada Comics$/,
-    ~r/^Simplified Chinese Alternate Art Cards$/,
-    ~r/^Renaissance$/,
-    ~r/^Rinascimento$/,
-    ~r/^Unstable$/,
     ~r/^GnD Cards$/,
     ~r/^Ultra-Pro Puzzle Cards$/,
-    ~r/^Summer Magic$/,
-    ~r/ Italian$/,
   ]
   defp set_blacklisted(%{"enName" => name}) do
     Enum.any?(@blacklisted_set_names, &Regex.match?(&1, name))

@@ -57,22 +57,4 @@ defmodule MkmAPI.CardsBasic do
   defp card_blacklisted(%{"enName" => name}) do
     Enum.any?(@blacklisted_card_names, &Regex.match?(&1, name))
   end
-
-  def fix do
-    set = DB.Models.Set |> DB.Repo.get(243)
-
-    set |> Ecto.assoc(:cards) |> DB.Repo.delete_all
-    set |> DB.Repo.delete
-    # DB.Models.Card
-    # |> DB.Stream.stream(DB.Repo)
-    # |> Stream.each(fn(card) ->
-    #   if is_nil(Ecto.assoc(card, :single) |> DB.Repo.one) do
-    #     IO.inspect "deleting single for card #{card.id}"
-    #     change(card)
-    #     |> put_change(:single_id, nil)
-    #     |> DB.Repo.update
-    #   end
-    # end)
-    # |> Stream.run
-  end
 end

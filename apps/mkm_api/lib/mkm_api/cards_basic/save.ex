@@ -25,9 +25,11 @@ defmodule MkmApi.CardsBasic.Save do
     case find_card(card_data, double_faced: double_faced, back_face: back_face) do
       nil ->
         new_card = %Card{mkm_double_faced: double_faced, mkm_back_face: back_face}
-        SilentRepo.insert(card_changeset(new_card, card_data, set))
+        single_id = single_id_for(new_card, card_data, double_faced, back_face)
+        SilentRepo.insert(card_changeset(new_card, card_data, set, single_id))
       card ->
-        SilentRepo.update(card_changeset(card, card_data, set))
+        single_id = single_id_for(card, card_data, double_faced, back_face)
+        SilentRepo.update(card_changeset(card, card_data, set, single_id))
     end
   end
 
@@ -46,13 +48,13 @@ defmodule MkmApi.CardsBasic.Save do
     |> SilentRepo.one
   end
 
-  defp card_changeset(card, data, set) do
+  defp card_changeset(card, data, set, single_id) do
     change(card)
     |> put_change(:mkm_basic_data, data)
     |> put_change(:mkm_id, data["idProduct"])
     |> put_change(:mkm_basic_updated_at, Timex.now)
     |> put_change(:set_id, set.id)
-    |> put_change(:single_id, single_id_for(card, data))
+    |> put_change(:single_id, single_id)
     |> put_change(:mkm_name, data["enName"])
     |> put_change(:name, name_for_card(card, data["enName"]))
     |> put_change(:rarity, String.downcase(data["rarity"]))
@@ -76,12 +78,14 @@ defmodule MkmApi.CardsBasic.Save do
   defp double_faced?(%Card{mkm_double_faced: double_faced}), do: double_faced
   defp back_face?(%Card{mkm_back_face: back_face}), do: back_face
 
-  defp single_id_for(%Card{single_id: nil}, data), do:
+  defp single_id_for(%Card{single_id: nil}, data, double_faced, back_face), do:
     Single
-    |> where([s], s.mkm_id == ^data["idMetaproduct"])
+    |> where([s], s.mkm_id == ^data["idMetaproduct"] and
+             s.mkm_double_faced == ^double_faced and
+             s.mkm_back_face == ^back_face)
     |> select([s], s.id)
     |> SilentRepo.one
-  defp single_id_for(%Card{single_id: id}, _), do:
+  defp single_id_for(%Card{single_id: id}, _, _, _), do:
     id
 
   defp mkm_relative_url("." <> relative_url), do: mkm_relative_url(relative_url)
