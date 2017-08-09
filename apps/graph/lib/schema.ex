@@ -32,5 +32,12 @@ defmodule Graph.Schema do
       arg :id, non_null(:id)
       resolve &Resolvers.Card.find/2
     end
+
+    @desc "Get a batch of singles"
+    field :singles, type: list_of(:single) do
+      arg :offset, non_null(:integer)
+      arg :limit, non_null(:integer)
+      resolve &Resolvers.Single.page/2
+    end
   end
 end
