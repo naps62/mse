@@ -6,8 +6,8 @@ services:
     command: foreground
     depends_on:
       - db
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     environment:
       VIRTUAL_HOST: "*.mtgsear.ch"
       MIX_ENV: prod
