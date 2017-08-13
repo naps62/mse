@@ -1,5 +1,5 @@
 #!/bin/bash
 
-export MSE_VERSION=`./bin/utils/current-version`
+export MTGSEARCH_VERSION=`./bin/utils/current-version`
 
 source ./bin/utils/set-env.secret

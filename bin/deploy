@@ -4,7 +4,7 @@ set -e
 
 source ./bin/utils/set-env
 
-TAG=$MSE_VERSION
+TAG=$MTGSEARCH_VERSION
 
 if [ "$TAG" == "" ]; then
   echo "No tag given"
@@ -13,13 +13,11 @@ fi
 
 # this cannot be set, otherwise docker would use the remote machine to build
 unset DOCKER_HOST
-unset DOCKER_CERT_PATH
-unset DOCKER_TLS_VERIFY
 
 # build docker release
-docker build -f Dockerfile.build -t naps62/mse:release .
-docker tag naps62/mse:release naps62/mse:$MSE_VERSION
-docker push naps62/mse:$MSE_VERSION
+docker build -f Dockerfile.build -t naps62/mtgsearch:release .
+docker tag naps62/mtgsearch:release naps62/mtgsearch:$MTGSEARCH_VERSION
+docker push naps62/mtgsearch:$MTGSEARCH_VERSION
 
 git tag --force $TAG
 git push --tags &
