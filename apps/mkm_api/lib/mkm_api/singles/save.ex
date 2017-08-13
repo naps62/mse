@@ -8,7 +8,7 @@ defmodule MkmAPI.Singles.Save do
       insert_or_update(data, double_faced: true, back_face: false)
       insert_or_update(data, double_faced: true, back_face: true)
     else
-      insert_or_update(data, double_faced: false, back_face: true)
+      insert_or_update(data, double_faced: false, back_face: false)
     end
   end
 
