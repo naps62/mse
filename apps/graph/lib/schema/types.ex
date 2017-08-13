@@ -76,8 +76,6 @@ defmodule Graph.Schema.Types do
     field :mkm_back_face, :boolean
     field :mkm_updated_at, :utc_datetime
     field :mtgjson_data, :json
-    field :gatherer_data, :json
-    field :gatherer_updated_at, :utc_datetime
 
     field :cards, list_of(:card), resolve: assoc(:card)
   end

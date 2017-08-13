@@ -18,8 +18,6 @@ defmodule DB.Models.Single do
     field :mkm_back_face, :boolean
     field :mkm_updated_at, Timex.Ecto.DateTime
 
-    field :gatherer_data, :map
-
     field :mtgjson_name, :string
     field :mtgjson_data, :map
 
