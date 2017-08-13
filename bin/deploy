@@ -17,10 +17,7 @@ unset DOCKER_HOST
 # build docker release
 docker build -f Dockerfile.build -t naps62/mtgsearch:release .
 docker tag naps62/mtgsearch:release naps62/mtgsearch:$MTGSEARCH_VERSION
-docker push naps62/mtgsearch:$MTGSEARCH_VERSION --force
-
-git tag --force $TAG
-git push --tags &
+docker push naps62/mtgsearch:$MTGSEARCH_VERSION
 
 ./bin/prod pull
 ./bin/prod stop web
