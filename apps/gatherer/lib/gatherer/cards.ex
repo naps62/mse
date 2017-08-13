@@ -1,24 +1,24 @@
 defmodule Gatherer.Cards do
   alias DB.{SilentRepo, Models.Card}
-  alias Ecto.Multi
 
   import Ecto.Query
   import Ecto.Changeset
 
   def import(data) do
     data
-    |> Enum.reduce(Multi.new, &update_cards/2)
-    |> SilentRepo.transaction
+    |> Enum.each(&update_cards/1)
   end
 
-  defp update_cards(data, multi) do
+  defp update_cards(data) do
     data
     |> find_cards
-    |> Enum.reduce(multi, &update_individual_card(&1, &2, data))
+    |> Enum.each(&update_individual_card(&1, data))
   end
 
-  defp update_individual_card(card, multi, data) do
-    Multi.update(multi, card.id, changecard(card, data))
+  defp update_individual_card(card, data) do
+    card
+    |> changeset(data)
+    |> SilentRepo.update
   end
 
   defp find_cards(%{id: id, name: name, set: set_gatherer_code}) do
@@ -29,7 +29,7 @@ defmodule Gatherer.Cards do
     |> SilentRepo.all
   end
 
-  defp changecard(card, data) do
+  defp changeset(card, data) do
     change(card)
     |> put_change(:gatherer_data, data)
     |> put_change(:gatherer_id, data[:id])

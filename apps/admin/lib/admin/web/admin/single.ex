@@ -12,9 +12,7 @@ defmodule Admin.Web.ExAdmin.Single do
     filter only: [:name]
 
     scope :all, default: true
-    scope :no_gatherer_data, &where(&1, [s], is_nil(s.gatherer_data))
     scope :no_mtgjson_data, &where(&1, [s], is_nil(s.mtgjson_data))
-    scope :no_data_at_all, &where(&1, [s], is_nil(s.gatherer_data) and is_nil(s.mtgjson_data))
 
     query do
       %{show: [preload: [cards: :set]]}
