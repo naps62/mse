@@ -1,57 +1,53 @@
 #!/usr/bin/env ruby
 
-require "aws-sdk"
-require "pry"
-require "tty-prompt"
+require 'aws-sdk'
+require 'pry'
+require 'tty-prompt'
 
 prompt = TTY::Prompt.new
 
-BUCKET=ENV.fetch("S3_BUCKET")
-REGION=ENV.fetch("S3_REGION")
-ACCESS_KEY_ID=ENV.fetch("S3_ACCESS_KEY_ID")
-SECRET_ACCESS_KEY=ENV.fetch("S3_SECRET_ACCESS_KEY")
+backup = 'backup.sql'.freeze
+backup_gz = "#{backup}.gz".freeze
 
-SERVER_USERNAME=ENV.fetch("SERVER_USERNAME")
-SERVER_ADDR=ENV.fetch("SERVER_ADDR")
-
-BACKUP_FILE="backup.sql"
-BACKUP_GZ_FILE="#{BACKUP_FILE}.gz"
-BACKUPS_HOST_PATH="/root/mse-production/backups"
-BACKUPS_CONTAINER_PATH="/mnt/backups"
-
-PG_USER=ENV.fetch("POSTGRES_USER")
-PG_PASSWORD=ENV.fetch("POSTGRES_PASSWORD")
-PG_DB=ENV.fetch("POSTGRES_DB")
-
+pg_host = 'db'
+pg_user = ENV.fetch('POSTGRES_USER')
+pg_pass = ENV.fetch('POSTGRES_PASSWORD')
+pg_db = ENV.fetch('POSTGRES_DB')
 
 credentials = Aws::Credentials.new(
-  ACCESS_KEY_ID,
-  SECRET_ACCESS_KEY,
+  ENV.fetch('S3_ACCESS_KEY_ID'),
+  ENV.fetch('S3_SECRET_ACCESS_KEY')
 )
 
 s3 = Aws::S3::Resource.new(
-  region: REGION,
-  credentials: credentials,
+  region: ENV.fetch('S3_REGION'),
+  credentials: credentials
 )
+bucket = s3.bucket(ENV.fetch('S3_BUCKET'))
 
-bucket = s3.bucket("mse-production")
-
-chosen_key = prompt.select("What backup do you want to restore from?", bucket.objects.map(&:key))
-
+available_backups = bucket.objects(prefix: 'backups/db/').reject do |obj|
+  obj.key =~ %r{/$}
+end
+chosen_key = prompt.select('What backup do you want to restore from?', available_backups.map(&:key))
 url = bucket.object(chosen_key).presigned_url(:get, expires_in: 3600)
 
-
 def ssh(cmd)
-  `ssh #{SERVER_USERNAME}@#{SERVER_ADDR} -C "#{cmd}"`
+  username = ENV.fetch('SERVER_USERNAME')
+  addr = ENV.fetch('SERVER_ADDR')
+
+  `ssh #{username}@#{addr} -C "#{cmd}"`
 end
 
-puts "\n\nDownloading backup file to the server..."
-ssh("wget -O #{BACKUPS_HOST_PATH}/#{BACKUP_GZ_FILE} '#{url}'")
+def exec_on_pgbackups(cmd)
+  puts `./bin/prod exec pgbackups sh -c "#{cmd}"`
+end
 
-puts "\n\Extracting..."
-ssh("gzip -f -d #{BACKUPS_HOST_PATH}/#{BACKUP_GZ_FILE}")
+puts 'Downloading backup file to the server...'
+ssh("wget -O /tmp/#{backup_gz} '#{url}' > /dev/null")
 
-puts "\n\nApplying..."
+puts 'Extracting...'
+ssh("gzip -f -d /tmp/#{backup_gz}")
 
-restore_cmd="export PGPASSWORD=#{PG_PASSWORD} && psql -h db -U #{PG_USER} -d #{PG_DB} < #{BACKUPS_CONTAINER_PATH}/#{BACKUP_FILE}"
-puts `./bin/prod exec pgbackups sh -c "#{restore_cmd}"`
+puts 'Applying...'
+restore_cmd = "export PGPASSWORD=#{pg_pass} && pg_restore --clean -U #{pg_user} -h #{pg_host} -d #{pg_db} /mnt/backups/#{backup}"
+exec_on_pgbackups(restore_cmd)
