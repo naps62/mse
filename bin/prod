@@ -14,7 +14,7 @@ case "$@" in
     ;;
 
   "db-restore")
-    ./bin/utils/db-restore
+    ./bin/db-restore/s3-to-prod
     ;;
 
   * )

@@ -9,11 +9,6 @@ prompt = TTY::Prompt.new
 backup = 'backup.sql'.freeze
 backup_gz = "#{backup}.gz".freeze
 
-pg_host = 'db'
-pg_user = ENV.fetch('POSTGRES_USER')
-pg_pass = ENV.fetch('POSTGRES_PASSWORD')
-pg_db = ENV.fetch('POSTGRES_DB')
-
 credentials = Aws::Credentials.new(
   ENV.fetch('S3_ACCESS_KEY_ID'),
   ENV.fetch('S3_SECRET_ACCESS_KEY')
@@ -25,7 +20,7 @@ s3 = Aws::S3::Resource.new(
 )
 bucket = s3.bucket(ENV.fetch('S3_BUCKET'))
 
-available_backups = bucket.objects(prefix: 'backups/db/').reject do |obj|
+available_backups = bucket.objects(prefix: 'db/').reject do |obj|
   obj.key =~ %r{/$}
 end
 chosen_key = prompt.select('What backup do you want to restore from?', available_backups.map(&:key))
@@ -38,8 +33,14 @@ def ssh(cmd)
   `ssh #{username}@#{addr} -C "#{cmd}"`
 end
 
-def exec_on_pgbackups(cmd)
-  puts `./bin/prod exec pgbackups sh -c "#{cmd}"`
+def psql(cmd)
+  pg_host = 'db'
+  pg_user = ENV.fetch('POSTGRES_USER')
+  pg_pass = ENV.fetch('POSTGRES_PASSWORD')
+  pg_db = ENV.fetch('POSTGRES_DB')
+  full_cmd = "export PGPASSWORD=#{pg_pass} && psql -U #{pg_user} -h #{pg_host} -d #{pg_db} #{cmd}"
+
+  puts `./bin/prod exec pgbackups sh -c "#{full_cmd}"`
 end
 
 puts 'Downloading backup file to the server...'
@@ -48,6 +49,8 @@ ssh("wget -O /tmp/#{backup_gz} '#{url}' > /dev/null")
 puts 'Extracting...'
 ssh("gzip -f -d /tmp/#{backup_gz}")
 
+puts 'Dropping public schema...'
+psql("-c 'drop schema public cascade; create schema public'")
+
 puts 'Applying...'
-restore_cmd = "export PGPASSWORD=#{pg_pass} && pg_restore --clean -U #{pg_user} -h #{pg_host} -d #{pg_db} /mnt/backups/#{backup}"
-exec_on_pgbackups(restore_cmd)
+psql("< /mnt/backups/#{backup}")

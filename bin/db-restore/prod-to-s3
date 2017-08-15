@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+./bin/prod exec pgbackups sh backup.sh

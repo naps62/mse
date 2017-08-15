@@ -40,12 +40,11 @@ services:
       S3_ACCESS_KEY_ID: "${S3_ACCESS_KEY_ID}"
       S3_SECRET_ACCESS_KEY: "${S3_SECRET_ACCESS_KEY}"
       S3_BUCKET: "${S3_BUCKET}"
-      S3_PREFIX: "backups/db"
+      S3_PREFIX: "db/prod"
       POSTGRES_HOST: "db"
       POSTGRES_DATABASE: "${POSTGRES_DB}"
       POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
-      POSTGRES_EXTRA_OPTS: "--format=c"
 
 volumes:
   db-volume:
