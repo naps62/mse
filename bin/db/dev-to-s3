@@ -8,7 +8,7 @@ timestamp=$(date +"%Y-%m-%dT%H:%M:%SZ")
 file=mtgsearch_dev_${timestamp}.sql
 gzfile=${file}.gz
 
-pg_dump -d mse_dev > /tmp/$file
+pg_dump --clean --if-exists -d mse_dev > /tmp/$file
 tar -zcvf /tmp/$gzfile /tmp/$file
 
 s3cmd put /tmp/$gzfile s3://${S3_BUCKET}/db/dev/$file

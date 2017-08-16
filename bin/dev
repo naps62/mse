@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+source ./bin/utils/set-env
+
+case "$@" in
+  "db-restore")
+    ./bin/db/s3-to-dev
+    ;;
+esac
