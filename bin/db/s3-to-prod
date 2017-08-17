@@ -29,8 +29,9 @@ url = bucket.object(chosen_key).presigned_url(:get, expires_in: 3600)
 def ssh(cmd)
   username = ENV.fetch('SERVER_USERNAME')
   addr = ENV.fetch('SERVER_ADDR')
+  port = ENV.fetch('SERVER_PORT')
 
-  `ssh #{username}@#{addr} -C "#{cmd}"`
+  puts `ssh #{username}@#{addr} -p #{port} -C "#{cmd}"`
 end
 
 def psql(cmd)
@@ -44,7 +45,7 @@ def psql(cmd)
 end
 
 puts 'Downloading backup file to the server...'
-ssh("wget -O /tmp/#{backup_gz} '#{url}' > /dev/null")
+ssh("wget -O /tmp/#{backup_gz} '#{url}'")
 
 puts 'Extracting...'
 ssh("gzip -f -d /tmp/#{backup_gz}")
