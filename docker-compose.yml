@@ -48,8 +48,3 @@ services:
 
 volumes:
   db-volume:
-
-networks:
-  default:
-    external:
-      name: nginx-proxy
