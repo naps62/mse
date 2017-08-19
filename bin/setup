@@ -1,7 +1,8 @@
 #!/bin/sh
 
 set -e
-source ./bin/utils/set-env
+
+source .env.secret
 
 DB_MIX="cd apps/db; mix"
 

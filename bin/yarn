@@ -2,6 +2,6 @@
 
 set -e
 
-source ./bin/utils/set-env
+source .env.secret
 
 cd apps/frontend && yarn $@

@@ -2,7 +2,7 @@
 
 set -e
 
-source ./bin/utils/set-env
+source .env.secret
 
 ARGS=$@
 
