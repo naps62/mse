@@ -10,6 +10,8 @@ services:
       - "80"
     environment:
       VIRTUAL_HOST: "mtgsear.ch,admin.mtgsear.ch"
+      LETSENCRYPT_HOST: "mtgsear.ch,admin.mtgsear.ch"
+      LETSENCRYPT_EMAIL: "mpalhas@gmail.com"
       MIX_ENV: prod
       DATABASE_URL: "ecto://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}"
       PROXY_PORT: 80
