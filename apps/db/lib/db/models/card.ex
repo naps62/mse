@@ -14,7 +14,6 @@ defmodule DB.Models.Card do
     field :mkm_basic_data, :map
     field :mkm_detailed_data, :map
     field :mkm_double_faced, :boolean
-    field :mkm_back_face, :boolean
     field :mkm_id, :integer
     field :mkm_url, :string
     field :mkm_basic_updated_at, Timex.Ecto.DateTime

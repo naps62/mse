@@ -43,7 +43,6 @@ defmodule Admin.Web.ExAdmin.Card do
         row :set, link: true
         row :single, link: true
         row :mkm_double_faced
-        row :mkm_back_face
         row :artist
         row :rarity
       end

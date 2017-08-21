@@ -4,47 +4,20 @@ defmodule MkmApi.CardsBasic.Save do
   alias DB.{SilentRepo, Models.Card, Models.Single}
 
   def save(set, card_data) do
-    if card_is_double_faced(card_data) do
-      insert_or_update(set, card_data, double_faced: true, back_face: false)
-      insert_or_update(set, card_data, double_faced: true, back_face: true)
-    else
-      insert_or_update(set, card_data, double_faced: false, back_face: false)
-    end
-  end
-
-  defp card_is_double_faced(%{"enName" => name}) do
-    Regex.match?(~r|\s/{1,2}\s|, name)
-  end
-
-  defp insert_or_update(
-    set,
-    card_data,
-    double_faced: double_faced,
-    back_face: back_face
-  ) do
-    case find_card(card_data, double_faced: double_faced, back_face: back_face) do
+    case find_card(card_data) do
       nil ->
-        new_card = %Card{mkm_double_faced: double_faced, mkm_back_face: back_face}
-        single_id = single_id_for(new_card, card_data, double_faced, back_face)
+        new_card = %Card{}
+        single_id = single_id_for(new_card, card_data)
         SilentRepo.insert(card_changeset(new_card, card_data, set, single_id))
       card ->
-        single_id = single_id_for(card, card_data, double_faced, back_face)
+        single_id = single_id_for(card, card_data)
         SilentRepo.update(card_changeset(card, card_data, set, single_id))
     end
   end
 
-  defp find_card(
-    %{"idProduct" => mkm_id},
-    double_faced: double_faced,
-    back_face: back_face
-  ) do
+  defp find_card(%{"idProduct" => mkm_id}) do
     Card
-    |> where(
-      [c],
-      c.mkm_id == ^mkm_id and
-      c.mkm_double_faced == ^double_faced and
-      c.mkm_back_face == ^back_face
-    )
+    |> where([c], c.mkm_id == ^mkm_id)
     |> SilentRepo.one
   end
 
@@ -53,36 +26,23 @@ defmodule MkmApi.CardsBasic.Save do
     |> put_change(:mkm_basic_data, data)
     |> put_change(:mkm_id, data["idProduct"])
     |> put_change(:mkm_basic_updated_at, Timex.now)
+    |> put_change(:mkm_double_faced, double_faced?(data))
     |> put_change(:set_id, set.id)
     |> put_change(:single_id, single_id)
     |> put_change(:mkm_name, data["enName"])
-    |> put_change(:name, name_for_card(card, data["enName"]))
+    |> put_change(:name, data["enName"])
     |> put_change(:rarity, String.downcase(data["rarity"]))
     |> put_change(:image_url, mkm_relative_url(data["image"]))
     |> put_change(:mkm_url, mkm_relative_url(data["website"]))
   end
 
-  defp name_for_card(card, name) do
-    cond do
-      double_faced?(card) and back_face?(card) ->
-        Regex.run(~r|/+\s+(.+)$|, name)
-        |> Enum.at(1)
-      double_faced?(card) and not back_face?(card) ->
-        Regex.run(~r|^(.+)\s+/+|, name)
-        |> Enum.at(1)
-      true ->
-        name
-    end
+  defp double_faced?(%{"enName" => name}) do
+    Regex.match?(~r|\s/{1,2}\s|, name)
   end
 
-  defp double_faced?(%Card{mkm_double_faced: double_faced}), do: double_faced
-  defp back_face?(%Card{mkm_back_face: back_face}), do: back_face
-
-  defp single_id_for(%Card{single_id: nil}, data, double_faced, back_face), do:
+  defp single_id_for(%Card{single_id: nil}, data), do:
     Single
-    |> where([s], s.mkm_id == ^data["idMetaproduct"] and
-             s.mkm_double_faced == ^double_faced and
-             s.mkm_back_face == ^back_face)
+    |> where([s], s.mkm_id == ^data["idMetaproduct"])
     |> select([s], s.id)
     |> SilentRepo.one
   defp single_id_for(%Card{single_id: id}, _, _, _), do:

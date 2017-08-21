@@ -47,7 +47,6 @@ defmodule Graph.Schema.Types do
     field :mkm_basic_data, :json
     field :mkm_detailed_data, :json
     field :mkm_double_faced, :boolean
-    field :mkm_back_face, :boolean
     field :mkm_basic_updated_at, :utc_datetime
     field :mkm_detailed_updated_at, :utc_datetime
     field :mtgjson_id, :string
@@ -73,7 +72,6 @@ defmodule Graph.Schema.Types do
 
     field :mkm_data, :json
     field :mkm_double_faced, :boolean
-    field :mkm_back_face, :boolean
     field :mkm_updated_at, :utc_datetime
     field :mtgjson_data, :json
 

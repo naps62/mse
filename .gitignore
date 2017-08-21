@@ -30,3 +30,4 @@ dump.rdb
 config/*.secret.exs
 .env.secret
 log/
+.sql

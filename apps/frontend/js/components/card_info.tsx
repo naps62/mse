@@ -27,11 +27,11 @@ const CardInfo = ({ card }: IProps) => (
       <div className="Info small">{card.single.type}</div>
       <Divider />
       <div className="Info small">
-        <Ability str={card.single.ability} />
+        // <Ability str={card.single.ability} />
       </div>
       <Divider />
       <div className="Info small">
-        <Manacost str={card.single.manacost} />
+        // <Manacost str={card.single.manacost} />
       </div>
       <Divider />
       <div className="Info small">
