@@ -31,6 +31,7 @@ config :ex_admin,
     Admin.Web.ExAdmin.Set,
     Admin.Web.ExAdmin.Single,
     Admin.Web.ExAdmin.Card,
+    Admin.Web.ExAdmin.Job,
   ],
   head_template: {Admin.Web.AdminView, "head.html"}
 
