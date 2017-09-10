@@ -8,8 +8,13 @@ defmodule Graph.Schema.Types do
   end
 
   scalar :utc_datetime, description: "UTC Datetime" do
-    parse &to_string/1
-    serialize &Ecto.DateTime.cast!/1
+    parse &(Timex.parse!(&1.value, "{ISO:Extended}"))
+    serialize &(IO.inspect(&1) |> to_string)
+  end
+
+  scalar :money, description: "Money" do
+    parse &Money.new/1
+    serialize &(&1.amount)
   end
 
   object :set do
@@ -38,7 +43,6 @@ defmodule Graph.Schema.Types do
 
     field :mkm_id, :integer
     field :mkm_url, :string
-    field :mkm_price_trend, :string
 
     field :gatherer_id, :string
 
@@ -49,6 +53,7 @@ defmodule Graph.Schema.Types do
     field :mkm_double_faced, :boolean
     field :mkm_basic_updated_at, :utc_datetime
     field :mkm_detailed_updated_at, :utc_datetime
+    field :mkm_price_trend, :money
     field :mtgjson_id, :string
     field :mtgjson_data, :json
     field :gatherer_id, :string

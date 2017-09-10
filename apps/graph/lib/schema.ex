@@ -24,6 +24,7 @@ defmodule Graph.Schema do
       arg :set_id, :id
       arg :search, :string, default_value: ""
       arg :limit, :integer, default_value: :infinity
+      arg :mkm_detailed_updated_at, :string
       resolve &Resolvers.Card.search/2
     end
 

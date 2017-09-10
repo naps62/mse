@@ -29,7 +29,17 @@ defmodule Graph.Resolvers.Card do
   defp add_query_param({:limit, limit}, query), do:
     query |> limit(^limit)
 
+  defp add_query_param({:mkm_detailed_updated_at, nil}, query), do: query
+  defp add_query_param({:mkm_detailed_updated_at, datetime}, query) do
+    parsed_datetime = Timex.parse!(datetime, "{ISO:Extended}")
+
+    query
+    |> where([c], c.mkm_detailed_updated_at >= ^parsed_datetime)
+  end
+
   defp scope do
-    Card |> preload([:set, :single])
+    Card
+    |> preload([:set, :single])
+    |> order_by([c], asc: :id)
   end
 end
