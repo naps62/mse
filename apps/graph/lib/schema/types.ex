@@ -9,7 +9,7 @@ defmodule Graph.Schema.Types do
 
   scalar :utc_datetime, description: "UTC Datetime" do
     parse &(Timex.parse!(&1.value, "{ISO:Extended}"))
-    serialize &(IO.inspect(&1) |> to_string)
+    serialize &to_string/1
   end
 
   scalar :money, description: "Money" do
