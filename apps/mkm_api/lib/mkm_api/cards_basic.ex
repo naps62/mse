@@ -1,5 +1,6 @@
 defmodule MkmAPI.CardsBasic do
   import Ecto.{Query, Changeset}
+  require Logger
 
   alias DB.{SilentRepo, Models.Card, Models.Set, Models.Single}
 
@@ -9,6 +10,8 @@ defmodule MkmAPI.CardsBasic do
   end
 
   def fetch(%Set{mkm_id: mkm_set_id} = set) do
+    Logger.info fn -> "Fetching cards for set #{set.name}" end
+
     cards_data = case MKM.expansion_singles(expansion_mkm_id: mkm_set_id) do
       {:ok, singles} -> singles
       _ -> []

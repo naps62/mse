@@ -37,7 +37,7 @@ config :admin, Admin.Web.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/admin/views/.*(ex)$},
-      ~r{lib/admin/templates/.*(eex)$}
+      ~r{lib/admin/web/templates/.*(eex|slim)$}
     ]
   ]
 

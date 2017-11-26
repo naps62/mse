@@ -1,5 +1,6 @@
 defmodule MkmAPI.CardsDetailed do
   import Ecto.{Query, Changeset}
+  require Logger
 
   alias DB.{SilentRepo, Models.Card}
 
@@ -9,6 +10,8 @@ defmodule MkmAPI.CardsDetailed do
   end
 
   def fetch(%Card{mkm_id: mkm_id} = card) do
+    Logger.info fn -> "Fetching details for card ##{card.id} - #{card.name}" end
+
     case MKM.product(mkm_id: mkm_id) do
       {:ok, card_data} ->
         changeset(card, card_data)

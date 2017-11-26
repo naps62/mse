@@ -1,0 +1,90 @@
+h1.box-title Stats
+
+.row
+  .col-lg-3
+    .box-body
+      .box.box-primary
+        .box-header
+          h3.box-title General
+        .box-body
+          = Enum.map @general_stats, fn {key,val} ->
+            div
+              strong = key
+              ' : 
+              span = val
+
+  .col-lg-3
+    .box-body
+      .box.box-primary
+        .box-header
+          h3.box-title MKM
+        .box-body
+          = Enum.map @mkm_stats, fn {key,val} ->
+            div
+              strong = key
+              ' : 
+              span = val
+
+  .col-lg-3
+    .box-body
+      .box.box-primary
+        .box-header
+          h3.box-title Mtgjson
+        .box-body
+          = Enum.map @mtgjson_stats, fn {key,val} ->
+            div
+              strong = key
+              ' : 
+              span = val
+
+  .col-lg-3
+    .box-body
+      .box.box-primary
+        .box-header
+          h3.box-title Gatherer
+        .box-body
+          = Enum.map @gatherer_stats, fn {key,val} ->
+            div
+              strong = key
+              ' : 
+              span = val
+
+h1.box-title Jobs
+
+.row
+  .col-lg-12
+    .box
+      .box-body
+        h3 Running workers
+
+        .box-body
+          ul
+            = Enum.map Workers.Info.get(), fn({job, pid}) ->
+              li = job
+
+.row
+  .col-lg-4
+    .box
+      .box-body
+        .boxy.box-primary
+          h3 Update data from Magic Card Markeet
+        .box-body
+          = button("Update MKM data", to: admin_mkm_path(@conn, :update, sets: true), method: :put)
+
+  .col-lg-4
+    .box
+      .box-body
+        .boxy.box-primary
+          h3 Upload Gatherer XML
+        .box-body
+          = form_for @conn, admin_gatherer_path(@conn, :update), [method: :put, as: :gatherer_import, multipart: true], fn f ->
+            = file_input f, :xml
+            = submit "Upload"
+
+  .col-lg-4
+    .box
+      .box-body
+        .boxy.box-primary
+          h3 Update data from MTG JSON (https://mtgjson.com)
+        .box-body
+          = button("Start update job", to: admin_mtgjson_path(@conn, :update), method: :put)

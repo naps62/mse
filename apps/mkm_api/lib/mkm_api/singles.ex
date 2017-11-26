@@ -1,6 +1,5 @@
 defmodule MkmAPI.Singles do
   import Ecto.{Query, Changeset}
-
   require Logger
 
   alias DB.{SilentRepo, Models.Card, Models.Single}
@@ -20,6 +19,8 @@ defmodule MkmAPI.Singles do
   end
 
   defp fetch_single_for_card(%Card{} = card) do
+    Logger.info fn -> "Fetching single for card ##{card.id} - #{card.name}" end
+
     case MKM.meta_product(mkm_id: card.mkm_basic_data["idMetaproduct"]) do
       {:ok, single_data} ->
         SilentRepo.transaction(fn ->

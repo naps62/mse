@@ -1,5 +1,6 @@
 defmodule MkmAPI.Sets do
   import Ecto.{Query, Changeset}
+  require Logger
 
   alias DB.{SilentRepo, Models.Set}
 
@@ -18,6 +19,8 @@ defmodule MkmAPI.Sets do
 
 
   defp add_or_update_set(set_data) do
+    Logger.info fn -> "Processing set #{set_data["enName"]}" end
+
     if !set_blacklisted(set_data) do
       case find_set(set_data) do
         nil -> SilentRepo.insert(set_changeset(%Set{}, set_data))
