@@ -1,5 +1,6 @@
 defmodule Mtgjson.Cards do
   alias DB.SilentRepo
+  require Logger
 
   import Ecto.Query
   import Ecto.Changeset
@@ -13,6 +14,8 @@ defmodule Mtgjson.Cards do
   end
 
   defp update_card(set, %{"name" => name} = data) do
+    Logger.info fn -> "[Mtgjson] Updating card #{name}" end
+
     case find_cards(set, data) do
       [] ->
         FileLogger.append(@logfile, "No card found for set: #{set.name}, #{name}")

@@ -1,6 +1,7 @@
 defmodule Mtgjson.Sets do
   alias DB.{SilentRepo, Models.Set}
   alias Mtgjson.Parser
+  require Logger
 
   import Ecto.Query
   import Ecto.Changeset
@@ -23,6 +24,8 @@ defmodule Mtgjson.Sets do
   defp update_set({mtgjson_code, %{"name" => name} = data}) do
     mkm_id = Map.get(data, "mkm_id")
 
+    Logger.info fn -> "[Mtgjson] Updating set #{name}" end
+
     case find_sets(mtgjson_code, data) do
       [] ->
         FileLogger.append(@logfile, "No set found #{mtgjson_code} - mkm_id: #{mkm_id}, name: #{Map.get(data, "name")}")
@@ -44,7 +47,7 @@ defmodule Mtgjson.Sets do
     |> Ecto.assoc(:cards)
     |> where([c], is_nil(c.mtgjson_data))
     |> DB.SilentRepo.all
-    |> Enum.empty?
+    |> Enum.any?
   end
 
   defp find_sets(mtgjson_code, data) do

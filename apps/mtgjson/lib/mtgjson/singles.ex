@@ -1,6 +1,7 @@
 defmodule Mtgjson.Singles do
   alias DB.{SilentRepo, Models.Single}
   alias Mtgjson.Parser
+  require Logger
 
   import Ecto.Query
   import Ecto.Changeset
@@ -18,6 +19,8 @@ defmodule Mtgjson.Singles do
   end
 
   defp update_single({name, data}) do
+    Logger.info fn -> "[Mtgjson] Updating single #{name}" end
+
     case find_singles(data) do
       nil ->
         IO.puts "No single called #{name} found"
