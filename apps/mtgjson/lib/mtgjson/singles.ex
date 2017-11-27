@@ -45,6 +45,8 @@ defmodule Mtgjson.Singles do
     |> put_change(:power, Map.get(data, "power") |> cast_to_integer)
     |> put_change(:toughness, Map.get(data, "toughness") |> cast_to_integer)
     |> put_change(:ability, Map.get(data, "text"))
+    |> put_change(:type, Map.get(data, "type"))
+    |> put_change(:color, Map.get(data, "colorIdentity") |> cast_to_first_elem)
   end
 
   defp cast_to_integer(nil), do: nil
@@ -54,4 +56,6 @@ defmodule Mtgjson.Singles do
       _ -> nil
     end
   end
+  defp cast_to_first_elem(nil), do: nil
+  defp cast_to_first_elem(list), do: Enum.at(list, 0)
 end

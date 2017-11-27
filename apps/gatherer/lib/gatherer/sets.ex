@@ -1,5 +1,6 @@
 defmodule Gatherer.Sets do
   alias DB.{SilentRepo, Models.Set}
+  require Logger
 
   import Ecto.Query
   import Ecto.Changeset
@@ -16,7 +17,7 @@ defmodule Gatherer.Sets do
   end
 
   defp update_individual_set(set, data) do
-    IO.puts "Updating set #{set.id} #{data.code} - #{data.name}"
+    Logger.info fn -> "[Gatherer] Updating set #{set.id} #{data.code} - #{data.name}" end
 
     set
     |> changeset(data)

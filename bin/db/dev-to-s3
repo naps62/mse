@@ -2,7 +2,7 @@
 
 set -e
 
-source ./bin/utils/set-env
+source .env.secret
 
 timestamp=$(date +"%Y-%m-%dT%H:%M:%SZ")
 file=mtgsearch_dev_${timestamp}.sql

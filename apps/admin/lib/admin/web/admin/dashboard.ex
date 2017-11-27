@@ -28,6 +28,8 @@ defmodule Admin.Web.ExAdmin.Dashboard do
         Repo.one(from c in Card, select: count(c.id)),
       "# Singles" =>
         Repo.one(from s in Single, select: count(s.id)),
+      "Oldest card update (prices)" =>
+        Repo.one(from c in Card, select: min(c.mkm_detailed_updated_at))
     }
   end
 
@@ -49,7 +51,7 @@ defmodule Admin.Web.ExAdmin.Dashboard do
       "Cards w/o data" =>
         Repo.one(from c in Card, where: is_nil(c.mtgjson_id), select: count(c.id)),
       "Singles w/o data" =>
-        Repo.one(from s in Single, where: is_nil(s.mtgjson_name), select: count(s.id)),
+        Repo.one(from s in Single, where: is_nil(s.mtgjson_data), select: count(s.id)),
     }
   end
 

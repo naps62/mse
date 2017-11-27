@@ -1,5 +1,6 @@
 defmodule Gatherer.Singles do
   alias DB.{SilentRepo, Models.Single}
+  require Logger
 
   import Ecto.Query
   import Ecto.Changeset
@@ -12,6 +13,8 @@ defmodule Gatherer.Singles do
   end
 
   defp update_single(single) do
+    Logger.info fn -> "[Gatherer] Updating single #{single.name}" end
+
     change(single)
     |> put_change(:type, field_in_cards(single, :type))
     |> put_change(:manacost, field_in_cards(single, :manacost))

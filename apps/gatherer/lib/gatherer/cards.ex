@@ -1,5 +1,6 @@
 defmodule Gatherer.Cards do
   alias DB.{SilentRepo, Models.Card}
+  require Logger
 
   import Ecto.Query
   import Ecto.Changeset
@@ -10,6 +11,8 @@ defmodule Gatherer.Cards do
   end
 
   defp update_cards(data) do
+    Logger.info fn -> "[Gatherer] Updating card #{data.name}" end
+
     data
     |> find_cards
     |> Enum.each(&update_individual_card(&1, data))
