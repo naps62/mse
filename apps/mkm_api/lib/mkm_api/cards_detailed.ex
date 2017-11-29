@@ -10,7 +10,7 @@ defmodule MkmAPI.CardsDetailed do
   end
 
   def fetch(%Card{mkm_id: mkm_id} = card) do
-    Logger.info fn -> "Fetching details for card ##{card.id} - #{card.name}" end
+    Logger.info fn -> "[MkmAPI.CardsDetailed] fetching ##{card.id} - #{card.name}" end
 
     case MKM.product(mkm_id: mkm_id) do
       {:ok, card_data} ->
@@ -18,7 +18,7 @@ defmodule MkmAPI.CardsDetailed do
         |> SilentRepo.update
 
       _ ->
-        IO.puts "Could not update card with mkm_id: #{mkm_id}"
+        Logger.info fn -> "Could not update card with mkm_id: #{mkm_id}" end
     end
   end
 
