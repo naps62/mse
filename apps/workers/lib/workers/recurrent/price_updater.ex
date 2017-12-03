@@ -23,7 +23,7 @@ defmodule Workers.Recurrent.PriceUpdater do
       desc: is_nil(c.mkm_detailed_updated_at),
       asc: c.mkm_detailed_updated_at,
     ])
-    |> limit(limit)
+    |> limit(^limit)
     |> SilentRepo.all
   end
 end
