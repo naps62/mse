@@ -54,6 +54,7 @@ defmodule Graph.Schema.Types do
     field :mkm_basic_updated_at, :utc_datetime
     field :mkm_detailed_updated_at, :utc_datetime
     field :mkm_price_trend, :money
+    field :mkm_foil_low, :money
     field :mtgjson_id, :string
     field :mtgjson_data, :json
     field :gatherer_id, :string

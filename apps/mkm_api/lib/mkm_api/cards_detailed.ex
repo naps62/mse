@@ -51,6 +51,7 @@ defmodule MkmAPI.CardsDetailed do
   defp changeset(card, data) do
     change(card)
     |> put_change(:mkm_price_trend, round(data["priceGuide"]["TREND"] * 100))
+    |> put_change(:mkm_foil_low, round(data["priceGuide"]["LOWFOIL"] * 100))
     |> put_change(:mkm_detailed_data, data)
     |> put_change(:mkm_detailed_updated_at, Timex.now)
   end

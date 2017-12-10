@@ -50,6 +50,7 @@ defmodule Admin.Web.ExAdmin.Card do
       attributes_table "Magic Card Market" do
         row :mkm_id
         row :mkm_price_trend
+        row :mkm_foil_low
         row :mkm_url
         row :mkm_basic_updated_at, &Helpers.relative_date(&1.mkm_basic_updated_at)
         row :mkm_detailed_updated_at, &Helpers.relative_date(&1.mkm_detailed_updated_at)
