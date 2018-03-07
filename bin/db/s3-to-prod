@@ -22,7 +22,7 @@ bucket = s3.bucket(ENV.fetch('S3_BUCKET'))
 
 available_backups = bucket.objects(prefix: 'db/').reject do |obj|
   obj.key =~ %r{/$}
-end
+end.reverse
 chosen_key = prompt.select('What backup do you want to restore from?', available_backups.map(&:key))
 url = bucket.object(chosen_key).presigned_url(:get, expires_in: 3600)
 
