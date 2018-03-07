@@ -3,19 +3,16 @@ defmodule Workers.Info do
 
   require Logger
 
-  @initial_state Map.new
+  @initial_state Map.new()
 
-  def start_link, do:
-    GenServer.start_link(__MODULE__, @initial_state, name: __MODULE__)
+  def start_link,
+    do: GenServer.start_link(__MODULE__, @initial_state, name: __MODULE__)
 
-  def get, do:
-    GenServer.call(__MODULE__, :get)
+  def get, do: GenServer.call(__MODULE__, :get)
 
-  def start(job), do:
-    GenServer.cast(__MODULE__, {:starting, job, self()})
+  def start(job), do: GenServer.cast(__MODULE__, {:starting, job, self()})
 
-  def finish(job), do:
-    GenServer.cast(__MODULE__, {:finishing, job})
+  def finish(job), do: GenServer.cast(__MODULE__, {:finishing, job})
 
   # Server callbacks
 
@@ -26,8 +23,9 @@ defmodule Workers.Info do
   def handle_cast({:starting, job, pid}, state) do
     Logger.info(fn -> "Starting: #{job}" end)
 
-    new_state = state
-                |> Map.put(job, pid)
+    new_state =
+      state
+      |> Map.put(job, pid)
 
     {:noreply, new_state}
   end
@@ -35,8 +33,9 @@ defmodule Workers.Info do
   def handle_cast({:finishing, job}, state) do
     Logger.info(fn -> "Ending: #{job}" end)
 
-    new_state = state
-                |> Map.delete(job)
+    new_state =
+      state
+      |> Map.delete(job)
 
     {:noreply, new_state}
   end

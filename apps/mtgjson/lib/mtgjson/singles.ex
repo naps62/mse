@@ -8,27 +8,28 @@ defmodule Mtgjson.Singles do
 
   def import({:data, data}) do
     data
-    |> Parser.parse
+    |> Parser.parse()
     |> Enum.each(&update_single/1)
   end
 
   def import(file) do
     file
-    |> Parser.parse_from_file
+    |> Parser.parse_from_file()
     |> Enum.each(&update_single/1)
   end
 
   defp update_single({name, data}) do
-    Logger.info fn -> "[Mtgjson] Updating single #{name}" end
+    Logger.info(fn -> "[Mtgjson] Updating single #{name}" end)
 
     case find_singles(data) do
       nil ->
-        IO.puts "No single called #{name} found"
+        IO.puts("No single called #{name} found")
+
       singles ->
         singles
-        |> Enum.each(fn(single) ->
+        |> Enum.each(fn single ->
           changeset(single, data)
-          |> SilentRepo.update
+          |> SilentRepo.update()
         end)
     end
   end
@@ -50,12 +51,14 @@ defmodule Mtgjson.Singles do
   end
 
   defp cast_to_integer(nil), do: nil
+
   defp cast_to_integer(str) do
     case Integer.parse(str) do
       {result, _} -> result
       _ -> nil
     end
   end
+
   defp cast_to_first_elem(nil), do: nil
   defp cast_to_first_elem(list), do: Enum.at(list, 0)
 end

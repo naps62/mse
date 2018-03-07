@@ -10,7 +10,7 @@ defmodule Admin do
     children = [
       # Start the Ecto repository
       # Start the endpoint when the application starts
-      supervisor(Admin.Web.Endpoint, []),
+      supervisor(Admin.Web.Endpoint, [])
       # Start your own worker by calling: Admin.Worker.start_link(arg1, arg2, arg3)
       # worker(Admin.Worker, [arg1, arg2, arg3]),
     ]
@@ -20,6 +20,7 @@ defmodule Admin do
     opts = [strategy: :one_for_one, name: Admin.Supervisor]
     Supervisor.start_link(children, opts)
   end
+
   #
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.

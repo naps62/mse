@@ -10,15 +10,17 @@ defmodule MkmAPI.CardsBasic do
   end
 
   def fetch(%Set{mkm_id: mkm_set_id} = set) do
-    Logger.info fn -> "Fetching cards for set #{set.name}" end
+    Logger.info(fn -> "Fetching cards for set #{set.name}" end)
 
-    cards_data = case MKM.expansion_singles(expansion_mkm_id: mkm_set_id) do
-      {:ok, singles} -> singles
-      _ -> []
-    end
+    cards_data =
+      case MKM.expansion_singles(expansion_mkm_id: mkm_set_id) do
+        {:ok, singles} -> singles
+        _ -> []
+      end
 
     cards_data
     |> Enum.each(&insert_or_update_card_for_set(set, &1))
+
     update_set_timestamp(set)
   end
 
@@ -27,7 +29,7 @@ defmodule MkmAPI.CardsBasic do
     |> join(:left, [s], c in assoc(s, :cards))
     |> where([s, c], is_nil(c.mkm_basic_updated_at))
     |> select([s, c], s)
-    |> SilentRepo.all
+    |> SilentRepo.all()
   end
 
   defp insert_or_update_card_for_set(set, card_data) do
@@ -37,8 +39,9 @@ defmodule MkmAPI.CardsBasic do
   end
 
   defp update_set_timestamp(set) do
-    changeset = change(set)
-    |> put_change(:mkm_cards_updated_at, Timex.now)
+    changeset =
+      change(set)
+      |> put_change(:mkm_cards_updated_at, Timex.now())
 
     SilentRepo.update(changeset)
   end
@@ -55,7 +58,7 @@ defmodule MkmAPI.CardsBasic do
     ~r/^Double-Faced Card Proxy Checklist/,
     ~r/ Symbol$/,
     ~r/ Counter$/,
-    ~r/^Complete Portal Card List/,
+    ~r/^Complete Portal Card List/
   ]
   defp card_blacklisted(%{"enName" => name}) do
     Enum.any?(@blacklisted_card_names, &Regex.match?(&1, name))

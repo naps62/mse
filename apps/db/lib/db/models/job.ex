@@ -6,10 +6,10 @@ defmodule DB.Models.Job do
   @derive [Poison.Encoder]
 
   schema "jobs" do
-    field :module, :string
-    field :name, :string
-    field :info, :map, default: %{}
-    field :status, :string, default: "started"
+    field(:module, :string)
+    field(:name, :string)
+    field(:info, :map, default: %{})
+    field(:status, :string, default: "started")
 
     timestamps()
   end

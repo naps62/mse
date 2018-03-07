@@ -17,7 +17,7 @@ config :mse_web, MseWeb.Endpoint,
   http: [:inet6, port: {:system, "WEB_PORT"}],
   url: [host: "localhost", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
-version: Mix.Project.config[:version],
+  version: Mix.Project.config()[:version],
   server: true
 
 # Do not print debug messages in production

@@ -14,15 +14,19 @@ defmodule Mtgjson.Cards do
   end
 
   defp update_card(set, %{"name" => name} = data) do
-    Logger.info fn -> "[Mtgjson] Updating card #{name}" end
+    Logger.info(fn -> "[Mtgjson] Updating card #{name}" end)
 
     case find_cards(set, data) do
       [] ->
-        FileLogger.append(@logfile, "No card found for set: #{set.name}, #{name}")
+        FileLogger.append(
+          @logfile,
+          "No card found for set: #{set.name}, #{name}"
+        )
+
       cards ->
-        Enum.each(cards, fn(card) ->
+        Enum.each(cards, fn card ->
           changeset(card, data)
-          |> SilentRepo.update
+          |> SilentRepo.update()
         end)
     end
   end
@@ -36,6 +40,6 @@ defmodule Mtgjson.Cards do
     |> put_change(:mtgjson_id, Map.get(data, "id"))
     |> put_change(:mtgjson_data, data)
     |> put_change(:artist, Map.get(data, "artist"))
-    |> put_change(:rarity, Map.get(data, "rarity") |> String.downcase)
+    |> put_change(:rarity, Map.get(data, "rarity") |> String.downcase())
   end
 end

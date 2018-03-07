@@ -17,28 +17,31 @@ defmodule Gatherer.Sets do
   end
 
   defp update_individual_set(set, data) do
-    Logger.info fn -> "[Gatherer] Updating set #{set.id} #{data.code} - #{data.name}" end
+    Logger.info(fn ->
+      "[Gatherer] Updating set #{set.id} #{data.code} - #{data.name}"
+    end)
 
     set
     |> changeset(data)
-    |> SilentRepo.update
+    |> SilentRepo.update()
   end
 
   defp find_sets(%{code: code, name: name}) do
     Set
     |> where(
-      [e], (e.gatherer_code == ^code) or
-      (is_nil(e.gatherer_code) and e.mkm_code == ^code) or
-      (is_nil(e.gatherer_code) and ilike(e.name, ^name)) or
-      (is_nil(e.gatherer_code) and ilike(e.name, ^"#{name}: Promos"))
+      [e],
+      e.gatherer_code == ^code or
+        (is_nil(e.gatherer_code) and e.mkm_code == ^code) or
+        (is_nil(e.gatherer_code) and ilike(e.name, ^name)) or
+        (is_nil(e.gatherer_code) and ilike(e.name, ^"#{name}: Promos"))
     )
-    |> SilentRepo.all
+    |> SilentRepo.all()
   end
 
   defp changeset(set, data) do
     change(set)
     |> put_change(:gatherer_data, data)
     |> put_change(:gatherer_code, data[:code])
-    |> put_change(:gatherer_updated_at, Timex.now)
+    |> put_change(:gatherer_updated_at, Timex.now())
   end
 end

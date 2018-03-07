@@ -5,7 +5,7 @@ defmodule MkmAPI.Sets do
   alias DB.{SilentRepo, Models.Set}
 
   def fetch do
-    {:ok, sets} = MKM.expansions
+    {:ok, sets} = MKM.expansions()
 
     sets
     |> Enum.each(&add_or_update_set/1)
@@ -13,13 +13,12 @@ defmodule MkmAPI.Sets do
 
   def parse do
     Set
-    |> SilentRepo.all
+    |> SilentRepo.all()
     |> Enum.each(&parse_set/1)
   end
 
-
   defp add_or_update_set(set_data) do
-    Logger.info fn -> "Processing set #{set_data["enName"]}" end
+    Logger.info(fn -> "Processing set #{set_data["enName"]}" end)
 
     if !set_blacklisted(set_data) do
       case find_set(set_data) do
@@ -30,7 +29,7 @@ defmodule MkmAPI.Sets do
   end
 
   defp find_set(%{"idExpansion" => mkm_id}) do
-    Set |> where(mkm_id: ^mkm_id) |> SilentRepo.one
+    Set |> where(mkm_id: ^mkm_id) |> SilentRepo.one()
   end
 
   defp parse_set(%Set{mkm_data: mkm_data} = set) do
@@ -44,7 +43,7 @@ defmodule MkmAPI.Sets do
     |> put_change(:mkm_code, data["abbreviation"])
     |> put_change(:mkm_name, data["enName"])
     |> put_change(:name, data["enName"])
-    |> put_change(:mkm_updated_at, Timex.now)
+    |> put_change(:mkm_updated_at, Timex.now())
     |> validate_required([:mkm_id, :mkm_data])
   end
 
@@ -74,7 +73,7 @@ defmodule MkmAPI.Sets do
     ~r/^Oversized Box Toppers$/,
     ~r/^Armada Comics$/,
     ~r/^GnD Cards$/,
-    ~r/^Ultra-Pro Puzzle Cards$/,
+    ~r/^Ultra-Pro Puzzle Cards$/
   ]
   defp set_blacklisted(%{"enName" => name}) do
     Enum.any?(@blacklisted_set_names, &Regex.match?(&1, name))

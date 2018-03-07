@@ -6,7 +6,7 @@ defmodule Gatherer.Parser do
   @set_fields [
     :name,
     :code,
-    :code_magiccards,
+    :code_magiccards
   ]
 
   @card_fields [
@@ -39,12 +39,12 @@ defmodule Gatherer.Parser do
     :name_PT,
     :name_RU,
     :name_ES,
-    :name_KO,
+    :name_KO
   ]
 
-  @set_schema Enum.map(@set_fields, &({&1, ~x"./#{&1}/text()"S}))
+  @set_schema Enum.map(@set_fields, &{&1, ~x"./#{&1}/text()"S})
 
-  @card_schema Enum.map(@card_fields, &({&1, ~x"./#{&1}/text()"S}))
+  @card_schema Enum.map(@card_fields, &{&1, ~x"./#{&1}/text()"S})
 
   def new({:inline, str}) do
     %__MODULE__{doc: str}

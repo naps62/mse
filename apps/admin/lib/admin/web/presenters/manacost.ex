@@ -5,8 +5,8 @@ defmodule Admin.Web.Presenters.Manacost do
 
   @mana_icon_regex ~r/\{([0-9A-Z]+)\}/
 
-  def present(nil), do:
-    [HTML.Tag.content_tag(:span, "", class: "ManaIcon placeholder")]
+  def present(nil),
+    do: [HTML.Tag.content_tag(:span, "", class: "ManaIcon placeholder")]
 
   def present(%Single{manacost: manacost}) do
     present(manacost)
@@ -19,9 +19,13 @@ defmodule Admin.Web.Presenters.Manacost do
 
   defp single_mana_image(str) do
     if String.match?(str, @mana_icon_regex) do
-      HTML.Tag.content_tag :span, "", class: "ManaIcon sprite-#{String.at(str, 1)}"
+      HTML.Tag.content_tag(
+        :span,
+        "",
+        class: "ManaIcon sprite-#{String.at(str, 1)}"
+      )
     else
-      HTML.Tag.content_tag :span, HTML.raw(str)
+      HTML.Tag.content_tag(:span, HTML.raw(str))
     end
   end
 end

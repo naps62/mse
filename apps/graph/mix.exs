@@ -2,16 +2,18 @@ defmodule Graph.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :graph,
-     version: "0.1.0",
-     build_path: "../../_build",
-     config_path: "../../config/config.exs",
-     deps_path: "../../deps",
-     lockfile: "../../mix.lock",
-     elixir: "~> 1.4",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :graph,
+      version: "0.1.0",
+      build_path: "../../_build",
+      config_path: "../../config/config.exs",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
+      elixir: "~> 1.4",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -38,9 +40,8 @@ defmodule Graph.Mixfile do
   defp deps do
     [
       {:db, in_umbrella: true},
-
       {:absinthe, "~> 1.2"},
-      {:absinthe_ecto, github: "absinthe-graphql/absinthe_ecto"},
+      {:absinthe_ecto, github: "absinthe-graphql/absinthe_ecto"}
     ]
   end
 end

@@ -49,7 +49,6 @@ defmodule MkmApi.CardsBasic.Save do
       |> SilentRepo.one()
 
   defp single_id_for(%Card{single_id: id}, _), do: id
-  defp single_id_for(%Card{single_id: id}, _, _, _), do: id
 
   defp mkm_relative_url("." <> relative_url), do: mkm_relative_url(relative_url)
   defp mkm_relative_url(relative_url), do: "https://mkmapi.eu" <> relative_url

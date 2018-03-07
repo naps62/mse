@@ -19,12 +19,12 @@ defmodule Graph.Resolvers.Set do
   end
 
   defp add_query_param({:search, ""}, query), do: query
-  defp add_query_param({:search, search}, query), do:
-    query |> where([s], ilike(s.name, ^"%#{search}%"))
+
+  defp add_query_param({:search, search}, query),
+    do: query |> where([s], ilike(s.name, ^"%#{search}%"))
 
   defp add_query_param({:limit, :infinity}, query), do: query
-  defp add_query_param({:limit, limit}, query), do:
-    query |> limit(^limit)
+  defp add_query_param({:limit, limit}, query), do: query |> limit(^limit)
 
   defp scope do
     Set

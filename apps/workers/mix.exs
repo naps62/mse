@@ -2,16 +2,18 @@ defmodule Workers.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :workers,
-     version: "0.1.0",
-     build_path: "../../_build",
-     config_path: "../../config/config.exs",
-     deps_path: "../../deps",
-     lockfile: "../../mix.lock",
-     elixir: "~> 1.4",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :workers,
+      version: "0.1.0",
+      build_path: "../../_build",
+      config_path: "../../config/config.exs",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
+      elixir: "~> 1.4",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -19,8 +21,7 @@ defmodule Workers.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger],
-     mod: {Workers.Application, []}]
+    [extra_applications: [:logger], mod: {Workers.Application, []}]
   end
 
   # Dependencies can be Hex packages:
@@ -42,9 +43,8 @@ defmodule Workers.Mixfile do
       {:mkm_api, in_umbrella: true},
       {:gatherer, in_umbrella: true},
       {:mtgjson, in_umbrella: true},
-
       {:quantum, ">= 2.0.0-beta.1"},
-      {:timex, "~> 3.0"},
+      {:timex, "~> 3.0"}
     ]
   end
 end

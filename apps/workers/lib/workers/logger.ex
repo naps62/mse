@@ -4,11 +4,11 @@ defmodule Workers.Logger do
 
   def job_start(params \\ %{}) do
     Job.create_changeset(%Job{}, params)
-    |> Repo.insert!
+    |> Repo.insert!()
   end
 
   def job_end(log, params \\ %{}) do
     Job.update_changeset(log, params)
-    |> Repo.update!
+    |> Repo.update!()
   end
 end

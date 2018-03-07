@@ -2,23 +2,25 @@ defmodule Mse.Mixfile do
   use Mix.Project
 
   def project do
-    [apps_path: "apps",
-     version: "beta.19-01-2018",
-     apps: [
-       :proxy,
-       :mse_web,
-       :admin,
-       :db,
-       :workers,
-       :mtgjson,
-       :gatherer,
-       :mkm_api,
-       :graph,
-       :mse_logging,
-     ],
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      apps_path: "apps",
+      version: "beta.19-01-2018",
+      apps: [
+        :proxy,
+        :mse_web,
+        :admin,
+        :db,
+        :workers,
+        :mtgjson,
+        :gatherer,
+        :mkm_api,
+        :graph,
+        :mse_logging
+      ],
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   defp deps do

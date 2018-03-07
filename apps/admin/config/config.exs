@@ -13,10 +13,10 @@ config :admin,
 # Configures the endpoint
 config :admin, Admin.Web.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "xSb85QxDsTZAo/cCpUIZgUyV7vPPE2aBgwe3CcWz1ORMpoKIvu4PnEGfVVWej0Dy",
+  secret_key_base:
+    "xSb85QxDsTZAo/cCpUIZgUyV7vPPE2aBgwe3CcWz1ORMpoKIvu4PnEGfVVWej0Dy",
   render_errors: [view: Admin.Web.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Admin.Web.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Admin.Web.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -31,15 +31,16 @@ config :ex_admin,
     Admin.Web.ExAdmin.Set,
     Admin.Web.ExAdmin.Single,
     Admin.Web.ExAdmin.Card,
-    Admin.Web.ExAdmin.Job,
+    Admin.Web.ExAdmin.Job
   ],
   head_template: {Admin.Web.AdminView, "head.html"}
 
-config :admin, admin_basic_auth: [
-  username: {:system, "ADMIN_USERNAME"},
-  password: {:system, "ADMIN_PASSWORD"},
-  realm: "Admin Area"
-]
+config :admin,
+  admin_basic_auth: [
+    username: {:system, "ADMIN_USERNAME"},
+    password: {:system, "ADMIN_PASSWORD"},
+    realm: "Admin Area"
+  ]
 
 config :phoenix, :template_engines,
   slim: PhoenixSlime.Engine,
@@ -49,4 +50,4 @@ config :xain, :after_callback, {Phoenix.HTML, :raw}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

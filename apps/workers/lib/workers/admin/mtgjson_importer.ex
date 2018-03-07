@@ -10,7 +10,9 @@ defmodule Workers.Admin.MtgjsonImport do
       Mtgjson.download_and_import()
     rescue
       e in RuntimeError ->
-        Logger.info("Something went wrong in Workers.Admin.MtgjsonImport: " <> e.message)
+        Logger.info(
+          "Something went wrong in Workers.Admin.MtgjsonImport: " <> e.message
+        )
     after
       Workers.Info.finish(@job_name)
     end

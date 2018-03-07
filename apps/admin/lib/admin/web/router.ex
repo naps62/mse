@@ -17,9 +17,9 @@ defmodule Admin.Web.Router do
   scope "/", Admin.Web, as: :admin do
     pipe_through [:browser, :admin_basic_auth]
 
-    resources "/mkm", MKMController, only: [:update], singleton: true
-    resources "/gatherer", GathererController, only: [:update], singleton: true
-    resources "/mtgjson", MtgjsonController, only: [:update], singleton: true
+    resources("/mkm", MKMController, only: [:update], singleton: true)
+    resources("/gatherer", GathererController, only: [:update], singleton: true)
+    resources("/mtgjson", MtgjsonController, only: [:update], singleton: true)
   end
 
   scope "/", ExAdmin do

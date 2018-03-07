@@ -10,7 +10,7 @@ defmodule Mse.Web.Application do
     children = [
       # Start the Ecto repository
       # Start the endpoint when the application starts
-      supervisor(MseWeb.Endpoint, []),
+      supervisor(MseWeb.Endpoint, [])
       # Start your own worker by calling: MseWeb.Worker.start_link(arg1, arg2, arg3)
       # worker(MseWeb.Worker, [arg1, arg2, arg3]),
     ]

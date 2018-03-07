@@ -7,7 +7,7 @@ defmodule MkmAPI.Singles do
   def fetch do
     cards_with_oudated_single()
     |> Stream.each(&fetch_single_for_card/1)
-    |> Stream.run
+    |> Stream.run()
   end
 
   defp cards_with_oudated_single do
@@ -19,7 +19,7 @@ defmodule MkmAPI.Singles do
   end
 
   defp fetch_single_for_card(%Card{} = card) do
-    Logger.info fn -> "Fetching single for card ##{card.id} - #{card.name}" end
+    Logger.info(fn -> "Fetching single for card ##{card.id} - #{card.name}" end)
 
     case MKM.meta_product(mkm_id: card.mkm_basic_data["idMetaproduct"]) do
       {:ok, single_data} ->
@@ -27,6 +27,7 @@ defmodule MkmAPI.Singles do
           {:ok, single} = insert_or_update_single(single_data)
           associate_single_with_card(single, card)
         end)
+
       {:error, message} ->
         Logger.info("error importing single: " <> message)
     end
@@ -39,6 +40,6 @@ defmodule MkmAPI.Singles do
   defp associate_single_with_card(single, card) do
     change(card)
     |> put_assoc(:single, single)
-    |> SilentRepo.update
+    |> SilentRepo.update()
   end
 end

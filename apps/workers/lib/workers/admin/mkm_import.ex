@@ -7,10 +7,10 @@ defmodule Workers.Admin.MKMImport do
     try do
       Workers.Info.start(@job_name)
 
-      MkmAPI.Sets.fetch
-      MkmAPI.CardsBasic.fetch
+      MkmAPI.Sets.fetch()
+      MkmAPI.CardsBasic.fetch()
       MkmAPI.CardsDetailed.fetch(:new)
-      MkmAPI.Singles.fetch
+      MkmAPI.Singles.fetch()
     rescue
       e in RuntimeError ->
         Logger.info("Something went wrong in Workers.Admin.MKMImport: ")

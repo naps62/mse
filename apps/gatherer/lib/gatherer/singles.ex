@@ -9,11 +9,11 @@ defmodule Gatherer.Singles do
     Single
     |> DB.Stream.stream(SilentRepo)
     |> Stream.each(&update_single/1)
-    |> Stream.run
+    |> Stream.run()
   end
 
   defp update_single(single) do
-    Logger.info fn -> "[Gatherer] Updating single #{single.name}" end
+    Logger.info(fn -> "[Gatherer] Updating single #{single.name}" end)
 
     change(single)
     |> put_change(:type, field_in_cards(single, :type))
@@ -22,12 +22,14 @@ defmodule Gatherer.Singles do
     |> put_change(:color, field_in_cards(single, :color))
     |> put_change(:power, field_in_cards(single, :power, :integer))
     |> put_change(:toughness, field_in_cards(single, :toughness, :integer))
-    |> SilentRepo.update
+    |> SilentRepo.update()
   end
 
   defp field_in_cards(single, field, :integer) do
     case field_in_cards(single, field) do
-      nil -> nil
+      nil ->
+        nil
+
       str ->
         case Integer.parse(str) do
           {result, _} -> result
@@ -40,14 +42,15 @@ defmodule Gatherer.Singles do
     single
     |> Ecto.assoc(:cards)
     |> select([c], fragment("?->>?", c.gatherer_data, ^to_string(field)))
-    |> SilentRepo.all
+    |> SilentRepo.all()
     |> Enum.find(&valid_value?/1)
   end
 
   defp valid_value?(nil), do: false
+
   defp valid_value?(str) do
-    (str
-    |> String.trim
-    |> String.length) > 0
+    str
+    |> String.trim()
+    |> String.length() > 0
   end
 end

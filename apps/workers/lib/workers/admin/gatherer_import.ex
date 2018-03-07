@@ -10,11 +10,12 @@ defmodule Workers.Admin.GathererImport do
       Gatherer.import(file)
     rescue
       e in RuntimeError ->
-        Logger.info("Something went wrong in Workers.Admin.GathererImport: " <> e.message)
+        Logger.info(
+          "Something went wrong in Workers.Admin.GathererImport: " <> e.message
+        )
     after
       Workers.Info.finish("#{@job_name} - #{file}")
     end
-
   end
 
   def perform_async(file) do

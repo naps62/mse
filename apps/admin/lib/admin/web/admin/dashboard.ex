@@ -5,7 +5,7 @@ defmodule Admin.Web.ExAdmin.Dashboard do
   import Ecto.Query
 
   register_page "Dashboard" do
-    menu priority: 1, label: "Dashboard"
+    menu(priority: 1, label: "Dashboard")
 
     content do
       Phoenix.View.render(
@@ -22,45 +22,62 @@ defmodule Admin.Web.ExAdmin.Dashboard do
 
   defp general_stats do
     %{
-      "# Sets" =>
-        Repo.one(from s in Set, select: count(s.id)),
-      "# Cards" =>
-        Repo.one(from c in Card, select: count(c.id)),
-      "# Singles" =>
-        Repo.one(from s in Single, select: count(s.id)),
+      "# Sets" => Repo.one(from(s in Set, select: count(s.id))),
+      "# Cards" => Repo.one(from(c in Card, select: count(c.id))),
+      "# Singles" => Repo.one(from(s in Single, select: count(s.id))),
       "Oldest card update (prices)" =>
-        Repo.one(from c in Card, select: min(c.mkm_detailed_updated_at))
+        Repo.one(from(c in Card, select: min(c.mkm_detailed_updated_at)))
     }
   end
 
   defp mkm_stats do
     %{
       "Cards w/o basic data" =>
-        Repo.one(from c in Card, where: is_nil(c.mkm_basic_data), select: count(c.id)),
+        Repo.one(
+          from(c in Card, where: is_nil(c.mkm_basic_data), select: count(c.id))
+        ),
       "Cards w/o detailed data" =>
-        Repo.one(from c in Card, where: is_nil(c.mkm_detailed_data), select: count(c.id)),
+        Repo.one(
+          from(
+            c in Card,
+            where: is_nil(c.mkm_detailed_data),
+            select: count(c.id)
+          )
+        ),
       "Cards w/o single" =>
-        Repo.one(from c in Card, where: is_nil(c.single_id), select: count(c.id)),
+        Repo.one(
+          from(c in Card, where: is_nil(c.single_id), select: count(c.id))
+        )
     }
   end
 
   defp mtgjson_stats do
     %{
       "Sets w/o data" =>
-        Repo.one(from s in Set, where: is_nil(s.mtgjson_data), select: count(s.id)),
+        Repo.one(
+          from(s in Set, where: is_nil(s.mtgjson_data), select: count(s.id))
+        ),
       "Cards w/o data" =>
-        Repo.one(from c in Card, where: is_nil(c.mtgjson_id), select: count(c.id)),
+        Repo.one(
+          from(c in Card, where: is_nil(c.mtgjson_id), select: count(c.id))
+        ),
       "Singles w/o data" =>
-        Repo.one(from s in Single, where: is_nil(s.mtgjson_data), select: count(s.id)),
+        Repo.one(
+          from(s in Single, where: is_nil(s.mtgjson_data), select: count(s.id))
+        )
     }
   end
 
   defp gatherer_stats do
     %{
       "Sets w/o data" =>
-        Repo.one(from s in Set, where: is_nil(s.gatherer_code), select: count(s.id)),
+        Repo.one(
+          from(s in Set, where: is_nil(s.gatherer_code), select: count(s.id))
+        ),
       "Cards w/o data" =>
-        Repo.one(from c in Card, where: is_nil(c.gatherer_id), select: count(c.id)),
+        Repo.one(
+          from(c in Card, where: is_nil(c.gatherer_id), select: count(c.id))
+        )
     }
   end
 end

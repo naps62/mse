@@ -11,29 +11,35 @@ defmodule Mtgjson.Sets do
 
   def import({:data, data}) do
     data
-    |> Parser.parse
+    |> Parser.parse()
     |> Enum.each(&update_set/1)
   end
 
   def import({:file, file}) do
     file
-    |> Parser.parse_from_file
+    |> Parser.parse_from_file()
     |> Enum.each(&update_set/1)
   end
 
   defp update_set({mtgjson_code, %{"name" => name} = data}) do
     mkm_id = Map.get(data, "mkm_id")
 
-    Logger.info fn -> "[Mtgjson] Updating set #{name}" end
+    Logger.info(fn -> "[Mtgjson] Updating set #{name}" end)
 
     case find_sets(mtgjson_code, data) do
       [] ->
-        FileLogger.append(@logfile, "No set found #{mtgjson_code} - mkm_id: #{mkm_id}, name: #{Map.get(data, "name")}")
+        FileLogger.append(
+          @logfile,
+          "No set found #{mtgjson_code} - mkm_id: #{mkm_id}, name: #{
+            Map.get(data, "name")
+          }"
+        )
+
       sets ->
         sets
-        |> Enum.each(fn(set) ->
+        |> Enum.each(fn set ->
           changeset(set, mtgjson_code, data)
-          |> SilentRepo.update
+          |> SilentRepo.update()
 
           if outdated_cards_in_set?(set) do
             Mtgjson.Cards.import(set, Map.get(data, "cards"))
@@ -46,8 +52,8 @@ defmodule Mtgjson.Sets do
     set
     |> Ecto.assoc(:cards)
     |> where([c], is_nil(c.mtgjson_data))
-    |> DB.SilentRepo.all
-    |> Enum.any?
+    |> DB.SilentRepo.all()
+    |> Enum.any?()
   end
 
   defp find_sets(mtgjson_code, data) do
@@ -56,7 +62,7 @@ defmodule Mtgjson.Sets do
 
   defp changeset(set, code, data) do
     change(set)
-    |> put_change(:mtgjson_codes, [code | set.mtgjson_codes] |> Enum.uniq)
+    |> put_change(:mtgjson_codes, [code | set.mtgjson_codes] |> Enum.uniq())
     |> put_change(:mtgjson_data, Map.delete(data, "cards"))
   end
 end

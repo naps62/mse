@@ -13,21 +13,22 @@ config :mse_web,
 # Configures the endpoint
 config :mse_web, MseWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "xSb85QxDsTZAo/cCpUIZgUyV7vPPE2aBgwe3CcWz1ORMpoKIvu4PnEGfVVWej0Dy",
+  secret_key_base:
+    "xSb85QxDsTZAo/cCpUIZgUyV7vPPE2aBgwe3CcWz1ORMpoKIvu4PnEGfVVWej0Dy",
   render_errors: [view: MseWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: MseWeb.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: MseWeb.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :mse_web, admin_basic_auth: [
-  username: {:system, "ADMIN_USERNAME"},
-  password: {:system, "ADMIN_PASSWORD"},
-  realm: "Admin Area"
-]
+config :mse_web,
+  admin_basic_auth: [
+    username: {:system, "ADMIN_USERNAME"},
+    password: {:system, "ADMIN_PASSWORD"},
+    realm: "Admin Area"
+  ]
 
 config :phoenix, :template_engines,
   slim: PhoenixSlime.Engine,
@@ -37,4 +38,4 @@ config :xain, :after_callback, {Phoenix.HTML, :raw}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
