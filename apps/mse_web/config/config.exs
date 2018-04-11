@@ -16,7 +16,8 @@ config :mse_web, MseWeb.Endpoint,
   secret_key_base:
     "xSb85QxDsTZAo/cCpUIZgUyV7vPPE2aBgwe3CcWz1ORMpoKIvu4PnEGfVVWej0Dy",
   render_errors: [view: MseWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: MseWeb.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: MseWeb.PubSub, adapter: Phoenix.PubSub.PG2],
+  server: false
 
 # Configures Elixir's Logger
 config :logger, :console,

@@ -11,7 +11,8 @@ config :proxy, Proxy.Endpoint,
   secret_key_base:
     "MyQg4fAy6mJ3SqXHtjqv+D0nNma8xBDYPP9VjPMo5nvgc8Y2RA2HcFsrAc5soBhr",
   render_errors: [view: Proxy.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Proxy.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Proxy.PubSub, adapter: Phoenix.PubSub.PG2],
+  server: true
 
 # Configures Elixir's Logger
 config :logger, :console,

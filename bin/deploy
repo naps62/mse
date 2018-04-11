@@ -15,11 +15,16 @@ fi
 unset DOCKER_HOST
 unset DOCKER_TLS_VERIFY
 
-# build docker release
-docker build -f Dockerfile.build -t naps62/mtgsearch:release .
+# build docker release for mtgserch app
+docker build -f docker/Dockerfile.app -t naps62/mtgsearch:release .
 docker tag naps62/mtgsearch:release naps62/mtgsearch:$TAG
 docker push naps62/mtgsearch:$TAG
 
+# build docker release for mtgserch server
+docker build -f docker/Dockerfile.server -t naps62/mtgsearch-server:release .
+docker tag naps62/mtgsearch-server:release naps62/mtgsearch-server:$TAG
+docker push naps62/mtgsearch-server:$TAG
+
 ./bin/prod pull
-./bin/prod stop web
+# ./bin/prod stop app
 ./bin/prod up -d

@@ -1,0 +1,10 @@
+new.mtgsear.ch, admin.mtgsear.ch {
+  tls mpalhas@gmail.com
+
+  proxy / app:4000 {
+    transparent
+  }
+
+  gzip
+  log stdout
+}

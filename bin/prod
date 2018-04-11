@@ -10,7 +10,7 @@ COMPOSE="docker-compose -f docker-compose.yml"
 
 case "$@" in
   "iex" )
-    $COMPOSE exec web /opt/app/bin/mse remote_console
+    $COMPOSE exec app /opt/app/bin/mse remote_console
     ;;
 
   "db-restore")

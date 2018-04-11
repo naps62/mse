@@ -22,7 +22,7 @@ defmodule DB.Models.Job do
 
   def update_changeset(job, params \\ %{}) do
     job
-    |> cast(params, [:name, :info])
+    |> cast(params, [:name, :info, :status])
     |> validate_required([])
   end
 end
