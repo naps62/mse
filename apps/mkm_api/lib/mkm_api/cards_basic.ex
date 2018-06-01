@@ -5,7 +5,7 @@ defmodule MkmAPI.CardsBasic do
   alias DB.{SilentRepo, Models.Card, Models.Set, Models.Single}
 
   def fetch do
-    sets_with_new_cards()
+    (sets_with_new_cards() ++ recent_sets())
     |> Enum.each(&fetch/1)
   end
 
@@ -29,6 +29,14 @@ defmodule MkmAPI.CardsBasic do
     |> join(:left, [s], c in assoc(s, :cards))
     |> where([s, c], is_nil(c.mkm_basic_updated_at))
     |> select([s, c], s)
+    |> SilentRepo.all()
+  end
+
+  defp recent_sets do
+    one_month_ago = Timex.new() |> Timex.shift(monhts: -1)
+
+    Set
+    |> where([s], s.inserted_at > ^one_month_ago)
     |> SilentRepo.all()
   end
 
