@@ -3,6 +3,10 @@ defmodule Graph.Resolvers.Single do
 
   alias DB.{Models.Single, Repo}
 
+  def find(%{id: id}, _info) do
+    {:ok, Repo.get(Single, id)}
+  end
+
   def page(%{offset: offset, limit: limit}, _info) do
     query =
       Single

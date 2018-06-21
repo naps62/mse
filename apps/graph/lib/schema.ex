@@ -40,5 +40,12 @@ defmodule Graph.Schema do
       arg(:limit, non_null(:integer))
       resolve(&Resolvers.Single.page/2)
     end
+
+    @desc "Get a single single"
+    field :singles, type: :single do
+      arg(:id, non_null(:id))
+
+      resolve(&Resolvers.Single.find/2)
+    end
   end
 end
