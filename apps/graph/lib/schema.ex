@@ -42,7 +42,7 @@ defmodule Graph.Schema do
     end
 
     @desc "Get a single single"
-    field :singles, type: :single do
+    field :single, type: :single do
       arg(:id, non_null(:id))
 
       resolve(&Resolvers.Single.find/2)
