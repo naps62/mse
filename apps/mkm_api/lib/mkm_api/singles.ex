@@ -18,7 +18,16 @@ defmodule MkmAPI.Singles do
     |> DB.Stream.stream(SilentRepo)
   end
 
-  defp fetch_single_for_card(%Card{} = card) do
+  def update_single(%Single{mkm_id: mkm_id}) do
+    case MKM.meta_product(mkm_id: mkm_id) do
+      {:ok, single_data} ->
+        SilentRepo.transaction(fn ->
+          {:ok, single} = insert_or_update_single(single_data)
+        end)
+    end
+  end
+
+  def fetch_single_for_card(%Card{} = card) do
     Logger.info(fn -> "Fetching single for card ##{card.id} - #{card.name}" end)
 
     case MKM.meta_product(mkm_id: card.mkm_basic_data["idMetaproduct"]) do
