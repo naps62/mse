@@ -1,4 +1,4 @@
-defmodule Mtgsearch.MkmApi.Fix.NewImageUrls do
+defmodule MkmAPI.Fix.NewImageUrls do
   alias DB.Models.{Single, Card}
   alias DB.Repo
 
@@ -25,7 +25,7 @@ defmodule Mtgsearch.MkmApi.Fix.NewImageUrls do
         nil
 
       _ ->
-        Enum.each(&MkmAPI.Singles.update_single/1)
+        Enum.each(singles, &MkmAPI.Singles.update_single/1)
 
         do_update_singles(limit, offset + limit)
     end
