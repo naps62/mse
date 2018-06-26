@@ -16,6 +16,7 @@ defmodule MkmAPI.Fix.NewImageUrls do
   def do_update_singles(limit, offset) do
     singles =
       Single
+      |> order_by([s], asc: :id)
       |> limit(^limit)
       |> offset(^offset)
       |> Repo.all()
