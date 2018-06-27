@@ -1,5 +1,5 @@
 defmodule MkmAPI.Fix.NewImageUrls do
-  alias DB.Models.{Single, Card}
+  alias DB.Models.{Single, Card, Set}
   alias DB.Repo
 
   import Ecto.Query
@@ -41,7 +41,7 @@ defmodule MkmAPI.Fix.NewImageUrls do
     |> where([s], s.id > ^from)
     |> Repo.all()
     |> Enum.each(fn set ->
-      IO.inspec("updating set #{set.id} - #{set.name}")
+      IO.inspect("updating set #{set.id} - #{set.name}")
       MkmAPI.CardsBasic.fetch(set)
     end)
   end
