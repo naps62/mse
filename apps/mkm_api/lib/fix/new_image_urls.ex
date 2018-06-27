@@ -14,9 +14,12 @@ defmodule MkmAPI.Fix.NewImageUrls do
   end
 
   def do_update_singles(limit, offset) do
+    IO.inspect("updating singles from #{offset} to #{offset + limit - 1}")
+
     singles =
       Single
       |> order_by([s], asc: :id)
+      |> where([s], like(s.image_url, "%/img/cards%"))
       |> limit(^limit)
       |> offset(^offset)
       |> Repo.all()
@@ -32,9 +35,14 @@ defmodule MkmAPI.Fix.NewImageUrls do
     end
   end
 
-  def update_cards_by_set do
+  def update_cards_by_set(from \\ 0) do
     Set
+    |> order_by([s], asc: :id)
+    |> where([s], s.id > ^from)
     |> Repo.all()
-    |> Enum.each(&MkmAPI.CardsBasic.fetch/1)
+    |> Enum.each(fn set ->
+      IO.inspec("updating set #{set.id} - #{set.name}")
+      MkmAPI.CardsBasic.fetch(set)
+    end)
   end
 end
