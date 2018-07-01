@@ -33,7 +33,7 @@ defmodule MkmAPI.CardsBasic do
   end
 
   defp recent_sets do
-    one_month_ago = Timex.new() |> Timex.shift(monhts: -3)
+    one_month_ago = Timex.now() |> Timex.shift(monhts: -3)
 
     Set
     |> where([s], s.inserted_at > ^one_month_ago)
