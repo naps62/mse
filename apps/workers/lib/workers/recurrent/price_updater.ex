@@ -15,7 +15,7 @@ defmodule Workers.Recurrent.PriceUpdater do
     cards = top_outdated_cards(limit)
     Enum.each(cards, &MkmAPI.CardsDetailed.fetch/1)
 
-    Logger.job_end(log, %{status: :success})
+    Logger.job_end(log, %{status: "success"})
   end
 
   defp top_outdated_cards(limit) do
