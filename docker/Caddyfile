@@ -1,4 +1,4 @@
-mtgsear.ch, new.mtgsear.ch, admin.mtgsear.ch {
+new.mtgsear.ch, admin.mtgsear.ch {
   tls mpalhas@gmail.com
 
   proxy / app:4000 {
