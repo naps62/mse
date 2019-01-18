@@ -94,7 +94,7 @@ defmodule Admin.Web.ExAdmin.Set do
           column(:name, link: true)
 
           column(:manacost, fn card ->
-            Manacost.present(card.single.manacost) |> Enum.map(&raw/1)
+            Manacost.present(card.single) |> Enum.map(&raw/1)
           end)
 
           column(:rarity)
