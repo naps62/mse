@@ -38,6 +38,9 @@ defmodule MkmAPI.Singles.Save do
     Regex.match?(~r|\s/{1,2}\s|, name)
   end
 
+  defp image_url(relative_url: "//static.cardmarket.com" <> _ = full_url),
+    do: "https:#{full_url}"
+
   defp image_url(relative_url: "." <> relative_url),
     do: "https://mkmapi.eu" <> relative_url
 
