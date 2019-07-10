@@ -9,10 +9,11 @@ shared_repo_config = [
   pool_size: 10
 ]
 
-config :db, DB.SilentRepo,
-  shared_repo_config ++ [
-    loggers: [],
-  ]
+config :db,
+       DB.SilentRepo,
+       shared_repo_config ++
+         [
+           loggers: []
+         ]
 
-config :db, DB.Repo,
-  shared_repo_config
+config :db, DB.Repo, shared_repo_config
