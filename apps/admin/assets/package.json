@@ -6,7 +6,7 @@
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "jquery.mousewheel": "^3.1.9",
     "moment": "^2.18.1",
     "phoenix": "file:../../../deps/phoenix",
